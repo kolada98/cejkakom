@@ -2,10 +2,10 @@ import { Flame, Layers, Wrench, Home, Zap, CheckCircle, Settings, ShieldCheck } 
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const services = [
-  { icon: Flame, title: "Čištění a revize", desc: "Poctivé čištění komínu cca 45 minut u zákazníka. Roční kontrola dle vyhlášky č. 34/2016 Sb." },
-  { icon: Layers, title: "Vložkování komínů", desc: "Vložkování pro tuhá paliva, kondenzační kotle i plynové spotřebiče. Nerez i plastové vložky." },
-  { icon: Settings, title: "Frézování", desc: "Vlastní profesionální fréza. Zvětšení průměru průduchu pro vložkování." },
-  { icon: Home, title: "Výstavba komínů", desc: "Nerezové i zděné systémové komíny. Vnitřní i fasádní provedení. Montáž za 1 den." },
+  { icon: Flame, title: "Čištění a revize", desc: "Vyčistíme komín na tuhá paliva i plyn při každoroční kontrole dle vyhlášky č. 34/2016 Sb. U zákazníka strávíme 30–60 minut podle stupně znečištění — čistíme komín, kouřovod, spalinové hrdlo i část pod deflektorem. Zhodnotíme stav celé spalinové cesty a případné závady rovnou navrhneme k opravě. Na přání vyčistíme i krbová kamna, krbovou vložku nebo kotel." },
+  { icon: Layers, title: "Vložkování komínů", desc: "Pokud stávající komín přestane bezpečně odvádět spaliny, nejšetrnější řešení je vložkování — do původního průduchu vložíme vložku z vhodného materiálu pro daný spotřebič. Vznikne komín vícevrstevný, bariérový, vhodný i pro mokrý provoz nebo přetlakový spotřebič. Vložkujeme pro tuhá paliva (nerez flexi DN 150–200 mm), kondenzační kotle (plast nebo nerez wrap) i atmosférické plynové kotle. Realizujeme i komplikované zakázky, zkušenosti od roku 2013." },
+  { icon: Settings, title: "Frézování", desc: "Frézováním zvětšíme průměr stávajícího průduchu tak, aby bylo možné vložkování. Pracujeme vlastní profesionální frézou — bez závislosti na subdodavatelích, s rychlejším termínem a přesnější cenou." },
+  { icon: Home, title: "Výstavba komínů", desc: "Stavíme nerezové komíny od různých výrobců — fasádní i vnitřní, v lesklém nerezu, černém matu nebo antracitu. Ročně realizujeme 60–100 nových komínů. Pro dřevostavby zajišťujeme systémové prostupy hořlavými konstrukcemi a certifikované napojení na parotěsné fólie. Díky nízké hmotnosti nerezu lze komín instalovat i dodatečně, tam kde se s ním původně nepočítalo. Montáž většinou zabere jeden den." },
   { icon: Zap, title: "Plynové komínky", desc: "Výstavba plynových komínků a odkouření, kondenzační kotle, kaskády kotlů." },
   { icon: CheckCircle, title: "Výchozí revize", desc: "Revize ke kolaudaci s vypracováním dokumentace. Osobní dohled RTSC." },
   { icon: Wrench, title: "Opravy komínů", desc: "Opravy nadstřešních částí, výměna dvířek, montáž kouřovodů. Řešíme i komplikované případy." },
@@ -20,7 +20,7 @@ export default function Services() {
         <div className="text-center mb-12">
           <h2 className="section-title">Naše služby</h2>
           <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Kompletní péče o váš komín od A do Z</p>
+          <p className="section-subtitle mx-auto">Provádíme veškeré kominické práce včetně výchozích revizí a dokumentace ke kolaudaci.</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">

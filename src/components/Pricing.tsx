@@ -55,7 +55,7 @@ export default function Pricing() {
           <h2 className="section-title">Orientační ceník</h2>
           <div className="section-title-bar mx-auto" />
           <p className="section-subtitle mx-auto">
-            Přesnou cenu vždy upřesníme po konzultaci. Cena se navyšuje u komplikací, o kterých vás okamžitě informujeme.
+            Ceny jsou orientační. Konečnou cenu vždy sdělíme předem — ještě před zahájením práce.
           </p>
         </div>
 
