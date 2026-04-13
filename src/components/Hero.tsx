@@ -43,12 +43,11 @@ export default function Hero() {
         </div>
 
         <div className="hidden lg:flex items-center justify-center">
-          <div className="w-full max-w-md aspect-[4/5] rounded-lg bg-secondary border border-border flex flex-col items-center justify-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-              <Shield size={32} className="text-primary" />
-            </div>
-            <span className="text-muted-foreground text-sm">Fotografie komínu</span>
-          </div>
+          <img
+            src={heroPhoto}
+            alt="Tým ČEJKAKOM při montáži nerezového komínu"
+            className="w-full max-w-md aspect-[4/5] rounded-lg border border-border object-cover"
+          />
         </div>
       </div>
     </section>
