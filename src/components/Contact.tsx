@@ -31,7 +31,7 @@ export default function Contact() {
         <div className="text-center mb-12">
           <h2 className="section-title">Kontaktujte nás</h2>
           <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Nezávazná konzultace zdarma. Odpovídáme do 24 hodin.</p>
+          <p className="section-subtitle mx-auto">Popište co potřebujete. Roman se ozve osobně, většinou ještě týž den.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -101,6 +101,9 @@ export default function Contact() {
             <Button type="submit" variant="gold" size="lg" className="w-full">
               Odeslat poptávku →
             </Button>
+            <p className="text-center text-muted-foreground text-sm mt-4">
+              Nebo zavolejte přímo: <a href="tel:+420776310278" className="text-primary hover:opacity-80 transition-opacity">+420 776 310 278</a>
+            </p>
           </form>
         </div>
       </div>

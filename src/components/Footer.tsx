@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="text-xl font-bold text-primary mb-1">ČEJKAKOM</div>
-            <p className="text-sm text-muted-foreground">Certifikované kominictví Brno a okolí</p>
+            <p className="text-sm text-muted-foreground">Komíny stavíme poctivě. Brno a okolí od 2013.</p>
           </div>
 
           <div>

@@ -2,8 +2,8 @@ import { User } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const stats = [
-  { value: "13+", label: "let praxe" },
-  { value: "Stovky", label: "realizací" },
+  { value: "2013", label: "rok vzniku" },
+  { value: "RTSC", label: "certifikace" },
   { value: "40 km", label: "servisní oblast" },
 ];
 
@@ -23,14 +23,14 @@ export default function About() {
           </div>
 
           <div>
-            <span className="text-primary font-semibold text-sm uppercase tracking-wider">Certifikovaný revizní technik</span>
+            <span className="text-primary font-semibold text-sm uppercase tracking-wider">CERTIFIKOVANÝ REVIZNÍ TECHNIK SPALINOVÝCH CEST</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Ing. Roman Čejka</h2>
 
             <p className="text-muted-foreground mb-4">
-              Kominictví je moje profese i vášeň. Od roku 2013 jsem s kolegy postavil a opravil stovky komínů po celé jižní Moravě — od jednoduchých čištění až po technicky náročné výstavby komínových systémů pro kondenzační kotle a dřevostavby.
+              Kominictví dělám od roku 2013. Za tu dobu jsem prošel stovky domácností a realizoval zakázky od běžného čištění až po výstavbu komínových systémů pro kondenzační kotle a dřevostavby.
             </p>
             <p className="text-muted-foreground mb-8">
-              Firma ČEJKAKOM s.r.o. působí z Bílovic nad Svitavou a obsluhujeme celé Brno a okolí do cca 40 km. V případě výstavby nových komínů vyjíždíme i na větší vzdálenosti.
+              Jsem certifikovaný revizní technik spalinových cest — vydávám výchozí i pravidelné revizní zprávy v souladu s vyhláškou č. 34/2016 Sb.
             </p>
 
             <div className="flex gap-8">
