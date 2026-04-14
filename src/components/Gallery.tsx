@@ -1,14 +1,24 @@
-import { ZoomIn } from "lucide-react";
+import { useState } from "react";
+import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const items = [
-  "Nerezový komín — Brno", "Vložkování", "Frézování", "Revize",
-  "Výstavba", "Montáž kouřovodu", "Komín fasádní", "Systémový komín",
-  "Oprava nadstřešní části", "Komínová stříška", "Revizní zpráva", "Kondenzační kotel",
+import fasadniKomin from "@/assets/gallery/20m_fasadni_komin.jpg";
+import cisteni1 from "@/assets/gallery/cisteni1.jpg";
+import cisteni2 from "@/assets/gallery/cisteni2.jpg";
+
+const items: { src: string; label: string }[] = [
+  { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
+  { src: cisteni1, label: "Čištění komínu" },
+  { src: cisteni2, label: "Čištění komínu — detail" },
 ];
 
 export default function Gallery() {
   const ref = useScrollAnimation();
+  const [selected, setSelected] = useState<number | null>(null);
+
+  const prev = () => setSelected((s) => (s !== null ? (s - 1 + items.length) % items.length : null));
+  const next = () => setSelected((s) => (s !== null ? (s + 1) % items.length : null));
+
   return (
     <section id="galerie" className="section-padding">
       <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
@@ -19,19 +29,53 @@ export default function Gallery() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((label) => (
-            <div
-              key={label}
-              className="aspect-[4/3] rounded-lg bg-secondary border border-border flex items-center justify-center relative group cursor-pointer overflow-hidden"
+          {items.map((item, i) => (
+            <button
+              key={i}
+              onClick={() => setSelected(i)}
+              className="aspect-[4/3] rounded-lg overflow-hidden relative group cursor-pointer border border-border"
             >
-              <span className="text-sm text-muted-foreground">{label}</span>
-              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+              <img
+                src={item.src}
+                alt={item.label}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2">
                 <ZoomIn size={32} className="text-primary" />
+                <span className="text-white text-sm font-medium px-3 text-center">{item.label}</span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setSelected(null)}
+        >
+          <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-white/80 hover:text-white z-10">
+            <X size={32} />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-3 md:left-6 text-white/70 hover:text-white z-10">
+            <ChevronLeft size={40} />
+          </button>
+          <img
+            src={items[selected].src}
+            alt={items[selected].label}
+            className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-3 md:right-6 text-white/70 hover:text-white z-10">
+            <ChevronRight size={40} />
+          </button>
+          <div className="absolute bottom-4 text-white/60 text-sm">
+            {items[selected].label} — {selected + 1} / {items.length}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
