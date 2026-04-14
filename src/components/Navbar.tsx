@@ -44,7 +44,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4" style={{ height: '72px' }}>
-        <a href="#" className="flex-shrink-0" style={{ marginLeft: '-10px' }}>
+        <a href="#" className="flex-shrink-0" style={{ marginLeft: '-12px' }}>
           <Logo height={72} />
         </a>
 
