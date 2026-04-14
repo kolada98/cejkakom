@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 import rcOsv2 from "@/assets/certificates/rc_osv2.jpg";
 import rcOsv3 from "@/assets/certificates/rc_osv3.jpg";
@@ -20,6 +20,9 @@ export default function Certificates() {
   const ref = useScrollAnimation();
   const [selected, setSelected] = useState<number | null>(null);
 
+  const prev = () => setSelected((s) => (s !== null ? (s - 1 + certificates.length) % certificates.length : null));
+  const next = () => setSelected((s) => (s !== null ? (s + 1) % certificates.length : null));
+
   return (
     <section id="certifikaty" className="py-20 md:py-28" style={{ backgroundColor: "#0F2748" }}>
       <div className="container mx-auto px-4">
@@ -33,18 +36,18 @@ export default function Certificates() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
           {certificates.map((cert, i) => (
             <button
               key={i}
               onClick={() => setSelected(i)}
-              className="block rounded-lg transition-all duration-200 cursor-pointer text-left"
+              className="group block transition-all duration-200 cursor-pointer"
               style={{
                 backgroundColor: "#0B1F3A",
                 border: "1px solid rgba(240,165,0,0.15)",
                 borderRadius: "8px",
-                padding: "8px",
-                overflow: "hidden",
+                padding: "6px",
+                width: "140px",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#F0A500")}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(240,165,0,0.15)")}
@@ -52,7 +55,7 @@ export default function Certificates() {
               <img
                 src={cert.src}
                 alt={cert.alt}
-                className="w-full h-auto rounded"
+                className="w-full h-[180px] object-cover rounded"
                 loading="lazy"
               />
             </button>
@@ -63,21 +66,40 @@ export default function Certificates() {
       {/* Lightbox */}
       {selected !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
           onClick={() => setSelected(null)}
         >
           <button
             onClick={() => setSelected(null)}
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors z-10"
           >
             <X size={32} />
           </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors z-10"
+          >
+            <ChevronLeft size={40} />
+          </button>
+
           <img
             src={certificates[selected].src}
             alt={certificates[selected].alt}
-            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+            className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
+
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors z-10"
+          >
+            <ChevronRight size={40} />
+          </button>
+
+          <div className="absolute bottom-4 text-white/60 text-sm">
+            {selected + 1} / {certificates.length}
+          </div>
         </div>
       )}
     </section>
