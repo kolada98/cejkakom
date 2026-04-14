@@ -24,6 +24,9 @@ import kourovodTuha from "@/assets/gallery/kourovod_u_kotle_na_tuha_paliva.jpg";
 import kourovod from "@/assets/gallery/kourovod.jpg";
 import leseni from "@/assets/gallery/leseni_pri_vystavbe_nerez_kominu.jpg";
 import dodavka from "@/assets/gallery/nase_dodavka.jpg";
+import maringotka from "@/assets/gallery/nerezovy_komin_na_maringotce.jpg";
+import nadstresniKotveni from "@/assets/gallery/nerezovy_komin_nadstresni_cast_a_kotveni.jpg";
+import vlozkovaniTeam from "@/assets/gallery/pan_cejka_s_kolegou_vlozkujeme_ja_vpravo.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -48,6 +51,9 @@ const items: { src: string; label: string }[] = [
   { src: kourovod, label: "Montáž kouřovodu" },
   { src: leseni, label: "Výstavba nerezového komínu" },
   { src: dodavka, label: "Naše dodávka" },
+  { src: maringotka, label: "Nerezový komín na maringotce" },
+  { src: nadstresniKotveni, label: "Nadstřešní část a kotvení komínu" },
+  { src: vlozkovaniTeam, label: "Vložkování — Roman Čejka s kolegou" },
 ];
 
 export default function Gallery() {
