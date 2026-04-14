@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const links = [
   { href: "#sluzby", label: "Služby" },
@@ -15,7 +16,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="text-xl font-bold text-primary mb-1">ČEJKAKOM</div>
+            <Logo className="mb-2" />
             <p className="text-sm text-muted-foreground">Komíny stavíme poctivě. Brno a okolí od 2013.</p>
           </div>
 
