@@ -8,12 +8,12 @@ import rcRevizv from "@/assets/certificates/rc_revizv.jpg";
 import ricomRc from "@/assets/certificates/ricom_rc.jpg";
 import cikoExpert from "@/assets/certificates/ciko_expert.jpg";
 
-const certificates = [
+const certificates: { src: string; alt: string; position?: string }[] = [
   { src: rcRevizv, alt: "Osvědčení – Revizní technik spalinových cest" },
   { src: rcOsv2, alt: "Osvědčení – Měření spalin" },
   { src: rcOsv3, alt: "Osvědčení – Montáž komínů a komínových vložek" },
   { src: ricomRc, alt: "Certifikát – RICOM gas školení" },
-  { src: cikoExpert, alt: "Certifikát – CIKO Expert 2025" },
+  { src: cikoExpert, alt: "Certifikát – CIKO Expert 2025", position: "object-top" },
 ];
 
 export default function Certificates() {
@@ -55,7 +55,7 @@ export default function Certificates() {
               <img
                 src={cert.src}
                 alt={cert.alt}
-                className="w-full h-[180px] object-cover rounded"
+                className={`w-full h-[180px] object-cover rounded ${cert.position ?? ""}`}
                 loading="lazy"
               />
             </button>
