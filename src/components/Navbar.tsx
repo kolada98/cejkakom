@@ -43,9 +43,9 @@ export default function Navbar() {
         scrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
-        <a href="#" style={{ alignSelf: 'center', paddingLeft: 0 }}>
-          <Logo height={72} />
+      <div className="container mx-auto flex items-center justify-between px-4" style={{ height: '72px' }}>
+        <a href="#" className="flex-shrink-0">
+          <Logo height={56} />
         </a>
 
         <div className="hidden lg:flex items-center gap-8">
@@ -60,6 +60,9 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+        </div>
+
+        <div className="hidden lg:block flex-shrink-0">
           <Button variant="gold" size="lg" asChild>
             <a href="#kontakt">Nezávazná poptávka</a>
           </Button>
