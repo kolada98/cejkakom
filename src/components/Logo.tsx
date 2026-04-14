@@ -1,67 +1,64 @@
 export default function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-col items-start leading-none select-none ${className}`}>
-      <div className="relative">
-        {/* Gold swoosh arcs - positioned above K area (top-right) */}
-        <svg
-          className="absolute"
-          style={{ top: "-10px", right: "-2px" }}
-          width="28"
-          height="16"
-          viewBox="0 0 28 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8 14C12 4 20 1 26 3"
-            stroke="#F0A500"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            fill="none"
-          />
-          <path
-            d="M12 13C15 5 21 3 25 5"
-            stroke="#F0A500"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-        <span
-          style={{
-            color: "#FFFFFF",
-            fontWeight: 900,
-            fontSize: "28px",
-            letterSpacing: "-0.5px",
-          }}
-        >
-          ČEJKA
-        </span>
-      </div>
-      {/* Gold horizontal line - aligned right under KA */}
-      <div className="flex justify-end w-full" style={{ marginTop: "1px" }}>
-        <div
-          style={{
-            height: "1.5px",
-            width: "58%",
-            backgroundColor: "#FFFFFF",
-          }}
-        />
-      </div>
-      {/* KOMÍNY text - right aligned */}
-      <div className="flex justify-end w-full">
-        <span
-          style={{
-            color: "#F0A500",
-            fontWeight: 700,
-            fontSize: "11px",
-            letterSpacing: "3px",
-            marginTop: "2px",
-          }}
-        >
-          KOMÍNY
-        </span>
-      </div>
-    </div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 90"
+      width="140"
+      height="63"
+      className={className}
+    >
+      {/* ČEJKA text */}
+      <text
+        x="0"
+        y="62"
+        fontFamily="Georgia, 'Times New Roman', serif"
+        fontSize="62"
+        fontWeight="700"
+        fill="#FFFFFF"
+        letterSpacing="2"
+      >
+        ČEJKA
+      </text>
+
+      {/* Horizontal gold line — right half only */}
+      <line
+        x1="80"
+        y1="68"
+        x2="195"
+        y2="68"
+        stroke="#F0A500"
+        strokeWidth="2"
+      />
+
+      {/* KOMÍNY text — right aligned under line */}
+      <text
+        x="195"
+        y="84"
+        fontFamily="Arial, sans-serif"
+        fontSize="13"
+        fontWeight="700"
+        fill="#F0A500"
+        letterSpacing="4"
+        textAnchor="end"
+      >
+        KOMÍNY
+      </text>
+
+      {/* Swoosh — two curves, top right above KA */}
+      <path
+        d="M 118,8 Q 148,0 178,18"
+        stroke="#F0A500"
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 125,14 Q 152,6 180,22"
+        stroke="#F0A500"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
