@@ -1,27 +1,28 @@
 export default function Logo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-col items-center leading-none select-none ${className}`}>
+    <div className={`flex flex-col items-start leading-none select-none ${className}`}>
       <div className="relative">
-        {/* Gold swoosh arc above Č */}
+        {/* Gold swoosh arcs - positioned above K area (top-right) */}
         <svg
-          className="absolute -top-3 -right-1"
-          width="20"
-          height="12"
-          viewBox="0 0 20 12"
+          className="absolute"
+          style={{ top: "-10px", right: "-2px" }}
+          width="28"
+          height="16"
+          viewBox="0 0 28 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M2 10C6 2 14 0 18 2"
+            d="M8 14C12 4 20 1 26 3"
             stroke="#F0A500"
-            strokeWidth="2"
+            strokeWidth="2.2"
             strokeLinecap="round"
             fill="none"
           />
           <path
-            d="M4 8C7 3 13 2 16 4"
+            d="M12 13C15 5 21 3 25 5"
             stroke="#F0A500"
-            strokeWidth="1.5"
+            strokeWidth="2"
             strokeLinecap="round"
             fill="none"
           />
@@ -37,28 +38,30 @@ export default function Logo({ className = "" }: { className?: string }) {
           ČEJKA
         </span>
       </div>
-      {/* Gold horizontal line */}
-      <div
-        style={{
-          height: "1.5px",
-          width: "100%",
-          backgroundColor: "#F0A500",
-          marginTop: "2px",
-        }}
-      />
-      {/* KOMÍNY text */}
-      <span
-        style={{
-          color: "#F0A500",
-          fontWeight: 700,
-          fontSize: "11px",
-          letterSpacing: "3px",
-          textAlign: "center",
-          marginTop: "3px",
-        }}
-      >
-        KOMÍNY
-      </span>
+      {/* Gold horizontal line - aligned right under KA */}
+      <div className="flex justify-end w-full" style={{ marginTop: "1px" }}>
+        <div
+          style={{
+            height: "1.5px",
+            width: "58%",
+            backgroundColor: "#FFFFFF",
+          }}
+        />
+      </div>
+      {/* KOMÍNY text - right aligned */}
+      <div className="flex justify-end w-full">
+        <span
+          style={{
+            color: "#F0A500",
+            fontWeight: 700,
+            fontSize: "11px",
+            letterSpacing: "3px",
+            marginTop: "2px",
+          }}
+        >
+          KOMÍNY
+        </span>
+      </div>
     </div>
   );
 }
