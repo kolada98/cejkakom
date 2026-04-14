@@ -27,6 +27,10 @@ import dodavka from "@/assets/gallery/nase_dodavka.jpg";
 import maringotka from "@/assets/gallery/nerezovy_komin_na_maringotce.jpg";
 import nadstresniKotveni from "@/assets/gallery/nerezovy_komin_nadstresni_cast_a_kotveni.jpg";
 import vlozkovaniTeam from "@/assets/gallery/pan_cejka_s_kolegou_vlozkujeme_ja_vpravo.jpg";
+import revizniKus from "@/assets/gallery/revizni_kus_na_pude.jpg";
+import striskaTurbo from "@/assets/gallery/striska_u_vlozky_pro_turbo_kotel.jpg";
+import vlozkaPevna from "@/assets/gallery/vlozka_pevna_paliva.jpg";
+import vlozkovaniKominu from "@/assets/gallery/vlozkovani_kominu.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -54,6 +58,10 @@ const items: { src: string; label: string }[] = [
   { src: maringotka, label: "Nerezový komín na maringotce" },
   { src: nadstresniKotveni, label: "Nadstřešní část a kotvení komínu" },
   { src: vlozkovaniTeam, label: "Vložkování — Roman Čejka s kolegou" },
+  { src: revizniKus, label: "Revizní kus na půdě" },
+  { src: striskaTurbo, label: "Stříška u vložky pro turbo kotel" },
+  { src: vlozkaPevna, label: "Pevná vložka — tuhá paliva" },
+  { src: vlozkovaniKominu, label: "Vložkování komínu" },
 ];
 
 export default function Gallery() {
