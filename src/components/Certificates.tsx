@@ -13,7 +13,7 @@ const certificates: { src: string; alt: string; position?: string }[] = [
   { src: rcOsv2, alt: "Osvědčení – Měření spalin" },
   { src: rcOsv3, alt: "Osvědčení – Montáž komínů a komínových vložek" },
   { src: ricomRc, alt: "Certifikát – RICOM gas školení" },
-  { src: cikoExpert, alt: "Certifikát – CIKO Expert 2025", position: "object-top" },
+  { src: cikoExpert, alt: "Certifikát – CIKO Expert 2025", position: "object-left" },
 ];
 
 export default function Certificates() {
