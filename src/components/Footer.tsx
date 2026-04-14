@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <Logo className="mb-2" height={44} />
+            <Logo className="mb-2" height={52} />
             <p className="text-sm text-muted-foreground">Komíny stavíme poctivě. Brno a okolí od 2013.</p>
           </div>
 
