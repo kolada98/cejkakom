@@ -44,8 +44,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
-        <a href="#">
-          <Logo />
+        <a href="#" style={{ alignSelf: 'center', paddingLeft: 0 }}>
+          <Logo height={72} />
         </a>
 
         <div className="hidden lg:flex items-center gap-8">
