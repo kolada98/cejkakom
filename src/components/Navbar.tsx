@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const links = [
   { href: "#sluzby", label: "Služby" },
@@ -43,9 +44,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4">
-        <a href="#" className="flex flex-col leading-tight">
-          <span className="text-xl font-bold text-primary tracking-wide">ČEJKAKOM</span>
-          <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">kominictví</span>
+        <a href="#">
+          <Logo />
         </a>
 
         <div className="hidden lg:flex items-center gap-8">
