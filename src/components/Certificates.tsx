@@ -9,16 +9,14 @@ const certificates = [
 ];
 
 export default function Certificates() {
-  const { ref, isVisible } = useScrollAnimation();
+  const ref = useScrollAnimation();
 
   return (
     <section id="certifikaty" className="py-20 md:py-28" style={{ backgroundColor: "#0F2748" }}>
       <div className="container mx-auto px-4">
         <div
           ref={ref}
-          className={`text-center mb-12 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+          className="text-center mb-12 opacity-0"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Certifikáty a oprávnění
