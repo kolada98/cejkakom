@@ -1,23 +1,29 @@
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
+
+import rcOsv2 from "@/assets/certificates/rc_osv2.jpg";
+import rcOsv3 from "@/assets/certificates/rc_osv3.jpg";
+import rcRevizv from "@/assets/certificates/rc_revizv.jpg";
+import ricomRc from "@/assets/certificates/ricom_rc.jpg";
+import cikoExpert from "@/assets/certificates/ciko_expert.jpg";
 
 const certificates = [
-  "https://drive.google.com/uc?export=view&id=1jZ-EUNXXnzU2Md1YjvlR23AgjlZKYv9m",
-  "https://drive.google.com/uc?export=view&id=1MxoYvUBUNhlm230pXl4c3uXXaZEr0Fk_",
-  "https://drive.google.com/uc?export=view&id=1rw3_jFqgMvD7MK6OdGBbRoC0rNUReXx7",
-  "https://drive.google.com/uc?export=view&id=1_DINoz9vIKkGTxqCFfF5VMed4JtwTwHX",
+  { src: rcRevizv, alt: "Osvědčení – Revizní technik spalinových cest" },
+  { src: rcOsv2, alt: "Osvědčení – Měření spalin" },
+  { src: rcOsv3, alt: "Osvědčení – Montáž komínů a komínových vložek" },
+  { src: ricomRc, alt: "Certifikát – RICOM gas školení" },
+  { src: cikoExpert, alt: "Certifikát – CIKO Expert 2025" },
 ];
 
 export default function Certificates() {
   const ref = useScrollAnimation();
+  const [selected, setSelected] = useState<number | null>(null);
 
   return (
     <section id="certifikaty" className="py-20 md:py-28" style={{ backgroundColor: "#0F2748" }}>
       <div className="container mx-auto px-4">
-        <div
-          ref={ref}
-          className="text-center mb-12 opacity-0"
-        >
+        <div ref={ref} className="text-center mb-12 opacity-0">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Certifikáty a oprávnění
           </h2>
@@ -27,14 +33,12 @@ export default function Certificates() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10">
-          {certificates.map((url, i) => (
-            <a
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {certificates.map((cert, i) => (
+            <button
               key={i}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block rounded-lg p-2 transition-all duration-200 cursor-pointer"
+              onClick={() => setSelected(i)}
+              className="block rounded-lg transition-all duration-200 cursor-pointer text-left"
               style={{
                 backgroundColor: "#0B1F3A",
                 border: "1px solid rgba(240,165,0,0.15)",
@@ -46,27 +50,36 @@ export default function Certificates() {
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(240,165,0,0.15)")}
             >
               <img
-                src={url}
-                alt={`Certifikát ${i + 1}`}
+                src={cert.src}
+                alt={cert.alt}
                 className="w-full h-auto rounded"
                 loading="lazy"
               />
-            </a>
+            </button>
           ))}
         </div>
-
-        <div className="text-center">
-          <Button variant="goldOutline" size="lg" asChild>
-            <a
-              href="https://drive.google.com/uc?export=download&id=1_wJm_yGZnu4ovkkuJID___byx9E7B2VB"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Stáhnout certifikát RTSC (PDF) →
-            </a>
-          </Button>
-        </div>
       </div>
+
+      {/* Lightbox */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setSelected(null)}
+        >
+          <button
+            onClick={() => setSelected(null)}
+            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+          >
+            <X size={32} />
+          </button>
+          <img
+            src={certificates[selected].src}
+            alt={certificates[selected].alt}
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }
