@@ -1,5 +1,5 @@
-import { User } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import panCejka from "@/assets/pan_cejka.jpg";
 
 const stats = [
   { value: "2013", label: "rok vzniku" },
@@ -14,11 +14,13 @@ export default function About() {
       <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="flex items-center justify-center">
-            <div className="w-full max-w-sm aspect-[3/4] rounded-lg bg-background border border-border flex flex-col items-center justify-center gap-4">
-              <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
-                <User size={40} className="text-primary" />
-              </div>
-              <span className="text-muted-foreground text-sm">Foto Romana Čejky</span>
+            <div className="w-full max-w-sm overflow-hidden rounded-lg border border-border bg-background">
+              <img
+                src={panCejka}
+                alt="Ing. Roman Čejka"
+                className="aspect-[3/4] w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
 
