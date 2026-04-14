@@ -11,6 +11,9 @@ import fasadniPlyn from "@/assets/gallery/fasadni_komin_pro_plyn.jpg";
 import fasadniNerezovy from "@/assets/gallery/fasadni_nerezovy_komin.jpg";
 import freza from "@/assets/gallery/freza.jpg";
 import frezovaniKominu from "@/assets/gallery/frezovani_kominu.jpg";
+import kamnaNerezovyKomin from "@/assets/gallery/kamna_nerezovy_komin.jpg";
+import kominDoJurty from "@/assets/gallery/komin_do_jurty.jpg";
+import kominKPlynovemuKrbu from "@/assets/gallery/komin_k_plynovemu_krbu.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -22,6 +25,9 @@ const items: { src: string; label: string }[] = [
   { src: fasadniNerezovy, label: "Fasádní nerezový komín" },
   { src: freza, label: "Vlastní profesionální fréza" },
   { src: frezovaniKominu, label: "Frézování komínu" },
+  { src: kamnaNerezovyKomin, label: "Nerezový komín u kamen" },
+  { src: kominDoJurty, label: "Komín do jurty" },
+  { src: kominKPlynovemuKrbu, label: "Komín k plynovému krbu" },
 ];
 
 export default function Gallery() {
