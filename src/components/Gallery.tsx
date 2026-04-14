@@ -5,11 +5,17 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import fasadniKomin from "@/assets/gallery/20m_fasadni_komin.jpg";
 import cisteni1 from "@/assets/gallery/cisteni1.jpg";
 import cisteni2 from "@/assets/gallery/cisteni2.jpg";
+import fasadniDrevostavba from "@/assets/gallery/fasadni_komin_na_drevostavbe.jpg";
+import fasadniChatka from "@/assets/gallery/fasadni_komin_na_chatce.jpg";
+import fasadniPlyn from "@/assets/gallery/fasadni_komin_pro_plyn.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
   { src: cisteni1, label: "Čištění komínu" },
   { src: cisteni2, label: "Čištění komínu — detail" },
+  { src: fasadniDrevostavba, label: "Fasádní komín na dřevostavbě" },
+  { src: fasadniChatka, label: "Fasádní komín na chatě" },
+  { src: fasadniPlyn, label: "Fasádní komín pro plyn" },
 ];
 
 export default function Gallery() {
