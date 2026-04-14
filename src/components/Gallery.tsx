@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -34,15 +34,16 @@ import vlozkovaniKominu from "@/assets/gallery/vlozkovani_kominu.jpg";
 import vlozkovaniSpolecnehoKominu from "@/assets/gallery/vlozkovani_spolecneho_kominu_pro_plyn.jpg";
 
 const items: { src: string; label: string }[] = [
+  { src: vlozkovaniTeam, label: "Roman Čejka s kolegou" },
+  { src: frezovaniKominu, label: "Frézování komínu" },
+  { src: fasadniDrevostavba, label: "Fasádní komín na dřevostavbě" },
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
   { src: cisteni1, label: "Čištění komínu" },
   { src: cisteni2, label: "Čištění komínu — detail" },
-  { src: fasadniDrevostavba, label: "Fasádní komín na dřevostavbě" },
   { src: fasadniChatka, label: "Fasádní komín na chatě" },
   { src: fasadniPlyn, label: "Fasádní komín pro plyn" },
   { src: fasadniNerezovy, label: "Fasádní nerezový komín" },
   { src: freza, label: "Vlastní profesionální fréza" },
-  { src: frezovaniKominu, label: "Frézování komínu" },
   { src: kamnaNerezovyKomin, label: "Nerezový komín u kamen" },
   { src: kominDoJurty, label: "Komín do jurty" },
   { src: kominKPlynovemuKrbu, label: "Komín k plynovému krbu" },
@@ -58,7 +59,6 @@ const items: { src: string; label: string }[] = [
   { src: dodavka, label: "Naše dodávka" },
   { src: maringotka, label: "Nerezový komín na maringotce" },
   { src: nadstresniKotveni, label: "Nadstřešní část a kotvení komínu" },
-  { src: vlozkovaniTeam, label: "Vložkování — Roman Čejka s kolegou" },
   { src: revizniKus, label: "Revizní kus na půdě" },
   { src: striskaTurbo, label: "Stříška u vložky pro turbo kotel" },
   { src: vlozkaPevna, label: "Pevná vložka — tuhá paliva" },
@@ -68,64 +68,106 @@ const items: { src: string; label: string }[] = [
 
 export default function Gallery() {
   const ref = useScrollAnimation();
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
 
   const prev = () => setSelected((s) => (s !== null ? (s - 1 + items.length) % items.length : null));
   const next = () => setSelected((s) => (s !== null ? (s + 1) % items.length : null));
+  const scrollGallery = (direction: number) => {
+    scrollRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
 
   return (
-    <section id="galerie" className="section-padding">
-      <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
+    <section id="galerie" className="py-20 md:py-28">
+      <div className="container mx-auto px-4" ref={ref} style={{ opacity: 0 }}>
         <div className="text-center mb-12">
           <h2 className="section-title">Galerie realizací</h2>
           <div className="section-title-bar mx-auto" />
           <p className="section-subtitle mx-auto">Ukázka naší práce</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {items.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setSelected(i)}
-              className="aspect-[4/3] rounded-lg overflow-hidden relative group cursor-pointer border border-border"
-            >
-              <img
-                src={item.src}
-                alt={item.label}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2">
-                <ZoomIn size={32} className="text-primary" />
-                <span className="text-white text-sm font-medium px-3 text-center">{item.label}</span>
-              </div>
-            </button>
-          ))}
+        <div className="relative mx-auto max-w-5xl">
+          <button
+            type="button"
+            onClick={() => scrollGallery(-1)}
+            className="absolute left-0 top-1/2 z-10 hidden h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex"
+            aria-label="Posunout galerii doleva"
+          >
+            <ChevronLeft size={34} />
+          </button>
+
+          <div
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto px-1 pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-10"
+          >
+            {items.map((item, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setSelected(i)}
+                className="group relative block w-[140px] shrink-0 cursor-pointer rounded-lg border border-primary/20 bg-card p-1.5 text-left transition-all duration-200 hover:-translate-y-1 hover:border-primary/60 hover:shadow-lg"
+              >
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="h-[180px] w-full rounded object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-1.5 bottom-1.5 flex min-h-14 items-center justify-between gap-2 rounded-b bg-background/88 px-2.5 py-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="line-clamp-2 text-xs font-semibold text-foreground">{item.label}</span>
+                  <ZoomIn size={18} className="shrink-0 text-primary" />
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollGallery(1)}
+            className="absolute right-0 top-1/2 z-10 hidden h-14 w-14 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex"
+            aria-label="Posunout galerii doprava"
+          >
+            <ChevronRight size={34} />
+          </button>
         </div>
       </div>
 
-      {/* Lightbox */}
       {selected !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
           onClick={() => setSelected(null)}
         >
-          <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-white/80 hover:text-white z-10">
+          <button
+            onClick={() => setSelected(null)}
+            className="absolute top-4 right-4 z-10 text-white/80 transition-colors hover:text-white"
+          >
             <X size={32} />
           </button>
-          <button onClick={(e) => { e.stopPropagation(); prev(); }} className="absolute left-3 md:left-6 text-white/70 hover:text-white z-10">
-            <ChevronLeft size={40} />
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              prev();
+            }}
+            className="absolute left-3 md:left-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
+          >
+            <ChevronLeft size={34} />
           </button>
           <img
             src={items[selected].src}
             alt={items[selected].label}
-            className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg"
+            className="max-h-[85vh] max-w-[85vw] rounded-lg object-contain"
             onClick={(e) => e.stopPropagation()}
           />
-          <button onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-3 md:right-6 text-white/70 hover:text-white z-10">
-            <ChevronRight size={40} />
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
+            className="absolute right-3 md:right-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
+          >
+            <ChevronRight size={34} />
           </button>
-          <div className="absolute bottom-4 text-white/60 text-sm">
+          <div className="absolute bottom-4 text-sm text-white/70">
             {items[selected].label} — {selected + 1} / {items.length}
           </div>
         </div>
@@ -133,3 +175,4 @@ export default function Gallery() {
     </section>
   );
 }
+
