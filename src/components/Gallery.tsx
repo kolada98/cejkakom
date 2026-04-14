@@ -20,6 +20,10 @@ import kondenzacniKominek from "@/assets/gallery/kondenzacni_plynovy_kominek.jpg
 import kourovodFunkce from "@/assets/gallery/kourovod_s_funkci_komina.jpg";
 import kourovodPrerusovac from "@/assets/gallery/kourovod_s_prerusovacem_tahu.jpg";
 import kourovodKondenzacni from "@/assets/gallery/kourovod_u_kondenzacniho_kotle.jpg";
+import kourovodTuha from "@/assets/gallery/kourovod_u_kotle_na_tuha_paliva.jpg";
+import kourovod from "@/assets/gallery/kourovod.jpg";
+import leseni from "@/assets/gallery/leseni_pri_vystavbe_nerez_kominu.jpg";
+import dodavka from "@/assets/gallery/nase_dodavka.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -40,6 +44,10 @@ const items: { src: string; label: string }[] = [
   { src: kourovodFunkce, label: "Kouřovod s funkcí komína" },
   { src: kourovodPrerusovac, label: "Kouřovod s přerušovačem tahu" },
   { src: kourovodKondenzacni, label: "Kouřovod u kondenzačního kotle" },
+  { src: kourovodTuha, label: "Kouřovod u kotle na tuhá paliva" },
+  { src: kourovod, label: "Montáž kouřovodu" },
+  { src: leseni, label: "Výstavba nerezového komínu" },
+  { src: dodavka, label: "Naše dodávka" },
 ];
 
 export default function Gallery() {
