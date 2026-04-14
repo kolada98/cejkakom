@@ -1,9 +1,9 @@
-import { Cog, Sparkles, FileText, ShieldCheck } from "lucide-react";
+import { Cog, Clock, FileText, ShieldCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const items = [
   { num: "01", icon: Cog, title: "Vlastní fréza", desc: "Frézování provádíme vlastní technikou — bez závislosti na subdodavatelích." },
-  { num: "02", icon: Sparkles, title: "Poctivé čištění", desc: "U každého zákazníka strávíme tolik času, kolik komín potřebuje. Obvykle kolem 45 minut." },
+  { num: "02", icon: Clock, title: "Poctivé čištění", desc: "U každého zákazníka strávíme tolik času, kolik komín potřebuje. Obvykle kolem 45 minut." },
   { num: "03", icon: FileText, title: "Dokumentace v pořádku", desc: "Jako certifikovaný RTSC technik vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem." },
   { num: "04", icon: ShieldCheck, title: "Požární bezpečnost", desc: "Každý komín stavíme s důrazem na požárně bezpečné provedení včetně certifikovaných prostupů hořlavými konstrukcemi." },
 ];

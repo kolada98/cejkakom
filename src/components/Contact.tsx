@@ -31,7 +31,7 @@ export default function Contact() {
         <div className="text-center mb-12">
           <h2 className="section-title">Kontaktujte nás</h2>
           <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Popište co potřebujete. Roman se ozve osobně, většinou ještě týž den.</p>
+          <p className="section-subtitle mx-auto">Popište co potřebujete. Obvykle odpovídáme do 24 hodin.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">

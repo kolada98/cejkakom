@@ -20,7 +20,7 @@ export default function Hero() {
             <span className="text-primary">poctivě a podle předpisů.</span>
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl mb-8 max-w-lg">
-            Výstavba, vložkování, čištění a revize komínů v Brně a okolí. Certifikovaný revizní technik spalinových cest.
+            Výstavba, vložkování, čištění a revize komínů v Brně a okolí. Certifikovaný kominík s 13 lety praxe.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">

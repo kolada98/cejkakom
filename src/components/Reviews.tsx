@@ -8,7 +8,7 @@ export default function Reviews() {
         <div className="text-center mb-12">
           <h2 className="section-title">Co říkají zákazníci</h2>
           <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Zatím sbíráme recenze — brzy zde uvidíte hodnocení z Google.</p>
+          
         </div>
 
         <div className="max-w-[560px] mx-auto">
@@ -22,9 +22,9 @@ export default function Reviews() {
           </div>
 
           <div className="text-center mt-8">
-            <p className="text-muted-foreground text-sm">Byli jste se službou spokojeni? Budeme rádi za recenzi.</p>
-            <a href="#" className="text-primary font-medium text-sm mt-1 inline-block hover:opacity-80 transition-opacity">
-              Zanechat recenzi na Google →
+            <p className="text-muted-foreground text-sm">Byli jste se službou spokojeni? Budeme rádi za hodnocení.</p>
+            <a href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html" target="_blank" rel="noopener noreferrer" className="text-primary font-medium text-sm mt-1 inline-block hover:opacity-80 transition-opacity">
+              Ohodnotit na Firmy.cz →
             </a>
           </div>
         </div>
