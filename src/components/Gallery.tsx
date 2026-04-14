@@ -8,6 +8,9 @@ import cisteni2 from "@/assets/gallery/cisteni2.jpg";
 import fasadniDrevostavba from "@/assets/gallery/fasadni_komin_na_drevostavbe.jpg";
 import fasadniChatka from "@/assets/gallery/fasadni_komin_na_chatce.jpg";
 import fasadniPlyn from "@/assets/gallery/fasadni_komin_pro_plyn.jpg";
+import fasadniNerezovy from "@/assets/gallery/fasadni_nerezovy_komin.jpg";
+import freza from "@/assets/gallery/freza.jpg";
+import frezovaniKominu from "@/assets/gallery/frezovani_kominu.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -16,6 +19,9 @@ const items: { src: string; label: string }[] = [
   { src: fasadniDrevostavba, label: "Fasádní komín na dřevostavbě" },
   { src: fasadniChatka, label: "Fasádní komín na chatě" },
   { src: fasadniPlyn, label: "Fasádní komín pro plyn" },
+  { src: fasadniNerezovy, label: "Fasádní nerezový komín" },
+  { src: freza, label: "Vlastní profesionální fréza" },
+  { src: frezovaniKominu, label: "Frézování komínu" },
 ];
 
 export default function Gallery() {
