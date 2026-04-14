@@ -31,6 +31,7 @@ import revizniKus from "@/assets/gallery/revizni_kus_na_pude.jpg";
 import striskaTurbo from "@/assets/gallery/striska_u_vlozky_pro_turbo_kotel.jpg";
 import vlozkaPevna from "@/assets/gallery/vlozka_pevna_paliva.jpg";
 import vlozkovaniKominu from "@/assets/gallery/vlozkovani_kominu.jpg";
+import vlozkovaniSpolecnehoKominu from "@/assets/gallery/vlozkovani_spolecneho_kominu_pro_plyn.jpg";
 
 const items: { src: string; label: string }[] = [
   { src: fasadniKomin, label: "Fasádní nerezový komín — 20 m" },
@@ -62,6 +63,7 @@ const items: { src: string; label: string }[] = [
   { src: striskaTurbo, label: "Stříška u vložky pro turbo kotel" },
   { src: vlozkaPevna, label: "Pevná vložka — tuhá paliva" },
   { src: vlozkovaniKominu, label: "Vložkování komínu" },
+  { src: vlozkovaniSpolecnehoKominu, label: "Vložkování společného komínu pro plyn" },
 ];
 
 export default function Gallery() {
