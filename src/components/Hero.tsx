@@ -11,9 +11,34 @@ const badges = [
 export default function Hero() {
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden">
+      {/* Noise texture overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{ backgroundImage: "repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)" }}
+      />
+      {/* Warm golden glow behind chimney (right side) */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          top: '10%',
+          right: '8%',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(251,146,60,0.14) 0%, rgba(251,146,60,0.05) 40%, transparent 70%)',
+          borderRadius: '50%',
+        }}
+      />
+      {/* Subtle blue glow bottom-left for depth contrast */}
+      <div
+        className="pointer-events-none absolute"
+        style={{
+          bottom: '-5%',
+          left: '-5%',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(26,46,74,0.5) 0%, rgba(26,46,74,0.15) 45%, transparent 70%)',
+          borderRadius: '50%',
+        }}
       />
 
       <div className="relative z-10 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center pt-24 pb-12">
