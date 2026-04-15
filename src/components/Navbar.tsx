@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 const links = [
   { href: "#sluzby", label: "Služby" },
   { href: "#o-nas", label: "O nás" },
-  { href: "#proc-my", label: "Proč my" },
+  
   { href: "#certifikaty", label: "Certifikáty" },
   { href: "#cenik", label: "Ceník" },
   { href: "#galerie", label: "Galerie" },
