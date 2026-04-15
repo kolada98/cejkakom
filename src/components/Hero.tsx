@@ -46,7 +46,7 @@ export default function Hero() {
           <img
             src={heroIllustration}
             alt="Ilustrace komínu"
-            className="w-full max-w-sm aspect-square object-contain"
+            className="w-full max-w-lg aspect-square object-contain"
           />
         </div>
       </div>
