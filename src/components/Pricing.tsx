@@ -27,7 +27,7 @@ const col2: PriceItem[] = [
 const col3: PriceItem[] = [
   { name: "Cestovné", price: "15 Kč/km" },
   { name: "Hodinová sazba víceprací", price: "950 Kč/h" },
-  { name: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 3 000 Kč" },
+  
   { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
 ];
 
