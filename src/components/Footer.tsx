@@ -51,7 +51,10 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
-        © 2025 ČEJKAKOM s.r.o. | IČO: 29277469 | Zpracování osobních údajů
+        © 2026 ČEJKAKOM s.r.o. | IČO: 29277469 | Zpracování osobních údajů | Vytvořil{" "}
+        <a href="https://webyproremeslniky.cz" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 transition-opacity">
+          webyproremeslniky.cz
+        </a>
       </div>
     </footer>
   );
