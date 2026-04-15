@@ -25,7 +25,7 @@ const col3: PriceItem[] = [
   { name: "Výměna komínových dvířek", price: "3 500 Kč" },
   { name: "Montáž kouřovodu / koaxiální systém", price: "od 7 000 Kč" },
   { name: "Montáž nerezové komínové stříšky", price: "od 2 500 Kč" },
-  { name: "Komínové poradenství", price: "ZDARMA" },
+  { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
   { name: "Cestovné", price: "15 Kč/km" },
   { name: "Hodinová sazba víceprací", price: "950 Kč/h" },
 ];
