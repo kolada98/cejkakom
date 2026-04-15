@@ -9,6 +9,8 @@ const col1: PriceItem[] = [
   { name: "Čištění na pevná paliva (aktuální cena)", price: "od 1 400 Kč" },
   { name: "Čištění na plyn (aktuální cena)", price: "od 900 Kč" },
   { name: "Strojové čištění dehtu (frézování)", price: "850 Kč/m" },
+  { name: "Výchozí revize ke kolaudaci", price: "od 3 000 Kč" },
+  { name: "Výchozí revize s osobním dohledem RTSC", price: "do 15 000 Kč" },
 ];
 
 const col2: PriceItem[] = [
@@ -17,16 +19,15 @@ const col2: PriceItem[] = [
   { name: "Vložkování – tuhá paliva DN150 (mat. + montáž)", price: "od 35 000 Kč" },
   { name: "Vložkování – kondenzační kotel (mat. + montáž)", price: "od 18 000 Kč" },
   { name: "Frézování komínu", price: "od 2 000 Kč/m" },
+  { name: "Montáž kouřovodu / koaxiální systém", price: "od 7 000 Kč" },
+  { name: "Montáž nerezové komínové stříšky", price: "od 2 500 Kč" },
+  { name: "Výměna komínových dvířek", price: "3 500 Kč" },
 ];
 
 const col3: PriceItem[] = [
-  { name: "Výchozí revize ke kolaudaci", price: "od 3 000 Kč" },
-  { name: "Výchozí revize s osobním dohledem RTSC", price: "do 15 000 Kč" },
-  { name: "Výměna komínových dvířek", price: "3 500 Kč" },
-  { name: "Montáž kouřovodu / koaxiální systém", price: "od 7 000 Kč" },
-  { name: "Montáž nerezové komínové stříšky", price: "od 2 500 Kč" },
   { name: "Cestovné", price: "15 Kč/km" },
   { name: "Hodinová sazba víceprací", price: "950 Kč/h" },
+  { name: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 3 000 Kč" },
   { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
 ];
 
