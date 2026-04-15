@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, MapPin } from "lucide-react";
-import heroPhoto from "@/assets/hero-photo.jpg";
+import heroIllustration from "@/assets/hero-illustration.png";
 
 const badges = [
   { icon: Shield, label: "Certifikovaný RTSC technik" },
@@ -44,9 +44,9 @@ export default function Hero() {
 
         <div className="hidden lg:flex items-center justify-center">
           <img
-            src={heroPhoto}
-            alt="Tým ČEJKAKOM při montáži nerezového komínu"
-            className="w-full max-w-md aspect-[4/5] rounded-lg border border-border object-cover"
+            src={heroIllustration}
+            alt="Ilustrace komínu"
+            className="w-full max-w-sm aspect-square object-contain"
           />
         </div>
       </div>
