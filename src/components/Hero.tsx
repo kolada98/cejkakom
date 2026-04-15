@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, MapPin } from "lucide-react";
-import heroPhoto from "@/assets/hero-photo.jpg";
+import heroIllustration from "@/assets/hero-illustration.png";
 
 const badges = [
   { icon: Shield, label: "Certifikovaný RTSC technik" },
