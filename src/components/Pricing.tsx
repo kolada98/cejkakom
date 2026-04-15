@@ -27,7 +27,7 @@ const col2: PriceItem[] = [
 const col3: PriceItem[] = [
   { name: "Cestovné", price: "15 Kč/km" },
   { name: "Hodinová sazba víceprací", price: "950 Kč/h" },
-  { name: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 3 000 Kč" },
+  
   { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
 ];
 
@@ -63,7 +63,7 @@ export default function Pricing() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <PriceColumn title="Čištění a revize" items={col1} />
           <PriceColumn title="Výstavba a vložkování" items={col2} />
-          <PriceColumn title="Podmínky a sazby" items={col3} />
+          <PriceColumn title="Ostatní služby a poplatky" items={col3} />
         </div>
 
 
