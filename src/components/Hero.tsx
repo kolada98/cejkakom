@@ -11,9 +11,12 @@ const badges = [
 export default function Hero() {
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)" }} />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{ backgroundImage: "repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)" }}
+      />
 
-      <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center pt-24 pb-12">
+      <div className="relative z-10 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center pt-24 pb-12">
         <div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
             Kominictví —{" "}
