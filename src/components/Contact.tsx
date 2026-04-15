@@ -66,14 +66,16 @@ export default function Contact() {
               </div>
             </div>
 
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=16.665%2C49.228%2C16.685%2C49.242&layer=mapnik&marker=49.2347%2C16.6738"
-              className="aspect-video w-full rounded-lg border border-border"
-              allowFullScreen
-              loading="lazy"
-              title="Mapa — K Lipinám 843, Bílovice nad Svitavou"
-              style={{ border: 0 }}
-            />
+            <div className="aspect-video w-full rounded-lg border border-border overflow-hidden relative">
+              <iframe
+                src="https://maps.google.com/maps?q=K+Lipin%C3%A1m+843,+B%C3%ADlovice+nad+Svitavou,+664+01&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full"
+                allowFullScreen
+                loading="lazy"
+                title="Mapa — K Lipinám 843, Bílovice nad Svitavou"
+                style={{ border: 0 }}
+              />
+            </div>
           </div>
 
           {/* Form */}
