@@ -34,7 +34,11 @@ export default function Services() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((s) => (
             <div key={s.title} className="card-base group hover:border-l-4 hover:border-l-primary">
-              <s.icon size={28} className="text-primary mb-4" />
+              {s.customIcon ? (
+                <img src={s.customIcon} alt={s.title} width={28} height={28} className="mb-4" loading="lazy" />
+              ) : s.icon ? (
+                <s.icon size={28} className="text-primary mb-4" />
+              ) : null}
               <h3 className="text-lg font-bold mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </div>
