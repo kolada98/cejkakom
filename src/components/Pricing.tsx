@@ -25,9 +25,9 @@ const col3: PriceItem[] = [
   { name: "Výměna komínových dvířek", price: "3 500 Kč" },
   { name: "Montáž kouřovodu / koaxiální systém", price: "od 7 000 Kč" },
   { name: "Montáž nerezové komínové stříšky", price: "od 2 500 Kč" },
-  { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
   { name: "Cestovné", price: "15 Kč/km" },
   { name: "Hodinová sazba víceprací", price: "950 Kč/h" },
+  { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
 ];
 
 function PriceColumn({ title, items }: { title: string; items: PriceItem[] }) {
@@ -65,9 +65,6 @@ export default function Pricing() {
           <PriceColumn title="Revize a ostatní" items={col3} />
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mb-6">
-          Expresní výjezd mimo pracovní dobu (do 10 km): od 3 000 Kč
-        </p>
 
         <div className="text-center">
           <Button variant="gold" size="lg" asChild>
