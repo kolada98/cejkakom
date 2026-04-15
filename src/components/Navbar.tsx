@@ -64,9 +64,9 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:block flex-shrink-0">
-          <Button variant="gold" size="lg" asChild>
-            <a href="#kontakt">Nezávazná poptávka</a>
-          </Button>
+          <a href="tel:+420776310278" className="text-primary font-extrabold text-xl hover:opacity-80 transition-opacity">
+            +420 776 310 278
+          </a>
         </div>
 
         <button className="lg:hidden text-foreground" onClick={() => setOpen(!open)}>
@@ -86,9 +86,9 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <Button variant="gold" size="lg" className="w-full mt-4" asChild>
-            <a href="#kontakt">Nezávazná poptávka</a>
-          </Button>
+          <a href="tel:+420776310278" className="block w-full mt-4 text-center text-primary font-extrabold text-xl">
+            +420 776 310 278
+          </a>
         </div>
       )}
     </nav>

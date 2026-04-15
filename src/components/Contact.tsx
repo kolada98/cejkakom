@@ -66,9 +66,14 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="aspect-video rounded-lg bg-secondary border border-border flex items-center justify-center">
-              <span className="text-sm text-muted-foreground">Google Maps — Bílovice nad Svitavou</span>
-            </div>
+            <a
+              href="https://maps.google.com/?q=K+Lipinám+843,+Bílovice+nad+Svitavou,+664+01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="aspect-video rounded-lg bg-secondary border border-border flex items-center justify-center hover:border-primary transition-colors"
+            >
+              <span className="text-sm text-muted-foreground">📍 Zobrazit na Google Maps — K Lipinám 843, Bílovice nad Svitavou</span>
+            </a>
           </div>
 
           {/* Form */}
