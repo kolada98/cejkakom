@@ -67,7 +67,7 @@ export default function Contact() {
             </div>
 
             <iframe
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=K+Lipinám+843,Bílovice+nad+Svitavou,Czech+Republic&zoom=15"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=16.665%2C49.228%2C16.685%2C49.242&layer=mapnik&marker=49.2347%2C16.6738"
               className="aspect-video w-full rounded-lg border border-border"
               allowFullScreen
               loading="lazy"
