@@ -1,8 +1,16 @@
-import { Brush as Brush2, Layers, Wrench, Home, Flame, CheckCircle, Settings, ShieldCheck } from "lucide-react";
+import { Layers, Wrench, Home, Flame, CheckCircle, Settings, ShieldCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import chimneyBrushIcon from "@/assets/chimney-brush-icon.png";
 
-const services = [
-  { icon: Brush2, title: "Čištění a revize", desc: "Vyčistíme komín na tuhá paliva i plyn při každoroční kontrole dle vyhlášky č. 34/2016 Sb. U zákazníka strávíme 30–60 minut podle stupně znečištění — čistíme komín, kouřovod, spalinové hrdlo i část pod deflektorem. Zhodnotíme stav celé spalinové cesty a případné závady rovnou navrhneme k opravě. Na přání vyčistíme i krbová kamna, krbovou vložku nebo kotel." },
+type ServiceItem = {
+  icon?: typeof Layers;
+  customIcon?: string;
+  title: string;
+  desc: string;
+};
+
+const services: ServiceItem[] = [
+  { customIcon: chimneyBrushIcon, title: "Čištění a revize", desc: "Vyčistíme komín na tuhá paliva i plyn při každoroční kontrole dle vyhlášky č. 34/2016 Sb. U zákazníka strávíme 30–60 minut podle stupně znečištění — čistíme komín, kouřovod, spalinové hrdlo i část pod deflektorem. Zhodnotíme stav celé spalinové cesty a případné závady rovnou navrhneme k opravě. Na přání vyčistíme i krbová kamna, krbovou vložku nebo kotel." },
   { icon: Layers, title: "Vložkování komínů", desc: "Pokud stávající komín přestane bezpečně odvádět spaliny, nejšetrnější řešení je vložkování — do původního průduchu vložíme vložku z vhodného materiálu pro daný spotřebič. Vznikne komín vícevrstevný, bariérový, vhodný i pro mokrý provoz nebo přetlakový spotřebič. Vložkujeme pro tuhá paliva (nerez flexi DN 150–200 mm), kondenzační kotle (plast nebo nerez wrap) i atmosférické plynové kotle. Realizujeme i komplikované zakázky, zkušenosti od roku 2013." },
   { icon: Settings, title: "Frézování", desc: "Frézováním zvětšíme průměr stávajícího průduchu tak, aby bylo možné vložkování. Pracujeme vlastní profesionální frézou — bez závislosti na subdodavatelích, s rychlejším termínem a přesnější cenou." },
   { icon: Home, title: "Výstavba komínů", desc: "Stavíme nerezové komíny od různých výrobců — fasádní i vnitřní, v lesklém nerezu, černém matu nebo antracitu. Ročně realizujeme 60–100 nových komínů. Pro dřevostavby zajišťujeme systémové prostupy hořlavými konstrukcemi a certifikované napojení na parotěsné fólie. Díky nízké hmotnosti nerezu lze komín instalovat i dodatečně, tam kde se s ním původně nepočítalo. Montáž většinou zabere jeden den." },
@@ -26,7 +34,11 @@ export default function Services() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((s) => (
             <div key={s.title} className="card-base group hover:border-l-4 hover:border-l-primary">
-              <s.icon size={28} className="text-primary mb-4" />
+              {s.customIcon ? (
+                <img src={s.customIcon} alt={s.title} width={28} height={28} className="mb-4" loading="lazy" />
+              ) : s.icon ? (
+                <s.icon size={28} className="text-primary mb-4" />
+              ) : null}
               <h3 className="text-lg font-bold mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </div>
