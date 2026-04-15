@@ -3,7 +3,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import ChimneyBrushIcon from "@/components/icons/ChimneyBrushIcon";
 
 type ServiceItem = {
-  icon: React.FC<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
   title: string;
   desc: string;
 };
