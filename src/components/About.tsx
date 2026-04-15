@@ -4,7 +4,7 @@ import panCejka from "@/assets/pan_cejka.jpg";
 const stats = [
   { value: "2013", label: "rok vzniku" },
   { value: "RTSC", label: "certifikace" },
-  { value: "40 km", label: "servisní oblast" },
+  { value: "cca 40 km", label: "okolo Brna" },
 ];
 
 export default function About() {
