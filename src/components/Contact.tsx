@@ -66,14 +66,14 @@ export default function Contact() {
               </div>
             </div>
 
-            <a
-              href="https://maps.google.com/?q=K+Lipinám+843,+Bílovice+nad+Svitavou,+664+01"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="aspect-video rounded-lg bg-secondary border border-border flex items-center justify-center hover:border-primary transition-colors"
-            >
-              <span className="text-sm text-muted-foreground">📍 Zobrazit na Google Maps — K Lipinám 843, Bílovice nad Svitavou</span>
-            </a>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2607.5!2d16.6738!3d49.2347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47129574e5f1c0e7%3A0x2e0c5a4e8b0f2a5e!2sK%20Lipin%C3%A1m%20843%2C%20664%2001%20B%C3%ADlovice%20nad%20Svitavou!5e0!3m2!1scs!2scz!4v1700000000000"
+              className="aspect-video w-full rounded-lg border border-border"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa — K Lipinám 843, Bílovice nad Svitavou"
+            />
           </div>
 
           {/* Form */}

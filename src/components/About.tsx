@@ -4,7 +4,7 @@ import panCejka from "@/assets/pan_cejka.jpg";
 const stats = [
   { value: "2013", label: "rok vzniku" },
   { value: "RTSC", label: "certifikace" },
-  { value: "cca 40 km", label: "okolo Brna" },
+  { value: "~40 km", label: "okolí Brna\nservisní oblast" },
 ];
 
 export default function About() {
@@ -39,7 +39,7 @@ export default function About() {
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
                   <div className="text-3xl font-extrabold text-primary">{s.value}</div>
-                  <div className="text-sm text-muted-foreground">{s.label}</div>
+                  <div className="text-sm text-muted-foreground whitespace-pre-line">{s.label}</div>
                 </div>
               ))}
             </div>

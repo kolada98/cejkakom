@@ -24,11 +24,11 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
-            <Button variant="gold" size="lg" asChild>
-              <a href="#kontakt">Nezávazná poptávka</a>
+            <Button variant="gold" size="lg" onClick={() => document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })}>
+              Nezávazná poptávka
             </Button>
-            <Button variant="goldOutline" size="lg" asChild>
-              <a href="#sluzby">Naše služby ↓</a>
+            <Button variant="goldOutline" size="lg" onClick={() => document.getElementById('sluzby')?.scrollIntoView({ behavior: 'smooth' })}>
+              Naše služby ↓
             </Button>
           </div>
 
