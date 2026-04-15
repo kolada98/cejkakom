@@ -4,7 +4,7 @@ import panCejka from "@/assets/pan_cejka.jpg";
 const stats = [
   { value: "2013", label: "rok vzniku" },
   { value: "RTSC", label: "certifikace" },
-  { value: "~40 km", label: "okolí Brna\nservisní oblast" },
+  { value: "~40 km", label: "servisní oblast" },
 ];
 
 export default function About() {
@@ -26,7 +26,8 @@ export default function About() {
 
           <div>
             <span className="text-primary font-semibold text-sm uppercase tracking-wider">CERTIFIKOVANÝ REVIZNÍ TECHNIK SPALINOVÝCH CEST</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">Ing. Roman Čejka</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-2">Ing. Roman Čejka</h2>
+            <p className="text-sm text-muted-foreground mb-6">okolí Brna</p>
 
             <p className="text-muted-foreground mb-4">
               Kominictví dělám od roku 2013. Za tu dobu jsem prošel stovky domácností a realizoval zakázky od běžného čištění až po výstavbu komínových systémů pro kondenzační kotle a dřevostavby.

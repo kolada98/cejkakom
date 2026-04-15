@@ -67,12 +67,12 @@ export default function Contact() {
             </div>
 
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2607.5!2d16.6738!3d49.2347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47129574e5f1c0e7%3A0x2e0c5a4e8b0f2a5e!2sK%20Lipin%C3%A1m%20843%2C%20664%2001%20B%C3%ADlovice%20nad%20Svitavou!5e0!3m2!1scs!2scz!4v1700000000000"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=K+Lipinám+843,Bílovice+nad+Svitavou,Czech+Republic&zoom=15"
               className="aspect-video w-full rounded-lg border border-border"
               allowFullScreen
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
               title="Mapa — K Lipinám 843, Bílovice nad Svitavou"
+              style={{ border: 0 }}
             />
           </div>
 

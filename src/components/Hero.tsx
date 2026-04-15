@@ -24,12 +24,18 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
-            <Button variant="gold" size="lg" onClick={() => document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button
+              onClick={() => document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-base px-8 py-3 hover:opacity-90 transition-opacity"
+            >
               Nezávazná poptávka
-            </Button>
-            <Button variant="goldOutline" size="lg" onClick={() => document.getElementById('sluzby')?.scrollIntoView({ behavior: 'smooth' })}>
+            </button>
+            <button
+              onClick={() => document.getElementById('sluzby')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center rounded-md border-2 border-primary text-primary font-bold text-base px-8 py-3 hover:bg-primary/10 transition-colors"
+            >
               Naše služby ↓
-            </Button>
+            </button>
           </div>
 
           <div className="flex flex-wrap gap-6">
