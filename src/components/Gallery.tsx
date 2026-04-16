@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 import fasadniKomin from "@/assets/gallery/20m_fasadni_komin.jpg";
@@ -66,21 +66,20 @@ const items: { src: string; label: string }[] = [
   { src: vlozkovaniSpolecnehoKominu, label: "Vložkování společného komínu pro plyn" },
 ];
 
+const INITIAL_COUNT = 12;
+
 export default function Gallery() {
   const ref = useScrollAnimation();
-  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleItems = showAll ? items : items.slice(0, INITIAL_COUNT);
 
   const prev = () =>
     setSelected((s) => (s !== null ? (s - 1 + items.length) % items.length : null));
   const next = () =>
     setSelected((s) => (s !== null ? (s + 1) % items.length : null));
 
-  const scrollGallery = (direction: number) => {
-    scrollRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
-  };
-
-  // Keyboard navigation
   useEffect(() => {
     if (selected === null) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -92,81 +91,74 @@ export default function Gallery() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [selected]);
 
-  // Lock body scroll when lightbox is open
   useEffect(() => {
-    if (selected !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = selected !== null ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [selected]);
 
   return (
-    <section id="galerie" className="section-py">
-      <div className="container mx-auto px-4" ref={ref} style={{ opacity: 0 }}>
-        <div className="text-center mb-12">
-          <h2 className="section-heading center">Galerie realizací</h2>
-          <p className="section-subtitle mx-auto mt-6">Ukázka naší práce</p>
-        </div>
+    <section id="galerie" className="section-py relative overflow-hidden">
+      {/* Radial glow */}
+      <div
+        className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px]"
+        style={{
+          background: "radial-gradient(circle at 100% 0%, rgba(251,146,60,0.06), transparent 55%)",
+        }}
+      />
 
-        <div className="relative mx-auto max-w-5xl">
-          {/* Left arrow */}
-          <button
-            type="button"
-            onClick={() => scrollGallery(-1)}
-            className="absolute left-0 top-1/2 z-10 hidden h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex min-h-[44px] min-w-[44px]"
-            aria-label="Posunout galerii doleva"
-          >
-            <ChevronLeft size={34} />
-          </button>
-
-          {/* Scroll container */}
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto px-1 pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:px-10"
-          >
-            {items.map((item, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setSelected(i)}
-                className="group relative block w-[140px] shrink-0 cursor-zoom-in overflow-hidden rounded-lg border border-primary/20 bg-card p-1.5 text-left transition-all duration-200 hover:-translate-y-1 hover:border-primary/60 hover:shadow-lg min-h-[44px]"
-                aria-label={`Zobrazit: ${item.label}`}
-              >
-                <div className="overflow-hidden rounded relative">
-                  <img
-                    src={item.src}
-                    alt={item.label}
-                    className="h-[180px] w-full rounded object-cover transition-transform duration-500 ease-smooth-out group-hover:scale-110"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {/* Overlay gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded" />
-                </div>
-                <div className="absolute inset-x-1.5 bottom-1.5 flex min-h-14 items-center justify-between gap-2 rounded-b bg-background/88 px-2.5 py-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
-                  <span className="line-clamp-2 text-xs font-semibold text-foreground">
-                    {item.label}
-                  </span>
-                  <ZoomIn size={18} className="shrink-0 text-primary" />
-                </div>
-              </button>
-            ))}
+      <div className="container mx-auto px-4 relative z-10" ref={ref} style={{ opacity: 0 }}>
+        <div className="mb-14">
+          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
+            — 06 / GALERIE
           </div>
-
-          {/* Right arrow */}
-          <button
-            type="button"
-            onClick={() => scrollGallery(1)}
-            className="absolute right-0 top-1/2 z-10 hidden h-14 w-14 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex min-h-[44px] min-w-[44px]"
-            aria-label="Posunout galerii doprava"
-          >
-            <ChevronRight size={34} />
-          </button>
+          <h2 className="section-heading">Galerie realizací</h2>
+          <p className="section-subtitle mt-6">Ukázka naší práce</p>
         </div>
+
+        {/* Masonry grid */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+          {visibleItems.map((item, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setSelected(i)}
+              className="group relative block w-full mb-4 break-inside-avoid rounded-lg overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-gold"
+              aria-label={`Zobrazit: ${item.label}`}
+            >
+              <img
+                src={item.src}
+                alt={item.label}
+                className="w-full object-cover rounded-lg transition-transform duration-700 group-hover:scale-[1.03]"
+                style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+                loading="lazy"
+                decoding="async"
+              />
+              {/* Gold overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+              {/* Label on hover */}
+              <div className="absolute bottom-0 left-0 right-0 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <span className="text-xs font-semibold text-white/90 line-clamp-1">{item.label}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Show more button */}
+        {!showAll && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => {
+                setShowAll(true);
+                // small delay to let render happen, then open lightbox at first hidden item
+              }}
+              className="group inline-flex items-center gap-3 border border-gold text-gold font-semibold px-8 py-4 rounded-lg hover:bg-gold hover:text-navy transition-all duration-300"
+              style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+            >
+              Zobrazit všech {items.length} fotek
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -175,22 +167,19 @@ export default function Gallery() {
           role="dialog"
           aria-modal="true"
           aria-label="Galerie realizací"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
           onClick={() => setSelected(null)}
         >
           <button
             onClick={() => setSelected(null)}
-            className="absolute top-4 right-4 z-10 text-white/80 transition-colors hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="absolute top-4 right-4 z-10 text-white/80 hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Zavřít"
           >
             <X size={32} />
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              prev();
-            }}
-            className="absolute left-3 md:left-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 min-h-[44px] min-w-[44px]"
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-3 md:left-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors min-h-[44px] min-w-[44px]"
             aria-label="Předchozí fotografie"
           >
             <ChevronLeft size={34} />
@@ -202,16 +191,13 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
           />
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
-            className="absolute right-3 md:right-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 min-h-[44px] min-w-[44px]"
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-3 md:right-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors min-h-[44px] min-w-[44px]"
             aria-label="Následující fotografie"
           >
             <ChevronRight size={34} />
           </button>
-          <div className="absolute bottom-4 text-sm text-white/70 select-none">
+          <div className="absolute bottom-4 text-sm text-white/60 select-none text-center">
             {items[selected].label} — {selected + 1} / {items.length}
           </div>
         </div>

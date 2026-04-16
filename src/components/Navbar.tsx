@@ -38,11 +38,12 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
+          ? "bg-navy/80 backdrop-blur-md border-b border-white/5"
           : "bg-transparent"
       }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
     >
       <div
         className="container mx-auto flex items-center justify-between px-4"
@@ -53,17 +54,20 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`text-sm font-medium transition-colors duration-200 min-h-[44px] inline-flex items-center ${
+              className={`relative text-sm font-medium transition-colors duration-300 min-h-[44px] inline-flex items-center gap-1.5 ${
                 active === l.href
-                  ? "text-primary"
-                  : "text-foreground/80 hover:text-primary"
+                  ? "text-gold"
+                  : "text-white/70 hover:text-white"
               }`}
             >
+              {active === l.href && (
+                <span className="text-gold text-[8px]">•</span>
+              )}
               {l.label}
             </a>
           ))}
@@ -73,7 +77,7 @@ export default function Navbar() {
         <div className="hidden lg:block flex-shrink-0">
           <a
             href="tel:+420776310278"
-            className="text-primary font-extrabold text-xl hover:opacity-80 transition-opacity min-h-[44px] inline-flex items-center"
+            className="inline-flex items-center bg-gold text-navy font-bold text-sm px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity min-h-[40px]"
           >
             +420 776 310 278
           </a>
@@ -81,7 +85,7 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="lg:hidden text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="lg:hidden text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Zavřít menu" : "Otevřít menu"}
         >
@@ -91,20 +95,23 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden bg-background/98 backdrop-blur-md border-t border-border px-4 pb-6 pt-2">
+        <div className="lg:hidden bg-navy/95 backdrop-blur-md border-t border-white/10 px-4 pb-6 pt-2">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="flex items-center min-h-[44px] text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              className={`flex items-center min-h-[44px] text-sm font-medium transition-colors ${
+                active === l.href ? "text-gold" : "text-white/75 hover:text-white"
+              }`}
             >
+              {active === l.href && <span className="mr-2 text-gold text-[8px]">•</span>}
               {l.label}
             </a>
           ))}
           <a
             href="tel:+420776310278"
-            className="flex items-center justify-center min-h-[44px] w-full mt-4 text-center text-primary font-extrabold text-xl"
+            className="flex items-center justify-center min-h-[44px] w-full mt-5 bg-gold text-navy font-bold rounded-md text-base"
           >
             +420 776 310 278
           </a>

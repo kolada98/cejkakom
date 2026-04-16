@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -86,11 +86,9 @@
     @apply py-12 md:py-20 px-4;
   }
 
-  /* Clamp-based vertical padding for sections */
+  /* Premium spacing — py-24 md:py-40 */
   .section-py {
-    padding-top: clamp(4rem, 8vw, 7rem);
-    padding-bottom: clamp(4rem, 8vw, 7rem);
-    @apply px-4;
+    @apply py-24 md:py-40 px-4;
   }
 
   .section-title {
@@ -99,7 +97,7 @@
 
   /* section-heading with gold underline pseudo-element */
   .section-heading {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-foreground;
+    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight;
     display: inline-block;
   }
 
@@ -136,18 +134,44 @@
   .gold-text {
     @apply text-primary;
   }
+
+  /* Gold corner frame — wrap img in a div with this class */
+  .corner-frame {
+    position: relative;
+  }
+  .corner-frame::before,
+  .corner-frame::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: #FB923C;
+    border-style: solid;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .corner-frame::before {
+    top: -6px;
+    left: -6px;
+    border-width: 2px 0 0 2px;
+  }
+  .corner-frame::after {
+    bottom: -6px;
+    right: -6px;
+    border-width: 0 2px 2px 0;
+  }
 }
 
 @layer utilities {
   /* animate-fade-up: used by useScrollAnimation and inline hero stagger */
   .animate-fade-up {
-    animation: fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: fadeUp 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -158,5 +182,30 @@
   @keyframes gradient-flow {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.7; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  .animate-scroll-bounce {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  /* Focus line grow */
+  .focus-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #FB923C;
+    transition: width 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  input:focus ~ .focus-line,
+  textarea:focus ~ .focus-line {
+    width: 100%;
   }
 }

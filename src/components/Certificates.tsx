@@ -25,7 +25,6 @@ export default function Certificates() {
   const next = () =>
     setSelected((s) => (s !== null ? (s + 1) % certificates.length : null));
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     if (selected === null) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -37,23 +36,27 @@ export default function Certificates() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [selected]);
 
-  // Lock body scroll when lightbox is open
   useEffect(() => {
-    if (selected !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = selected !== null ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [selected]);
 
   return (
-    <section id="certifikaty" className="section-py" style={{ backgroundColor: "#0F2748" }}>
-      <div className="container mx-auto px-4">
-        <div ref={ref} className="text-center mb-12 opacity-0">
-          <h2 className="section-heading center text-foreground">
+    <section id="certifikaty" className="section-py relative overflow-hidden" style={{ backgroundColor: "#0F2748" }}>
+      {/* Subtle radial glow center */}
+      <div
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px]"
+        style={{
+          background: "radial-gradient(ellipse at center, rgba(251,146,60,0.06), transparent 65%)",
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div ref={ref} className="mb-14 opacity-0">
+          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
+            — 03 / CERTIFIKÁTY
+          </div>
+          <h2 className="section-heading text-foreground">
             Certifikáty a oprávnění
           </h2>
           <p className="text-muted-foreground text-lg mt-6">
@@ -61,25 +64,34 @@ export default function Certificates() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto">
           {certificates.map((cert, i) => (
             <button
               key={i}
               onClick={() => setSelected(i)}
-              className="group block transition-all duration-500 cursor-pointer hover:scale-105 hover:ring-2 hover:ring-gold/50 rounded-lg"
+              className="group relative block cursor-pointer rounded-lg overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:ring-2 hover:ring-gold/50 hover:shadow-[0_16px_40px_-12px_rgba(251,146,60,0.3)]"
               style={{
                 backgroundColor: "#0B1F3A",
                 border: "1px solid rgba(251,146,60,0.15)",
-                borderRadius: "8px",
                 padding: "6px",
                 width: "140px",
               }}
               aria-label={`Zobrazit ${cert.alt}`}
             >
+              {/* Corner frames */}
+              <div
+                className="absolute top-0 left-0 w-[20px] h-[20px] z-10 pointer-events-none"
+                style={{ borderTop: "2px solid rgba(251,146,60,0.6)", borderLeft: "2px solid rgba(251,146,60,0.6)" }}
+              />
+              <div
+                className="absolute bottom-0 right-0 w-[20px] h-[20px] z-10 pointer-events-none"
+                style={{ borderBottom: "2px solid rgba(251,146,60,0.6)", borderRight: "2px solid rgba(251,146,60,0.6)" }}
+              />
+
               <img
                 src={cert.src}
                 alt={cert.alt}
-                className={`w-full h-[180px] object-cover rounded ${cert.position ?? ""}`}
+                className={`w-full aspect-[3/4] object-cover rounded ${cert.position ?? ""}`}
                 loading="lazy"
                 decoding="async"
               />
@@ -104,7 +116,6 @@ export default function Certificates() {
           >
             <X size={32} />
           </button>
-
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
             className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -112,14 +123,12 @@ export default function Certificates() {
           >
             <ChevronLeft size={40} />
           </button>
-
           <img
             src={certificates[selected].src}
             alt={certificates[selected].alt}
             className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
-
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
             className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -127,7 +136,6 @@ export default function Certificates() {
           >
             <ChevronRight size={40} />
           </button>
-
           <div className="absolute bottom-4 text-white/60 text-sm select-none">
             {selected + 1} / {certificates.length}
           </div>

@@ -1,116 +1,166 @@
-import { Shield, Clock, MapPin } from "lucide-react";
 import heroIllustration from "@/assets/hero-illustration.png";
 import HeroEmbers from "@/components/HeroEmbers";
 
-const badges = [
-  { icon: Shield, label: "Certifikovaný RTSC technik" },
-  { icon: Clock, label: "Brno a okolí od 2013" },
-  { icon: MapPin, label: "Revizní zpráva na místě" },
-];
-
 export default function Hero() {
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden">
-      {/* Ember particles canvas */}
+    <section className="min-h-screen flex flex-col relative overflow-hidden">
       <HeroEmbers />
 
       {/* Noise texture overlay */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04] z-0"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] z-0"
         style={{
           backgroundImage:
             "repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)",
         }}
       />
 
-      {/* Warm golden glow behind chimney illustration */}
+      {/* Large gold radial halo behind illustration */}
       <div
         className="pointer-events-none absolute z-0"
         style={{
-          top: "10%",
-          right: "8%",
+          top: "0%",
+          right: "-2%",
+          width: "820px",
+          height: "820px",
+          background:
+            "radial-gradient(circle, rgba(251,146,60,0.35) 0%, rgba(251,146,60,0.10) 30%, transparent 65%)",
+          filter: "blur(40px)",
+          borderRadius: "50%",
+        }}
+      />
+
+      {/* Subtle bottom-left darkness */}
+      <div
+        className="pointer-events-none absolute z-0"
+        style={{
+          bottom: "-8%",
+          left: "-8%",
           width: "600px",
           height: "600px",
           background:
-            "radial-gradient(circle, rgba(251,146,60,0.25) 0%, rgba(251,146,60,0.08) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(6,13,24,0.8) 0%, rgba(6,13,24,0.2) 50%, transparent 70%)",
           borderRadius: "50%",
         }}
       />
 
-      {/* Subtle blue glow bottom-left */}
-      <div
-        className="pointer-events-none absolute z-0"
-        style={{
-          bottom: "-5%",
-          left: "-5%",
-          width: "500px",
-          height: "500px",
-          background:
-            "radial-gradient(circle, rgba(13,21,32,0.7) 0%, rgba(13,21,32,0.2) 45%, transparent 70%)",
-          borderRadius: "50%",
-        }}
-      />
-
-      <div className="relative z-10 container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center pt-24 pb-12">
-        <div>
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 animate-fade-up"
+      {/* Main content grid */}
+      <div className="relative z-10 container mx-auto px-4 flex-1 grid lg:grid-cols-[1fr_0.75fr] gap-8 items-center pt-32 pb-20">
+        {/* Left: Text column */}
+        <div className="max-w-2xl">
+          {/* Eyebrow */}
+          <div
+            className="text-xs uppercase tracking-[0.3em] text-gold mb-7 animate-fade-up"
             style={{ animationDelay: "0.1s" }}
           >
-            Kominictví —{" "}
-            <span className="text-primary">poctivě a podle předpisů.</span>
+            — REVIZE · ČIŠTĚNÍ · FRÉZOVÁNÍ ·
+          </div>
+
+          {/* Headline */}
+          <h1
+            className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.92] tracking-tight mb-8 animate-fade-up"
+            style={{ animationDelay: "0.4s" }}
+          >
+            Kominické
+            <br />
+            <span className="text-gold">služby,</span>
+            <br />
+            na které
+            <br />
+            je spoleh.
           </h1>
 
+          {/* Subtitle */}
           <p
-            className="text-muted-foreground text-lg md:text-xl mb-8 max-w-lg animate-fade-up"
-            style={{ animationDelay: "0.3s" }}
+            className="text-lg md:text-xl text-white/70 max-w-xl leading-relaxed mb-10 animate-fade-up"
+            style={{ animationDelay: "0.7s" }}
           >
             Výstavba, vložkování, čištění a revize komínů v Brně a okolí.
             Certifikovaný kominík s 13 lety praxe.
           </p>
 
-          <div className="flex flex-wrap gap-4 mb-10">
+          {/* CTAs */}
+          <div
+            className="flex flex-wrap items-center gap-6 mb-12 animate-fade-up"
+            style={{ animationDelay: "0.9s" }}
+          >
             <button
-              onClick={() =>
-                document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-base px-8 py-3 hover:opacity-90 transition-opacity min-h-[44px] animate-fade-up"
-              style={{ animationDelay: "0.5s" }}
+              onClick={() => scrollTo("kontakt")}
+              className="group inline-flex items-center gap-3 bg-gold text-navy font-bold text-base px-8 py-4 rounded-md hover:opacity-90 transition-all duration-300 min-h-[52px]"
             >
               Nezávazná poptávka
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </button>
             <button
-              onClick={() =>
-                document.getElementById("sluzby")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="inline-flex items-center justify-center rounded-md border-2 border-primary text-primary font-bold text-base px-8 py-3 hover:bg-primary/10 transition-colors min-h-[44px] animate-fade-up"
-              style={{ animationDelay: "0.65s" }}
+              onClick={() => scrollTo("sluzby")}
+              className="group inline-flex items-center gap-2 text-white/75 font-medium hover:text-gold transition-colors duration-300 underline underline-offset-4 decoration-white/25 hover:decoration-gold/60"
             >
-              Naše služby ↓
+              Naše služby
+              <span className="inline-block transition-transform duration-300 group-hover:translate-y-0.5">
+                ↓
+              </span>
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-6">
-            {badges.map((b) => (
-              <div key={b.label} className="flex items-center gap-2">
-                <b.icon size={20} className="text-primary" />
-                <span className="text-sm text-muted-foreground">{b.label}</span>
-              </div>
-            ))}
+          {/* Trust badges strip */}
+          <div
+            className="flex flex-wrap items-center gap-x-0 gap-y-2 text-[11px] uppercase tracking-wider text-white/45 animate-fade-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <span>Certifikovaný RTSC technik</span>
+            <span className="mx-3 text-gold/35">·</span>
+            <span>Revizní zpráva na místě</span>
+            <span className="mx-3 text-gold/35">·</span>
+            <span>Od roku 2013</span>
+            <span className="mx-3 text-gold/35">·</span>
+            <span>Brno a okolí</span>
           </div>
         </div>
 
+        {/* Right: Illustration */}
         <div
-          className="hidden lg:flex items-center justify-center animate-fade-up"
+          className="hidden lg:flex items-center justify-center relative animate-fade-up"
           style={{ animationDelay: "0.2s" }}
         >
           <img
             src={heroIllustration}
             alt="Ilustrace nerezového komínu"
-            className="w-full max-w-lg aspect-square object-contain"
+            className="w-full max-w-[480px] aspect-square object-contain relative z-10"
             loading="eager"
             fetchPriority="high"
           />
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div
+        className="relative z-10 flex flex-col items-center gap-2 pb-10 animate-fade-up"
+        style={{ animationDelay: "1.1s" }}
+      >
+        <div className="animate-scroll-bounce flex flex-col items-center gap-1.5">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-white/35 select-none">
+            POSUN
+          </span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="text-gold/65"
+          >
+            <path
+              d="M12 5v14M5 15l7 7 7-7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
       </div>
 

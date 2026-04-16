@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface PriceItem { name: string; price: string }
@@ -30,70 +29,109 @@ const col3: PriceItem[] = [
   { name: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
 ];
 
-function PriceColumn({
-  title,
-  items,
-  delay,
-}: {
-  title: string;
-  items: PriceItem[];
-  delay: number;
-}) {
-  return (
-    <div
-      className="rounded-lg overflow-hidden border border-border"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {/* Column header */}
-      <div
-        className="border-t-2 border-gold py-6 px-6"
-        style={{
-          background: "linear-gradient(to bottom, #1a2535, #141d2b)",
-        }}
-      >
-        <h3 className="text-xl font-bold text-gold">{title}</h3>
-      </div>
+const columns = [
+  { title: "Čištění a revize", eyebrow: "ZÁKLADNÍ SLUŽBY", items: col1 },
+  { title: "Výstavba a vložkování", eyebrow: "INSTALACE", items: col2 },
+  { title: "Ostatní služby a poplatky", eyebrow: "DOPLŇKOVÉ", items: col3 },
+];
 
-      {/* Items */}
-      <div className="bg-card p-6">
-        <ul className="space-y-3">
-          {items.map((item) => (
-            <li
-              key={item.name}
-              className="flex justify-between gap-4 text-sm border-b border-border pb-2 last:border-0"
-            >
-              <span className="text-muted-foreground">{item.name}</span>
-              <span className="font-semibold whitespace-nowrap">{item.price}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+function PriceRow({ item }: { item: PriceItem }) {
+  return (
+    <li className="flex items-baseline gap-2 py-3 border-b border-white/5 last:border-0">
+      <span className="text-sm text-white/85 flex-1 leading-snug">{item.name}</span>
+      {/* Dotted leader */}
+      <span
+        className="flex-shrink-0 mx-1 mb-[3px]"
+        style={{
+          flex: "0 1 32px",
+          borderBottom: "2px dotted rgba(255,255,255,0.12)",
+          alignSelf: "flex-end",
+        }}
+      />
+      <span className="text-sm font-bold text-gold font-mono whitespace-nowrap flex-shrink-0">
+        {item.price}
+      </span>
+    </li>
   );
 }
 
 export default function Pricing() {
   const ref = useScrollAnimation();
+
   return (
-    <section id="cenik" className="section-py bg-secondary">
-      <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
-        <div className="text-center mb-12">
-          <h2 className="section-heading center">Orientační ceník</h2>
-          <p className="section-subtitle mx-auto mt-6">
+    <section id="cenik" className="section-py bg-secondary relative overflow-hidden">
+      {/* Radial glow bottom */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+        style={{
+          background: "radial-gradient(ellipse at bottom, rgba(251,146,60,0.07), transparent 70%)",
+        }}
+      />
+
+      <div className="container mx-auto relative z-10" ref={ref} style={{ opacity: 0 }}>
+        {/* Section header */}
+        <div className="mb-14">
+          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
+            — 05 / CENÍK
+          </div>
+          <h2 className="section-heading">Orientační ceník</h2>
+          <p className="section-subtitle mt-6">
             Ceny jsou orientační. Konečnou cenu vždy sdělíme předem — ještě před zahájením práce.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <PriceColumn title="Čištění a revize" items={col1} delay={0} />
-          <PriceColumn title="Výstavba a vložkování" items={col2} delay={80} />
-          <PriceColumn title="Ostatní služby a poplatky" items={col3} delay={160} />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {columns.map((col, colIdx) => {
+            const isMiddle = colIdx === 1;
+            return (
+              <div
+                key={col.title}
+                className={[
+                  "rounded-xl overflow-hidden border transition-all duration-700",
+                  isMiddle
+                    ? "border-gold/40 shadow-[0_0_0_1px_rgba(251,146,60,0.15),0_24px_60px_-16px_rgba(251,146,60,0.25)] lg:scale-105"
+                    : "border-white/10",
+                ].join(" ")}
+                style={{ animationDelay: `${colIdx * 80}ms` }}
+              >
+                {/* Card header */}
+                <div
+                  className={[
+                    "px-6 py-7 border-t-4 border-gold",
+                    isMiddle
+                      ? "bg-gradient-to-b from-navy-lighter to-navy-light"
+                      : "bg-gradient-to-b from-navy-lighter to-navy",
+                  ].join(" ")}
+                >
+                  <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 font-mono">
+                    {col.eyebrow}
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{col.title}</h3>
+                </div>
 
-        <div className="text-center">
-          <Button variant="gold" size="lg" asChild>
-            <a href="#kontakt">Nezávazná poptávka</a>
-          </Button>
+                {/* Price rows */}
+                <div className="bg-navy-light px-6 py-4">
+                  <ul>
+                    {col.items.map((item) => (
+                      <PriceRow key={item.name} item={item} />
+                    ))}
+                  </ul>
+                </div>
+
+                {/* CTA */}
+                <div className="bg-navy-light px-6 pb-6">
+                  <a
+                    href="#kontakt"
+                    className="group block w-full text-center border border-gold text-gold font-semibold py-3 px-4 rounded-lg hover:bg-gold hover:text-navy transition-all duration-300"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+                  >
+                    Nezávazná poptávka
+                    <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

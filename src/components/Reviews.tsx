@@ -2,41 +2,68 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Reviews() {
   const ref = useScrollAnimation();
+
   return (
-    <section id="recenze" className="section-py">
-      <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
-        <div className="text-center mb-12">
-          <h2 className="section-heading center">Co říkají zákazníci</h2>
+    <section id="recenze" className="section-py relative overflow-hidden">
+      {/* Radial glow */}
+      <div
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px]"
+        style={{
+          background: "radial-gradient(ellipse at center, rgba(251,146,60,0.05), transparent 65%)",
+        }}
+      />
+
+      <div className="container mx-auto relative z-10" ref={ref} style={{ opacity: 0 }}>
+        <div className="mb-14">
+          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
+            — 04 / RECENZE
+          </div>
+          <h2 className="section-heading">Co říkají zákazníci</h2>
         </div>
 
-        <div className="max-w-[560px] mx-auto">
+        <div className="max-w-[600px]">
           <div
-            className="card-base border-l-4 border-l-gold shadow-[0_4px_24px_-8px_rgba(251,146,60,0.15)]"
-            style={{ padding: "28px 32px" }}
+            className="relative bg-navy-light rounded-xl p-8 md:p-10 border-l-[3px] border-gold shadow-[0_20px_60px_-20px_rgba(251,146,60,0.15)]"
           >
-            <div className="text-primary text-xl" style={{ letterSpacing: "4px" }}>
-              ★★★★★
+            {/* Decorative large quotation mark */}
+            <div
+              className="absolute top-4 left-6 text-gold/25 select-none pointer-events-none leading-none"
+              style={{ fontSize: "7rem", fontFamily: "Georgia, serif", lineHeight: 1 }}
+              aria-hidden="true"
+            >
+              "
             </div>
-            <p className="text-foreground mt-3 leading-[1.7] text-base md:text-[17px]">
-              Profesionálně odvedená práce. Doporučuji.
-            </p>
-            <div className="font-semibold mt-4">Jana Šťastná</div>
-            <div className="text-muted-foreground text-[13px] mt-1">
-              via Mapy.cz · prosinec 2021
+
+            <div className="relative z-10">
+              <div className="text-gold text-lg mb-5" style={{ letterSpacing: "4px" }} aria-label="5 hvězd">
+                ★★★★★
+              </div>
+
+              <p className="text-xl md:text-2xl font-medium italic text-white/90 leading-relaxed mb-6">
+                Profesionálně odvedená práce. Doporučuji.
+              </p>
+
+              <div>
+                <div className="font-semibold text-white">Jana Šťastná</div>
+                <div className="text-muted-foreground text-[13px] mt-1">
+                  via Mapy.cz · prosinec 2021
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <p className="text-muted-foreground text-sm">
+          <div className="mt-8">
+            <p className="text-muted-foreground text-sm mb-2">
               Byli jste se službou spokojeni? Budeme rádi za hodnocení.
             </p>
             <a
               href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary font-medium text-sm mt-1 inline-block hover:text-gold transition-colors"
+              className="group inline-flex items-center gap-2 text-gold font-medium text-sm hover:opacity-80 transition-opacity"
             >
-              Ohodnotit na Firmy.cz →
+              Ohodnotit na Firmy.cz
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
           </div>
         </div>

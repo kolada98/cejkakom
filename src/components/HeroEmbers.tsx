@@ -9,13 +9,13 @@ interface Ember {
   opacity: number;
   age: number;
   maxAge: number;
+  glow: boolean;
 }
 
 export default function HeroEmbers() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const canvas = canvasRef.current;
@@ -30,28 +30,26 @@ export default function HeroEmbers() {
       canvas.height = canvas.offsetHeight;
     };
     resize();
-
-    const handleResize = () => resize();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", resize);
 
     const isMobile = () => window.innerWidth < 768;
-    const count = isMobile() ? 12 : 25;
 
     const spawnEmber = (): Ember => ({
       x: Math.random() * canvas.width,
       y: canvas.height + Math.random() * 20,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: -(0.3 + Math.random() * 0.9),
-      size: 1 + Math.random() * 2,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: -(0.3 + Math.random() * 1.1),
+      size: 1 + Math.random() * 3,
       opacity: 0,
       age: 0,
-      maxAge: 200 + Math.random() * 300,
+      maxAge: 180 + Math.random() * 320,
+      glow: Math.random() > 0.55,
     });
 
+    const count = isMobile() ? 20 : 40;
     const embers: Ember[] = [];
     for (let i = 0; i < count; i++) {
       const e = spawnEmber();
-      // Spread initial y positions so they don't all appear at once
       e.y = Math.random() * canvas.height;
       e.age = Math.random() * e.maxAge * 0.7;
       embers.push(e);
@@ -67,7 +65,6 @@ export default function HeroEmbers() {
         e.y += e.vy;
 
         const progress = e.age / e.maxAge;
-        // fade-in 0–20%, plateau 20–80%, fade-out 80–100%
         if (progress < 0.2) {
           e.opacity = progress / 0.2;
         } else if (progress < 0.8) {
@@ -84,14 +81,25 @@ export default function HeroEmbers() {
         // Core dot
         ctx.beginPath();
         ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(251,146,60,${(e.opacity * 0.85).toFixed(3)})`;
+        ctx.fillStyle = `rgba(251,146,60,${(e.opacity * 0.9).toFixed(3)})`;
         ctx.fill();
 
-        // Soft glow halo
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.size * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(251,146,60,${(e.opacity * 0.12).toFixed(3)})`;
-        ctx.fill();
+        // Glow halo — bigger on "glow" particles
+        if (e.glow) {
+          const haloSize = e.size * 4;
+          const gradient = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, haloSize);
+          gradient.addColorStop(0, `rgba(251,146,60,${(e.opacity * 0.25).toFixed(3)})`);
+          gradient.addColorStop(1, "rgba(251,146,60,0)");
+          ctx.beginPath();
+          ctx.arc(e.x, e.y, haloSize, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(e.x, e.y, e.size * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(251,146,60,${(e.opacity * 0.12).toFixed(3)})`;
+          ctx.fill();
+        }
       }
 
       animId = requestAnimationFrame(tick);
@@ -101,7 +109,7 @@ export default function HeroEmbers() {
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", resize);
     };
   }, []);
 
