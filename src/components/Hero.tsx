@@ -24,7 +24,7 @@ export default function Hero() {
           right: '8%',
           width: '600px',
           height: '600px',
-          background: 'radial-gradient(circle, rgba(251,146,60,0.14) 0%, rgba(251,146,60,0.05) 40%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(251,146,60,0.25) 0%, rgba(251,146,60,0.08) 40%, transparent 70%)',
           borderRadius: '50%',
         }}
       />
