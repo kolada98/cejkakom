@@ -22,18 +22,23 @@ const services: ServiceItem[] = [
 export default function Services() {
   const ref = useScrollAnimation();
   return (
-    <section id="sluzby" className="section-padding bg-secondary">
+    <section id="sluzby" className="section-py bg-secondary">
       <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
         <div className="text-center mb-12">
-          <h2 className="section-title">Naše služby</h2>
-          <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Provádíme veškeré kominické práce včetně výchozích revizí a dokumentace ke kolaudaci.</p>
+          <h2 className="section-heading center">Naše služby</h2>
+          <p className="section-subtitle mx-auto mt-6">
+            Provádíme veškeré kominické práce včetně výchozích revizí a dokumentace ke kolaudaci.
+          </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {services.map((s) => (
-            <div key={s.title} className="card-base group hover:border-l-4 hover:border-l-primary">
-              <s.icon size={28} className="text-primary mb-4" />
+          {services.map((s, index) => (
+            <div
+              key={s.title}
+              className="card-base border-l-4 border-l-gold group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(251,146,60,0.4),0_10px_30px_-10px_rgba(251,146,60,0.3)]"
+              style={{ animationDelay: `${Math.min(index * 80, 600)}ms` }}
+            >
+              <s.icon size={28} className="text-gold mb-4" />
               <h3 className="text-lg font-bold mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </div>

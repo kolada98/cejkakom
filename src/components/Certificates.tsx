@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -20,18 +20,43 @@ export default function Certificates() {
   const ref = useScrollAnimation();
   const [selected, setSelected] = useState<number | null>(null);
 
-  const prev = () => setSelected((s) => (s !== null ? (s - 1 + certificates.length) % certificates.length : null));
-  const next = () => setSelected((s) => (s !== null ? (s + 1) % certificates.length : null));
+  const prev = () =>
+    setSelected((s) => (s !== null ? (s - 1 + certificates.length) % certificates.length : null));
+  const next = () =>
+    setSelected((s) => (s !== null ? (s + 1) % certificates.length : null));
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (selected === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelected(null);
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selected]);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (selected !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selected]);
 
   return (
-    <section id="certifikaty" className="py-20 md:py-28" style={{ backgroundColor: "#0F2748" }}>
+    <section id="certifikaty" className="section-py" style={{ backgroundColor: "#0F2748" }}>
       <div className="container mx-auto px-4">
         <div ref={ref} className="text-center mb-12 opacity-0">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="section-heading center text-foreground">
             Certifikáty a oprávnění
           </h2>
-          <div className="w-16 h-1 bg-primary mx-auto mb-6" />
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg mt-6">
             Certifikovaný revizní technik spalinových cest (RTSC)
           </p>
         </div>
@@ -41,22 +66,22 @@ export default function Certificates() {
             <button
               key={i}
               onClick={() => setSelected(i)}
-              className="group block transition-all duration-200 cursor-pointer"
+              className="group block transition-all duration-500 cursor-pointer hover:scale-105 hover:ring-2 hover:ring-gold/50 rounded-lg"
               style={{
                 backgroundColor: "#0B1F3A",
-                border: "1px solid rgba(240,165,0,0.15)",
+                border: "1px solid rgba(251,146,60,0.15)",
                 borderRadius: "8px",
                 padding: "6px",
                 width: "140px",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#F0A500")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(240,165,0,0.15)")}
+              aria-label={`Zobrazit ${cert.alt}`}
             >
               <img
                 src={cert.src}
                 alt={cert.alt}
                 className={`w-full h-[180px] object-cover rounded ${cert.position ?? ""}`}
                 loading="lazy"
+                decoding="async"
               />
             </button>
           ))}
@@ -66,19 +91,24 @@ export default function Certificates() {
       {/* Lightbox */}
       {selected !== null && (
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Náhled certifikátu"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
           onClick={() => setSelected(null)}
         >
           <button
             onClick={() => setSelected(null)}
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors z-10"
+            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label="Zavřít"
           >
             <X size={32} />
           </button>
 
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute left-3 md:left-6 text-white/70 hover:text-white transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label="Předchozí"
           >
             <ChevronLeft size={40} />
           </button>
@@ -92,12 +122,13 @@ export default function Certificates() {
 
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors z-10"
+            className="absolute right-3 md:right-6 text-white/70 hover:text-white transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            aria-label="Další"
           >
             <ChevronRight size={40} />
           </button>
 
-          <div className="absolute bottom-4 text-white/60 text-sm">
+          <div className="absolute bottom-4 text-white/60 text-sm select-none">
             {selected + 1} / {certificates.length}
           </div>
         </div>

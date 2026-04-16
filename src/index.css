@@ -6,50 +6,50 @@
 
 @layer base {
   :root {
-    --background: 214 63% 14%;
+    --background: 214 63% 8%;
     --foreground: 0 0% 100%;
 
-    --card: 214 63% 14%;
+    --card: 214 63% 10%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 214 63% 14%;
+    --popover: 214 63% 10%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 40 100% 47%;
-    --primary-foreground: 214 63% 14%;
+    --primary: 27 95% 60%;
+    --primary-foreground: 214 63% 8%;
 
-    --secondary: 214 56% 17%;
+    --secondary: 214 56% 13%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 214 56% 17%;
-    --muted-foreground: 200 18% 72%;
+    --muted: 214 56% 13%;
+    --muted-foreground: 200 18% 68%;
 
-    --accent: 40 100% 47%;
-    --accent-foreground: 214 63% 14%;
+    --accent: 27 95% 60%;
+    --accent-foreground: 214 63% 8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 100% 47% / 0.15;
-    --input: 214 56% 17%;
-    --ring: 40 100% 47%;
+    --border: 27 95% 60% / 0.15;
+    --input: 214 56% 13%;
+    --ring: 27 95% 60%;
 
-    --radius: 0.375rem;
+    --radius: 0.5rem;
 
-    --sidebar-background: 214 63% 14%;
+    --sidebar-background: 214 63% 8%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 40 100% 47%;
-    --sidebar-primary-foreground: 214 63% 14%;
-    --sidebar-accent: 214 56% 17%;
+    --sidebar-primary: 27 95% 60%;
+    --sidebar-primary-foreground: 214 63% 8%;
+    --sidebar-accent: 214 56% 13%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 40 100% 47% / 0.15;
-    --sidebar-ring: 40 100% 47%;
+    --sidebar-border: 27 95% 60% / 0.15;
+    --sidebar-ring: 27 95% 60%;
 
-    --navy-dark: 214 75% 8%;
-    --navy: 214 63% 14%;
-    --navy-light: 214 56% 17%;
-    --gold: 40 100% 47%;
-    --text-secondary: 200 18% 72%;
+    --navy-dark: 214 75% 4%;
+    --navy: 214 63% 8%;
+    --navy-light: 214 56% 13%;
+    --gold: 27 95% 60%;
+    --text-secondary: 200 18% 68%;
   }
 }
 
@@ -68,6 +68,17 @@
     font-size: 16px;
     line-height: 1.7;
   }
+
+  /* prefers-reduced-motion: disable all animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
@@ -75,8 +86,35 @@
     @apply py-12 md:py-20 px-4;
   }
 
+  /* Clamp-based vertical padding for sections */
+  .section-py {
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+    @apply px-4;
+  }
+
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-foreground mb-2;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2;
+  }
+
+  /* section-heading with gold underline pseudo-element */
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-foreground;
+    display: inline-block;
+  }
+
+  .section-heading::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: #FB923C;
+    margin-top: 0.75rem;
+  }
+
+  .section-heading.center::after {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .section-title-bar {
@@ -84,11 +122,11 @@
   }
 
   .section-subtitle {
-    @apply text-muted-foreground text-lg max-w-2xl;
+    @apply text-muted-foreground text-base md:text-[17px] leading-relaxed max-w-2xl;
   }
 
   .card-base {
-    @apply bg-background border border-border rounded-md p-6 transition-all duration-200;
+    @apply bg-card border border-border rounded-lg p-6 transition-all duration-300;
   }
 
   .card-base:hover {
@@ -101,18 +139,24 @@
 }
 
 @layer utilities {
+  /* animate-fade-up: used by useScrollAnimation and inline hero stagger */
   .animate-fade-up {
-    animation: fadeUp 0.6s ease-out both;
+    animation: fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 }

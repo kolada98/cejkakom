@@ -4,7 +4,6 @@ import Logo from "@/components/Logo";
 const links = [
   { href: "#sluzby", label: "Služby" },
   { href: "#o-nas", label: "O nás" },
-  
   { href: "#cenik", label: "Ceník" },
   { href: "#galerie", label: "Galerie" },
   { href: "#kontakt", label: "Kontakt" },
@@ -12,19 +11,27 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-dark border-t border-border">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="bg-navy-dark border-t border-gold/40">
+      <div className="container mx-auto px-4 py-12 mt-8">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <Logo className="mb-2" height={52} />
-            <p className="text-sm text-muted-foreground">Komíny stavíme poctivě. Brno a okolí od 2013.</p>
+            <Logo className="mb-3" height={52} />
+            <p className="text-sm text-white/70">
+              Komíny stavíme poctivě. Brno a okolí od 2013.
+            </p>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3 text-sm">Navigace</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-gold/80 mb-4">
+              Navigace
+            </h4>
             <div className="grid grid-cols-2 gap-2">
               {links.map((l) => (
-                <a key={l.href} href={l.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm text-white/70 hover:text-gold transition-colors"
+                >
                   {l.label}
                 </a>
               ))}
@@ -32,8 +39,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3 text-sm">Kontakt</h4>
-            <div className="space-y-1 text-sm text-muted-foreground">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-gold/80 mb-4">
+              Kontakt
+            </h4>
+            <div className="space-y-1 text-sm text-white/70">
               <p>+420 776 310 278</p>
               <p>info@cejkakominy.cz</p>
               <p>K Lipinám 843, Bílovice nad Svitavou</p>
@@ -42,7 +51,7 @@ export default function Footer() {
               href="https://instagram.com/cejka_kominy"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-3 text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 mt-3 text-sm text-white/70 hover:text-gold transition-colors"
             >
               <Instagram size={18} /> @cejka_kominy
             </a>
@@ -50,9 +59,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
+      <div className="border-t border-white/10 pt-6 pb-6 mt-0 text-center text-sm text-white/50">
         © 2026 ČEJKAKOM s.r.o. | IČO: 29277469 | Zpracování osobních údajů | Vytvořil{" "}
-        <a href="https://webyproremeslniky.cz" target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-80 transition-opacity">
+        <a
+          href="https://webyproremeslniky.cz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gold hover:opacity-80 transition-opacity"
+        >
           webyproremeslniky.cz
         </a>
       </div>

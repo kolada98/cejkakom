@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
@@ -7,7 +7,14 @@ import { useToast } from "@/hooks/use-toast";
 export default function Contact() {
   const ref = useScrollAnimation();
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", consent: false });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+    consent: false,
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -16,26 +23,35 @@ export default function Contact() {
       return;
     }
     if (!form.consent) {
-      toast({ title: "Musíte souhlasit se zpracováním osobních údajů", variant: "destructive" });
+      toast({
+        title: "Musíte souhlasit se zpracováním osobních údajů",
+        variant: "destructive",
+      });
       return;
     }
-    toast({ title: "Poptávka odeslána!", description: "Odpovíme vám do 24 hodin." });
-    setForm({ name: "", phone: "", email: "", message: "", consent: false });
+    setIsLoading(true);
+    setTimeout(() => {
+      toast({ title: "Poptávka odeslána!", description: "Odpovíme vám do 24 hodin." });
+      setForm({ name: "", phone: "", email: "", message: "", consent: false });
+      setIsLoading(false);
+    }, 800);
   };
 
-  const inputClass = "w-full bg-secondary border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm";
+  const inputClass =
+    "w-full bg-secondary border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:border-gold transition-colors duration-200 text-sm";
 
   return (
-    <section id="kontakt" className="section-padding">
+    <section id="kontakt" className="section-py">
       <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
         <div className="text-center mb-12">
-          <h2 className="section-title">Kontaktujte nás</h2>
-          <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Popište co potřebujete. Obvykle odpovídáme do 24 hodin.</p>
+          <h2 className="section-heading center">Kontaktujte nás</h2>
+          <p className="section-subtitle mx-auto mt-6">
+            Popište co potřebujete. Obvykle odpovídáme do 24 hodin.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Info */}
+          {/* Contact info */}
           <div className="space-y-6">
             <a href="tel:+420776310278" className="flex items-center gap-4 card-base">
               <Phone className="text-primary" size={24} />
@@ -72,6 +88,7 @@ export default function Contact() {
                 className="w-full h-full"
                 allowFullScreen
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
                 title="Mapa — K Lipinám 843, Bílovice nad Svitavou"
                 style={{ border: 0 }}
               />
@@ -81,20 +98,41 @@ export default function Contact() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-sm text-muted-foreground mb-1 block">Jméno a příjmení *</label>
-              <input className={inputClass} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <label className="text-sm text-muted-foreground mb-1 block">
+                Jméno a příjmení *
+              </label>
+              <input
+                className={inputClass}
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
             </div>
             <div>
               <label className="text-sm text-muted-foreground mb-1 block">Telefon *</label>
-              <input className={inputClass} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+              <input
+                className={inputClass}
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              />
             </div>
             <div>
               <label className="text-sm text-muted-foreground mb-1 block">Email</label>
-              <input type="email" className={inputClass} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+              <input
+                type="email"
+                className={inputClass}
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
             </div>
             <div>
               <label className="text-sm text-muted-foreground mb-1 block">Zpráva</label>
-              <textarea rows={4} className={inputClass} placeholder="Popište co potřebujete..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+              <textarea
+                rows={4}
+                className={inputClass}
+                placeholder="Popište co potřebujete..."
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+              />
             </div>
             <label className="flex items-start gap-2 text-sm text-muted-foreground cursor-pointer">
               <input
@@ -105,11 +143,30 @@ export default function Contact() {
               />
               Souhlasím se zpracováním osobních údajů
             </label>
-            <Button type="submit" variant="gold" size="lg" className="w-full">
-              Odeslat poptávku →
+            <Button
+              type="submit"
+              variant="gold"
+              size="lg"
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Odesílám...
+                </>
+              ) : (
+                "Odeslat poptávku →"
+              )}
             </Button>
             <p className="text-center text-muted-foreground text-sm mt-4">
-              Nebo zavolejte přímo: <a href="tel:+420776310278" className="text-primary hover:opacity-80 transition-opacity">+420 776 310 278</a>
+              Nebo zavolejte přímo:{" "}
+              <a
+                href="tel:+420776310278"
+                className="text-primary hover:opacity-80 transition-opacity"
+              >
+                +420 776 310 278
+              </a>
             </p>
           </form>
         </div>

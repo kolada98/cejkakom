@@ -11,21 +11,28 @@ const items = [
 export default function WhyUs() {
   const ref = useScrollAnimation();
   return (
-    <section id="proc-my" className="section-padding">
+    <section id="proc-my" className="section-py">
       <div className="container mx-auto" ref={ref} style={{ opacity: 0 }}>
         <div className="text-center mb-12">
-          <h2 className="section-title">Jak pracujeme</h2>
-          <div className="section-title-bar mx-auto" />
-          <p className="section-subtitle mx-auto">Pár věcí, které o naší práci vědět.</p>
+          <h2 className="section-heading center">Jak pracujeme</h2>
+          <p className="section-subtitle mx-auto mt-6">Pár věcí, které o naší práci vědět.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {items.map((item) => (
-            <div key={item.num} className="card-base relative overflow-hidden p-8">
-              <span className="absolute top-4 right-6 text-6xl font-extrabold text-primary/10 select-none">{item.num}</span>
+          {items.map((item, index) => (
+            <div
+              key={item.num}
+              className="card-base relative overflow-hidden p-8"
+              style={{ animationDelay: `${index * 80}ms` }}
+            >
+              <span className="absolute top-4 right-6 text-6xl font-extrabold text-primary/10 select-none">
+                {item.num}
+              </span>
               <item.icon size={32} className="text-primary mb-4" />
               <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-muted-foreground">{item.desc}</p>
+              <p className="text-muted-foreground text-base md:text-[17px] leading-relaxed">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>

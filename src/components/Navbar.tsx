@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const links = [
   { href: "#sluzby", label: "Služby" },
   { href: "#o-nas", label: "O nás" },
-  
   { href: "#certifikaty", label: "Certifikáty" },
   { href: "#cenik", label: "Ceník" },
   { href: "#galerie", label: "Galerie" },
@@ -41,21 +39,29 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
+        scrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4" style={{ height: '72px' }}>
-        <a href="#" className="flex-shrink-0" style={{ marginLeft: '-12px' }}>
+      <div
+        className="container mx-auto flex items-center justify-between px-4"
+        style={{ height: "72px" }}
+      >
+        <a href="#" className="flex-shrink-0" style={{ marginLeft: "-12px" }}>
           <Logo height={72} />
         </a>
 
+        {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`text-sm font-medium transition-colors duration-200 ${
-                active === l.href ? "text-primary" : "text-foreground/80 hover:text-primary"
+              className={`text-sm font-medium transition-colors duration-200 min-h-[44px] inline-flex items-center ${
+                active === l.href
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-primary"
               }`}
             >
               {l.label}
@@ -63,17 +69,27 @@ export default function Navbar() {
           ))}
         </div>
 
+        {/* Phone CTA */}
         <div className="hidden lg:block flex-shrink-0">
-          <a href="tel:+420776310278" className="text-primary font-extrabold text-xl hover:opacity-80 transition-opacity">
+          <a
+            href="tel:+420776310278"
+            className="text-primary font-extrabold text-xl hover:opacity-80 transition-opacity min-h-[44px] inline-flex items-center"
+          >
             +420 776 310 278
           </a>
         </div>
 
-        <button className="lg:hidden text-foreground" onClick={() => setOpen(!open)}>
+        {/* Hamburger */}
+        <button
+          className="lg:hidden text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Zavřít menu" : "Otevřít menu"}
+        >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* Mobile menu */}
       {open && (
         <div className="lg:hidden bg-background/98 backdrop-blur-md border-t border-border px-4 pb-6 pt-2">
           {links.map((l) => (
@@ -81,12 +97,15 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block py-3 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              className="flex items-center min-h-[44px] text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
             >
               {l.label}
             </a>
           ))}
-          <a href="tel:+420776310278" className="block w-full mt-4 text-center text-primary font-extrabold text-xl">
+          <a
+            href="tel:+420776310278"
+            className="flex items-center justify-center min-h-[44px] w-full mt-4 text-center text-primary font-extrabold text-xl"
+          >
             +420 776 310 278
           </a>
         </div>
