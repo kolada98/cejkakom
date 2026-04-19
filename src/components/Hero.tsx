@@ -130,7 +130,7 @@ export default function Hero() {
           <img
             src={heroIllustration}
             alt="Ilustrace nerezového komínu"
-            className="w-full max-w-[480px] aspect-square object-contain relative z-10"
+            className="w-full max-w-2xl aspect-square object-contain relative z-10"
             loading="eager"
             fetchPriority="high"
           />

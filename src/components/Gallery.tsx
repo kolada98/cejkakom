@@ -116,7 +116,7 @@ export default function Gallery() {
         </div>
 
         {/* Masonry grid */}
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-4">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
           {visibleItems.map((item, i) => (
             <button
               key={i}

@@ -51,7 +51,7 @@ function ServiceCard({ service, index, featured = false, className = "" }: CardP
       </h3>
 
       {/* Description */}
-      <p className={`text-white/60 leading-relaxed ${featured ? "text-base mt-4 line-clamp-6" : "text-sm line-clamp-3"}`}>
+      <p className={`text-white/60 leading-relaxed ${featured ? "text-base mt-4" : "text-sm"}`}>
         {service.desc}
       </p>
 
@@ -102,10 +102,7 @@ export default function Services() {
         </div>
 
         {/* Bento grid */}
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          style={{ gridAutoRows: "minmax(200px, auto)" }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
           {/* Featured — col-span-2 row-span-2 */}
           <ServiceCard
             service={services[0]}
