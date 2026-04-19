@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const links = [
   { href: "#sluzby", label: "Služby" },
+  { href: "#proc-my", label: "Proč my" },
   { href: "#o-nas", label: "O nás" },
   { href: "#certifikaty", label: "Certifikáty" },
   { href: "#cenik", label: "Ceník" },
@@ -40,48 +41,64 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-navy/80 backdrop-blur-md border-b border-white/5"
+          ? "bg-[rgba(10,29,58,0.95)] backdrop-blur-xl border-b border-[rgba(232,177,75,0.08)]"
           : "bg-transparent"
       }`}
-      style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+      style={{ transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)" }}
     >
       <div
         className="container mx-auto flex items-center justify-between px-4"
-        style={{ height: "72px" }}
+        style={{ height: "80px" }}
       >
-        <a href="#" className="flex-shrink-0" style={{ marginLeft: "-12px" }}>
-          <Logo height={72} />
+        <a href="#" className="flex-shrink-0" style={{ marginLeft: "-12px" }} aria-label="ČEJKAKOM — domů">
+          <Logo height={60} />
         </a>
 
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`relative text-sm font-medium transition-colors duration-300 min-h-[44px] inline-flex items-center gap-1.5 ${
-                active === l.href
-                  ? "text-gold"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              {active === l.href && (
-                <span className="text-gold text-[8px]">•</span>
-              )}
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = active === l.href;
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                className={`group relative inline-flex items-center gap-1.5 transition-colors duration-300 min-h-[44px] ${
+                  isActive ? "text-gold" : "text-white/75 hover:text-white"
+                }`}
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "15px",
+                  letterSpacing: "0.01em",
+                }}
+              >
+                <span
+                  className={`inline-block w-1 h-1 rounded-full bg-gold transition-all duration-300 ease-out ${
+                    isActive
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-0 group-hover:opacity-100 group-hover:scale-100"
+                  }`}
+                />
+                {l.label}
+              </a>
+            );
+          })}
         </div>
 
-        {/* Phone CTA */}
-        <div className="hidden lg:block flex-shrink-0">
-          <a
-            href="tel:+420776310278"
-            className="inline-flex items-center bg-gold text-navy font-bold text-sm px-5 py-2.5 rounded-md hover:opacity-90 transition-opacity min-h-[40px]"
-          >
-            +420 776 310 278
-          </a>
-        </div>
+        {/* Phone pill CTA */}
+        <a
+          href="tel:+420776310278"
+          className="hidden lg:inline-flex items-center gap-2 flex-shrink-0 bg-gold text-navy font-extrabold rounded-full px-5 py-2.5 transition-all duration-300 hover:brightness-110 hover:scale-[1.03]"
+          style={{
+            fontFamily: "Plus Jakarta Sans, sans-serif",
+            fontWeight: 800,
+            fontSize: "14px",
+            transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+          }}
+        >
+          <Phone size={16} strokeWidth={2.5} />
+          +420 776 310 278
+        </a>
 
         {/* Hamburger */}
         <button
@@ -89,32 +106,47 @@ export default function Navbar() {
           onClick={() => setOpen(!open)}
           aria-label={open ? "Zavřít menu" : "Otevřít menu"}
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile fullscreen overlay */}
       {open && (
-        <div className="lg:hidden bg-navy/95 backdrop-blur-md border-t border-white/10 px-4 pb-6 pt-2">
-          {links.map((l) => (
+        <div
+          className="lg:hidden fixed inset-0 top-[80px] bg-navy/98 backdrop-blur-xl px-6 pt-10"
+          style={{ backgroundColor: "rgba(10,29,58,0.98)" }}
+        >
+          <div className="flex flex-col items-center gap-6">
+            {links.map((l, i) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`animate-fade-up text-2xl font-semibold transition-colors duration-200 ${
+                  active === l.href ? "text-gold" : "text-white hover:text-gold"
+                }`}
+                style={{
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                  animationDelay: `${i * 60}ms`,
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
             <a
-              key={l.href}
-              href={l.href}
+              href="tel:+420776310278"
               onClick={() => setOpen(false)}
-              className={`flex items-center min-h-[44px] text-sm font-medium transition-colors ${
-                active === l.href ? "text-gold" : "text-white/75 hover:text-white"
-              }`}
+              className="inline-flex items-center gap-2 mt-6 bg-gold text-navy font-extrabold rounded-full px-8 py-4 animate-fade-up"
+              style={{
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontSize: "16px",
+                animationDelay: `${links.length * 60 + 60}ms`,
+              }}
             >
-              {active === l.href && <span className="mr-2 text-gold text-[8px]">•</span>}
-              {l.label}
+              <Phone size={18} strokeWidth={2.5} />
+              +420 776 310 278
             </a>
-          ))}
-          <a
-            href="tel:+420776310278"
-            className="flex items-center justify-center min-h-[44px] w-full mt-5 bg-gold text-navy font-bold rounded-md text-base"
-          >
-            +420 776 310 278
-          </a>
+          </div>
         </div>
       )}
     </nav>

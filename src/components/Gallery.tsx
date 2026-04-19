@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 import fasadniKomin from "@/assets/gallery/20m_fasadni_komin.jpg";
@@ -66,14 +66,9 @@ const items: { src: string; label: string }[] = [
   { src: vlozkovaniSpolecnehoKominu, label: "Vložkování společného komínu pro plyn" },
 ];
 
-const INITIAL_COUNT = 12;
-
 export default function Gallery() {
   const ref = useScrollAnimation();
   const [selected, setSelected] = useState<number | null>(null);
-  const [showAll, setShowAll] = useState(false);
-
-  const visibleItems = showAll ? items : items.slice(0, INITIAL_COUNT);
 
   const prev = () =>
     setSelected((s) => (s !== null ? (s - 1 + items.length) % items.length : null));
@@ -93,72 +88,109 @@ export default function Gallery() {
 
   useEffect(() => {
     document.body.style.overflow = selected !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [selected]);
 
   return (
-    <section id="galerie" className="section-py relative overflow-hidden">
-      {/* Radial glow */}
+    <section
+      id="galerie"
+      className="section-padding relative overflow-hidden"
+      style={{ backgroundColor: "#0A1D3A" }}
+    >
       <div
-        className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px]"
+        className="pointer-events-none absolute top-0 right-0"
         style={{
-          background: "radial-gradient(circle at 100% 0%, rgba(251,146,60,0.06), transparent 55%)",
+          width: "500px",
+          height: "500px",
+          background:
+            "radial-gradient(circle at 100% 0%, rgba(232,177,75,0.06), transparent 55%)",
         }}
       />
 
-      <div className="container mx-auto px-4 relative z-10" ref={ref} style={{ opacity: 0 }}>
-        <div className="mb-14">
-          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
-            — 06 / GALERIE
-          </div>
-          <h2 className="section-heading">Galerie realizací</h2>
-          <p className="section-subtitle mt-6">Ukázka naší práce</p>
+      <div className="container mx-auto relative z-10" ref={ref} style={{ opacity: 0 }}>
+        {/* Centered header */}
+        <div className="text-center mx-auto" style={{ maxWidth: "800px" }}>
+          <div className="eyebrow mb-4">Naše realizace</div>
+          <h2 className="section-heading">Galerie prací</h2>
+          <span className="section-title-bar center" />
+          <p className="section-subtitle mx-auto mt-5" style={{ textAlign: "center" }}>
+            Vybrané projekty z posledních let.
+          </p>
         </div>
 
-        {/* Masonry grid */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
-          {visibleItems.map((item, i) => (
+        {/* Masonry grid via CSS columns */}
+        <div
+          className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4"
+          style={{ marginTop: "4rem" }}
+        >
+          {items.map((item, i) => (
             <button
               key={i}
               type="button"
               onClick={() => setSelected(i)}
-              className="group relative block w-full mb-4 break-inside-avoid rounded-lg overflow-hidden cursor-zoom-in focus-visible:ring-2 focus-visible:ring-gold"
+              className="group relative block w-full mb-4 break-inside-avoid overflow-hidden cursor-zoom-in transition-all duration-300"
+              style={{
+                borderRadius: "12px",
+                border: "1px solid rgba(232,177,75,0.08)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(232,177,75,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(232,177,75,0.08)";
+              }}
               aria-label={`Zobrazit: ${item.label}`}
             >
               <img
                 src={item.src}
                 alt={item.label}
-                className="w-full object-cover rounded-lg transition-transform duration-700 group-hover:scale-[1.03]"
-                style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+                className="w-full block transition-transform duration-700 group-hover:scale-[1.08]"
+                style={{
+                  transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+                }}
                 loading="lazy"
                 decoding="async"
               />
-              {/* Gold overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-              {/* Label on hover */}
-              <div className="absolute bottom-0 left-0 right-0 px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-xs font-semibold text-white/90 line-clamp-1">{item.label}</span>
+
+              {/* Zoom icon top-right */}
+              <div
+                className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ top: "0.75rem", right: "0.75rem" }}
+              >
+                <Maximize2 size={20} className="text-gold" />
+              </div>
+
+              {/* Caption overlay */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(10,29,58,0.85) 0%, transparent 55%)",
+                }}
+              >
+                <div style={{ padding: "1rem" }}>
+                  <span
+                    className="block bg-gold"
+                    style={{ width: "30px", height: "2px" }}
+                  />
+                  <span
+                    className="text-white block"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "0.9375rem",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
               </div>
             </button>
           ))}
         </div>
-
-        {/* Show more button */}
-        {!showAll && (
-          <div className="text-center mt-10">
-            <button
-              onClick={() => {
-                setShowAll(true);
-                // small delay to let render happen, then open lightbox at first hidden item
-              }}
-              className="group inline-flex items-center gap-3 border border-gold text-gold font-semibold px-8 py-4 rounded-lg hover:bg-gold hover:text-navy transition-all duration-300"
-              style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
-            >
-              Zobrazit všech {items.length} fotek
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Lightbox */}
@@ -167,7 +199,7 @@ export default function Gallery() {
           role="dialog"
           aria-modal="true"
           aria-label="Galerie realizací"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/92 p-4"
           onClick={() => setSelected(null)}
         >
           <button
@@ -178,8 +210,11 @@ export default function Gallery() {
             <X size={32} />
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-3 md:left-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors min-h-[44px] min-w-[44px]"
+            onClick={(e) => {
+              e.stopPropagation();
+              prev();
+            }}
+            className="absolute left-3 md:left-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors"
             aria-label="Předchozí fotografie"
           >
             <ChevronLeft size={34} />
@@ -191,13 +226,16 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
           />
           <button
-            onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-3 md:right-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors min-h-[44px] min-w-[44px]"
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
+            className="absolute right-3 md:right-6 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-gold/20 text-white hover:bg-gold/40 transition-colors"
             aria-label="Následující fotografie"
           >
             <ChevronRight size={34} />
           </button>
-          <div className="absolute bottom-4 text-sm text-white/60 select-none text-center">
+          <div className="absolute bottom-4 text-sm text-white/70 select-none text-center px-4">
             {items[selected].label} — {selected + 1} / {items.length}
           </div>
         </div>

@@ -3,9 +3,9 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import panCejka from "@/assets/pan_cejka.jpg";
 
 const stats = [
-  { value: "2013", label: "OD ROKU" },
-  { value: "RTSC", label: "CERTIFIKÁT" },
-  { value: "BRNO", label: "PŮSOBÍME" },
+  { value: "2013", label: "Rok vzniku" },
+  { value: "RTSC", label: "Certifikace" },
+  { value: "40 km", label: "Servisní oblast" },
 ];
 
 export default function About() {
@@ -32,64 +32,71 @@ export default function About() {
   return (
     <section
       id="o-nas"
-      className="section-py bg-secondary relative overflow-hidden"
+      className="section-padding relative overflow-hidden"
+      style={{ backgroundColor: "#0A1D3A" }}
     >
-      {/* Gold radial glow — top right */}
       <div
-        className="pointer-events-none absolute top-0 right-0 w-[600px] h-[600px] opacity-100"
+        className="pointer-events-none absolute top-0 right-0"
         style={{
+          width: "600px",
+          height: "600px",
           background:
-            "radial-gradient(circle at 100% 0%, rgba(251,146,60,0.08), transparent 55%)",
+            "radial-gradient(circle at 100% 0%, rgba(232,177,75,0.08), transparent 55%)",
         }}
       />
 
       <div className="container mx-auto relative z-10" ref={ref} style={{ opacity: 0 }}>
-        {/* Section header */}
-        <div className="mb-14">
-          <div className="text-xs font-mono uppercase tracking-[0.25em] text-gold mb-3">
-            — 02 / O NÁS
-          </div>
-          <h2 className="section-heading">O Čejkakom</h2>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left: Portrait with corner frames */}
-          <div className="flex items-start justify-center lg:justify-start">
-            <div className="relative w-full max-w-sm">
-              {/* Gold corner frames */}
-              <div
-                className="absolute -top-[6px] -left-[6px] w-[28px] h-[28px] pointer-events-none z-10"
-                style={{ borderTop: "2px solid #FB923C", borderLeft: "2px solid #FB923C" }}
-              />
-              <div
-                className="absolute -bottom-[6px] -right-[6px] w-[28px] h-[28px] pointer-events-none z-10"
-                style={{ borderBottom: "2px solid #FB923C", borderRight: "2px solid #FB923C" }}
-              />
-              <div
-                className="absolute -top-[6px] -right-[6px] w-[28px] h-[28px] pointer-events-none z-10"
-                style={{ borderTop: "2px solid rgba(251,146,60,0.35)", borderRight: "2px solid rgba(251,146,60,0.35)" }}
-              />
-              <div
-                className="absolute -bottom-[6px] -left-[6px] w-[28px] h-[28px] pointer-events-none z-10"
-                style={{ borderBottom: "2px solid rgba(251,146,60,0.35)", borderLeft: "2px solid rgba(251,146,60,0.35)" }}
-              />
-
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT — portrait with premium frame */}
+          <div className="flex items-center justify-center lg:justify-start">
+            <div className="relative" style={{ maxWidth: "440px", width: "100%" }}>
               {/* Gold glow behind photo */}
               <div
-                className="absolute inset-0 -z-10 rounded-lg"
+                className="absolute inset-0 -z-10"
                 style={{
-                  background: "radial-gradient(circle at center, rgba(251,146,60,0.15) 0%, transparent 70%)",
-                  transform: "scale(1.1)",
-                  filter: "blur(16px)",
+                  background:
+                    "radial-gradient(circle at center, rgba(232,177,75,0.22) 0%, transparent 70%)",
+                  transform: "scale(1.2)",
+                  filter: "blur(24px)",
                 }}
               />
 
-              <div className="overflow-hidden rounded-lg border border-border">
+              {/* L-shaped corner accents */}
+              <div
+                className="absolute -top-3 -left-3 pointer-events-none"
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderTop: "3px solid #E8B14B",
+                  borderLeft: "3px solid #E8B14B",
+                  borderTopLeftRadius: "4px",
+                  zIndex: 10,
+                }}
+              />
+              <div
+                className="absolute -bottom-3 -right-3 pointer-events-none"
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderBottom: "3px solid #E8B14B",
+                  borderRight: "3px solid #E8B14B",
+                  borderBottomRightRadius: "4px",
+                  zIndex: 10,
+                }}
+              />
+
+              <div
+                className="overflow-hidden"
+                style={{
+                  borderRadius: "16px",
+                  border: "1px solid rgba(232,177,75,0.2)",
+                }}
+              >
                 <img
                   src={panCejka}
                   alt="Ing. Roman Čejka — certifikovaný kominík"
                   className="aspect-[3/4] w-full object-cover"
-                  style={{ filter: "brightness(0.95)" }}
+                  style={{ filter: "brightness(0.96)" }}
                   loading="lazy"
                   decoding="async"
                 />
@@ -97,42 +104,99 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right: Text + stats */}
-          <div className="flex flex-col justify-center">
-            <span className="text-gold font-semibold text-xs uppercase tracking-wider mb-2">
-              CERTIFIKOVANÝ REVIZNÍ TECHNIK SPALINOVÝCH CEST
-            </span>
-            <h3 className="text-3xl md:text-4xl font-bold mt-1 mb-8 tracking-tight">
+          {/* RIGHT — text + stats */}
+          <div>
+            <div
+              className="eyebrow"
+              style={{ fontSize: "13px", letterSpacing: "0.3em", fontWeight: 700 }}
+            >
+              Certifikovaný revizní technik
+            </div>
+
+            <h2
+              className="text-white"
+              style={{
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontWeight: 800,
+                fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                marginTop: "1rem",
+                marginBottom: "2rem",
+              }}
+            >
               Ing. Roman Čejka
-            </h3>
+            </h2>
 
-            <p className="text-lg leading-relaxed text-white/80 max-w-prose mb-5">
-              Kominictví dělám od roku 2013. Za tu dobu jsem prošel stovky domácností a realizoval
-              zakázky od běžného čištění až po výstavbu komínových systémů pro kondenzační kotle a
-              dřevostavby.
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: "1.0625rem",
+                color: "#B8C5D9",
+                lineHeight: 1.75,
+                marginBottom: "1.25rem",
+              }}
+            >
+              Kominictví dělám od roku 2013. Za tu dobu jsem prošel stovky domácností
+              a realizoval zakázky od běžného čištění až po výstavbu komínových systémů
+              pro kondenzační kotle a dřevostavby.
             </p>
-            <p className="text-lg leading-relaxed text-white/80 max-w-prose mb-12">
-              Jsem certifikovaný revizní technik spalinových cest — vydávám výchozí i pravidelné
-              revizní zprávy v souladu s vyhláškou č. 34/2016 Sb.
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: "1.0625rem",
+                color: "#B8C5D9",
+                lineHeight: 1.75,
+              }}
+            >
+              Jsem certifikovaný revizní technik spalinových cest — vydávám výchozí
+              i pravidelné revizní zprávy v souladu s vyhláškou č. 34/2016 Sb.
             </p>
 
-            {/* Big stat badges */}
+            {/* Stats row */}
             <div
               ref={statsRef}
-              className="grid grid-cols-3 divide-x divide-gold/20"
+              className="flex flex-wrap gap-8"
+              style={{
+                marginTop: "3rem",
+                borderLeft: "0",
+              }}
             >
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`text-center px-4 first:pl-0 last:pr-0 ${
-                    statsVisible ? "animate-fade-up" : "opacity-0"
-                  }`}
-                  style={statsVisible ? { animationDelay: `${i * 0.15}s` } : {}}
+                  className={statsVisible ? "animate-fade-up" : "opacity-0"}
+                  style={{
+                    animationDelay: `${i * 120}ms`,
+                    paddingLeft: i === 0 ? 0 : "2rem",
+                    borderLeft: i === 0 ? "none" : "1px solid rgba(232,177,75,0.25)",
+                  }}
                 >
-                  <div className="text-5xl md:text-6xl font-bold text-gold leading-none mb-2">
+                  <div
+                    className="text-gold"
+                    style={{
+                      fontFamily: "Plus Jakarta Sans, sans-serif",
+                      fontWeight: 800,
+                      fontSize: "2.5rem",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
                     {stat.value}
                   </div>
-                  <div className="text-xs uppercase tracking-widest text-white/50">
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "0.75rem",
+                      color: "#7A8AA3",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      marginTop: "0.5rem",
+                    }}
+                  >
                     {stat.label}
                   </div>
                 </div>
