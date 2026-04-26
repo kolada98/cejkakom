@@ -42,7 +42,7 @@ export default function Footer() {
       className="relative overflow-hidden"
       style={{
         backgroundColor: "#050F1E",
-        borderTop: "1px solid rgba(232,177,75,0.2)",
+        borderTop: "1px solid rgba(249,115,22,0.2)",
       }}
     >
       {/* Ghost decorative text */}
@@ -89,15 +89,15 @@ export default function Footer() {
                 fontWeight: 600,
                 color: "#B8C5D9",
                 padding: "0.5rem 1rem",
-                border: "1px solid rgba(232,177,75,0.2)",
+                border: "1px solid rgba(249,115,22,0.2)",
                 borderRadius: "999px",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(232,177,75,0.5)";
-                e.currentTarget.style.color = "#E8B14B";
+                e.currentTarget.style.borderColor = "rgba(249,115,22,0.5)";
+                e.currentTarget.style.color = "#F97316";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(232,177,75,0.2)";
+                e.currentTarget.style.borderColor = "rgba(249,115,22,0.2)";
                 e.currentTarget.style.color = "#B8C5D9";
               }}
             >
@@ -116,7 +116,7 @@ export default function Footer() {
                 key={l.label}
                 href={l.href}
                 style={linkStyle}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#E8B14B")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#F97316")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#B8C5D9")}
               >
                 {l.label}
@@ -134,7 +134,7 @@ export default function Footer() {
                 key={l.label}
                 href={l.href}
                 style={linkStyle}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#E8B14B")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#F97316")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#B8C5D9")}
               >
                 {l.label}
@@ -151,7 +151,7 @@ export default function Footer() {
               href="tel:+420776310278"
               className="flex items-start gap-3 transition-colors duration-300"
               style={{ ...linkStyle, marginBottom: "1rem" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#E8B14B")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#F97316")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#B8C5D9")}
             >
               <Phone size={16} className="text-gold flex-shrink-0" style={{ marginTop: "0.2rem" }} />
@@ -161,7 +161,7 @@ export default function Footer() {
               href="mailto:info@cejkakominy.cz"
               className="flex items-start gap-3 transition-colors duration-300"
               style={{ ...linkStyle, marginBottom: "1rem" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#E8B14B")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#F97316")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#B8C5D9")}
             >
               <Mail size={16} className="text-gold flex-shrink-0" style={{ marginTop: "0.2rem" }} />

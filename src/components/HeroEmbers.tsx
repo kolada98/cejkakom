@@ -76,15 +76,15 @@ export default function HeroEmbers() {
           bottom: 0;
           border-radius: 50%;
           will-change: transform, opacity;
-          background: radial-gradient(circle at 35% 35%, #FFE1A6 0%, #FFB347 45%, #E8B14B 100%);
+          background: radial-gradient(circle at 35% 35%, #FFE1A6 0%, #FFB347 45%, #F97316 100%);
           box-shadow:
             0 0 12px 2px rgba(255,179,71,0.55),
-            0 0 24px 4px rgba(232,177,75,0.3);
+            0 0 24px 4px rgba(249,115,22,0.3);
         }
         .ember-spark {
           box-shadow:
             0 0 18px 4px rgba(255,179,71,0.7),
-            0 0 36px 8px rgba(232,177,75,0.45);
+            0 0 36px 8px rgba(249,115,22,0.45);
         }
       `}</style>
 

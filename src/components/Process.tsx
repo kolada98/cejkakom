@@ -54,7 +54,7 @@ export default function Process() {
           width: "700px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at center, rgba(232,177,75,0.05), transparent 65%)",
+            "radial-gradient(ellipse at center, rgba(249,115,22,0.05), transparent 65%)",
         }}
       />
 
@@ -83,7 +83,7 @@ export default function Process() {
               left: "12.5%",
               right: "12.5%",
               height: "2px",
-              backgroundColor: "rgba(232,177,75,0.3)",
+              backgroundColor: "rgba(249,115,22,0.3)",
               zIndex: 0,
             }}
             aria-hidden="true"
@@ -102,7 +102,7 @@ export default function Process() {
                   fontWeight: 900,
                   fontSize: "3.5rem",
                   lineHeight: 1,
-                  color: "#E8B14B",
+                  color: "#F97316",
                   opacity: 0.9,
                   letterSpacing: "-0.02em",
                   backgroundColor: "#0A1D3A",
@@ -148,9 +148,9 @@ export default function Process() {
             className="group inline-flex items-center justify-center gap-2 transition-all duration-300"
             style={{
               padding: "0.875rem 2rem",
-              border: "1.5px solid #E8B14B",
+              border: "1.5px solid #F97316",
               borderRadius: "8px",
-              color: "#E8B14B",
+              color: "#F97316",
               backgroundColor: "transparent",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
@@ -158,12 +158,12 @@ export default function Process() {
               transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#E8B14B";
+              e.currentTarget.style.backgroundColor = "#F97316";
               e.currentTarget.style.color = "#0A1D3A";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.color = "#E8B14B";
+              e.currentTarget.style.color = "#F97316";
             }}
           >
             Nezávazná poptávka

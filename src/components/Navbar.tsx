@@ -41,7 +41,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[rgba(10,29,58,0.95)] backdrop-blur-xl border-b border-[rgba(232,177,75,0.08)]"
+          ? "bg-[rgba(10,29,58,0.95)] backdrop-blur-xl border-b border-[rgba(249,115,22,0.08)]"
           : "bg-transparent"
       }`}
       style={{ transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)" }}

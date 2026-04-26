@@ -29,7 +29,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(circle at 85% 15%, rgba(232,177,75,0.18) 0%, transparent 60%)",
+            "radial-gradient(circle at 85% 15%, rgba(249,115,22,0.18) 0%, transparent 60%)",
         }}
       />
       {/* Layer 3: radial bottom-left navy depth */}
@@ -131,8 +131,8 @@ export default function Hero() {
                   style={{
                     width: 40,
                     height: 40,
-                    backgroundColor: "rgba(232,177,75,0.1)",
-                    border: "1px solid rgba(232,177,75,0.2)",
+                    backgroundColor: "rgba(249,115,22,0.1)",
+                    border: "1px solid rgba(249,115,22,0.2)",
                   }}
                 >
                   <Icon size={20} className="text-gold" />
@@ -164,7 +164,7 @@ export default function Hero() {
               width: "500px",
               height: "500px",
               background:
-                "radial-gradient(circle, rgba(255,150,50,0.28) 0%, rgba(232,177,75,0.1) 35%, transparent 70%)",
+                "radial-gradient(circle, rgba(255,150,50,0.28) 0%, rgba(249,115,22,0.1) 35%, transparent 70%)",
               filter: "blur(20px)",
               borderRadius: "50%",
               zIndex: 1,
@@ -197,7 +197,7 @@ export default function Hero() {
               marginLeft: "-30px",
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(232,177,75,0.3) 0%, rgba(232,177,75,0) 70%)",
+                "radial-gradient(circle, rgba(249,115,22,0.3) 0%, rgba(249,115,22,0) 70%)",
               zIndex: 2,
             }}
           />

@@ -60,19 +60,19 @@ function ServiceCard({ service }: { service: ServiceItem }) {
       className="group relative rounded-xl transition-all duration-[400ms] cursor-default flex flex-col"
       style={{
         backgroundColor: "#0F2A52",
-        border: "1px solid rgba(232,177,75,0.12)",
+        border: "1px solid rgba(249,115,22,0.12)",
         padding: "2rem",
         transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.backgroundColor = "#132F5A";
-        e.currentTarget.style.borderColor = "rgba(232,177,75,0.4)";
+        e.currentTarget.style.borderColor = "rgba(249,115,22,0.4)";
         e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = "0 20px 40px -15px rgba(232,177,75,0.3)";
+        e.currentTarget.style.boxShadow = "0 20px 40px -15px rgba(249,115,22,0.3)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.backgroundColor = "#0F2A52";
-        e.currentTarget.style.borderColor = "rgba(232,177,75,0.12)";
+        e.currentTarget.style.borderColor = "rgba(249,115,22,0.12)";
         e.currentTarget.style.transform = "translateY(0)";
         e.currentTarget.style.boxShadow = "none";
       }}
@@ -83,8 +83,8 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         style={{
           width: 56,
           height: 56,
-          backgroundColor: "rgba(232,177,75,0.08)",
-          border: "1px solid rgba(232,177,75,0.25)",
+          backgroundColor: "rgba(249,115,22,0.08)",
+          border: "1px solid rgba(249,115,22,0.25)",
           borderRadius: "12px",
           marginBottom: "1.5rem",
         }}
@@ -133,7 +133,7 @@ export default function Services() {
         style={{
           width: "800px",
           height: "400px",
-          background: "radial-gradient(ellipse at bottom, rgba(232,177,75,0.06), transparent 70%)",
+          background: "radial-gradient(ellipse at bottom, rgba(249,115,22,0.06), transparent 70%)",
         }}
       />
 

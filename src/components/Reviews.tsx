@@ -16,7 +16,7 @@ export default function Reviews() {
           width: "600px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at center, rgba(232,177,75,0.05), transparent 65%)",
+            "radial-gradient(ellipse at center, rgba(249,115,22,0.05), transparent 65%)",
         }}
       />
 
@@ -34,7 +34,7 @@ export default function Reviews() {
             className="relative"
             style={{
               backgroundColor: "#0F2A52",
-              borderLeft: "4px solid #E8B14B",
+              borderLeft: "4px solid #F97316",
               borderRadius: "12px",
               padding: "2.5rem",
             }}
@@ -46,7 +46,7 @@ export default function Reviews() {
               style={{
                 top: "-1rem",
                 left: "-0.5rem",
-                color: "rgba(232,177,75,0.25)",
+                color: "rgba(249,115,22,0.25)",
               }}
               aria-hidden="true"
             />

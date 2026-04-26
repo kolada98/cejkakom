@@ -66,18 +66,18 @@ export default function WhyUs() {
               className="group relative overflow-hidden transition-all duration-[400ms]"
               style={{
                 background: "linear-gradient(135deg, #0A1D3A 0%, #132F5A 100%)",
-                border: "1px solid rgba(232,177,75,0.15)",
+                border: "1px solid rgba(249,115,22,0.15)",
                 borderRadius: "16px",
                 padding: "3rem",
                 transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(232,177,75,0.4)";
+                e.currentTarget.style.borderColor = "rgba(249,115,22,0.4)";
                 e.currentTarget.style.background =
                   "linear-gradient(135deg, #0C2244 0%, #163563 100%)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(232,177,75,0.15)";
+                e.currentTarget.style.borderColor = "rgba(249,115,22,0.15)";
                 e.currentTarget.style.background =
                   "linear-gradient(135deg, #0A1D3A 0%, #132F5A 100%)";
               }}

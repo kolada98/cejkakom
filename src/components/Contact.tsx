@@ -47,8 +47,8 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
     width: "100%",
     backgroundColor: "#050F1E",
     border: focused
-      ? "1.5px solid #E8B14B"
-      : "1px solid rgba(232,177,75,0.15)",
+      ? "1.5px solid #F97316"
+      : "1px solid rgba(249,115,22,0.15)",
     borderRadius: "8px",
     padding: "0.875rem 1rem",
     color: "#FFFFFF",
@@ -57,7 +57,7 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
     lineHeight: 1.5,
     outline: "none",
     transition: "border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
-    boxShadow: focused ? "0 0 0 4px rgba(232,177,75,0.1)" : "none",
+    boxShadow: focused ? "0 0 0 4px rgba(249,115,22,0.1)" : "none",
     resize: textarea ? "vertical" : undefined,
   };
 
@@ -150,7 +150,7 @@ export default function Contact() {
           width: "500px",
           height: "500px",
           background:
-            "radial-gradient(circle at 0% 50%, rgba(232,177,75,0.07), transparent 60%)",
+            "radial-gradient(circle at 0% 50%, rgba(249,115,22,0.07), transparent 60%)",
         }}
       />
 
@@ -181,7 +181,7 @@ export default function Contact() {
                       style={{
                         width: "48px",
                         height: "48px",
-                        backgroundColor: "rgba(232,177,75,0.12)",
+                        backgroundColor: "rgba(249,115,22,0.12)",
                       }}
                     >
                       <Icon size={20} className="text-gold" />
@@ -217,7 +217,7 @@ export default function Contact() {
 
                 const cardStyle: React.CSSProperties = {
                   backgroundColor: "#0A1D3A",
-                  border: "1px solid rgba(232,177,75,0.15)",
+                  border: "1px solid rgba(249,115,22,0.15)",
                   borderRadius: "12px",
                   padding: "1.5rem",
                   transition: "border-color 300ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1)",
@@ -225,11 +225,11 @@ export default function Contact() {
                 };
 
                 const onEnter = (e: React.MouseEvent<HTMLElement>) => {
-                  e.currentTarget.style.borderColor = "rgba(232,177,75,0.4)";
+                  e.currentTarget.style.borderColor = "rgba(249,115,22,0.4)";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 };
                 const onLeave = (e: React.MouseEvent<HTMLElement>) => {
-                  e.currentTarget.style.borderColor = "rgba(232,177,75,0.15)";
+                  e.currentTarget.style.borderColor = "rgba(249,115,22,0.15)";
                   e.currentTarget.style.transform = "translateY(0)";
                 };
 
@@ -262,7 +262,7 @@ export default function Contact() {
               style={{
                 marginTop: "1.5rem",
                 borderRadius: "12px",
-                border: "1px solid rgba(232,177,75,0.15)",
+                border: "1px solid rgba(249,115,22,0.15)",
                 aspectRatio: "16 / 10",
               }}
             >
@@ -283,7 +283,7 @@ export default function Contact() {
             onSubmit={handleSubmit}
             style={{
               backgroundColor: "#0A1D3A",
-              border: "1px solid rgba(232,177,75,0.2)",
+              border: "1px solid rgba(249,115,22,0.2)",
               borderRadius: "16px",
               padding: "2.5rem",
             }}
@@ -369,7 +369,7 @@ export default function Contact() {
               disabled={isLoading}
               className="group w-full flex items-center justify-center gap-3 transition-all duration-300"
               style={{
-                background: "linear-gradient(135deg, #E8B14B 0%, #F5C668 100%)",
+                background: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)",
                 color: "#0A1D3A",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 800,
@@ -378,7 +378,7 @@ export default function Contact() {
                 padding: "1rem 1.5rem",
                 borderRadius: "10px",
                 minHeight: "52px",
-                boxShadow: "0 8px 24px -8px rgba(232,177,75,0.5)",
+                boxShadow: "0 8px 24px -8px rgba(249,115,22,0.5)",
                 cursor: isLoading ? "not-allowed" : "pointer",
                 opacity: isLoading ? 0.7 : 1,
                 transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
@@ -386,12 +386,12 @@ export default function Contact() {
               onMouseEnter={(e) => {
                 if (!isLoading) {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 14px 32px -10px rgba(232,177,75,0.7)";
+                  e.currentTarget.style.boxShadow = "0 14px 32px -10px rgba(249,115,22,0.7)";
                 }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 24px -8px rgba(232,177,75,0.5)";
+                e.currentTarget.style.boxShadow = "0 8px 24px -8px rgba(249,115,22,0.5)";
               }}
             >
               {isLoading ? (
