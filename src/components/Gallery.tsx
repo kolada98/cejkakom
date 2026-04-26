@@ -132,7 +132,7 @@ export default function Gallery() {
             <button
               key={i}
               type="button"
-              {...(i < 12 ? { "data-stagger": "" } : {})}
+              data-stagger
               onClick={() => setSelected(i)}
               className="group relative block w-full mb-4 break-inside-avoid overflow-hidden cursor-zoom-in transition-all duration-300"
               style={{
