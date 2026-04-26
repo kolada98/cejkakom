@@ -60,7 +60,7 @@ export default function About() {
           width: "600px",
           height: "600px",
           background:
-            "radial-gradient(circle at 100% 0%, rgba(249,115,22,0.08), transparent 55%)",
+            "radial-gradient(circle at 100% 0%, rgba(240,165,0,0.08), transparent 55%)",
         }}
       />
 
@@ -74,7 +74,7 @@ export default function About() {
                 className="absolute inset-0 -z-10"
                 style={{
                   background:
-                    "radial-gradient(circle at center, rgba(249,115,22,0.22) 0%, transparent 70%)",
+                    "radial-gradient(circle at center, rgba(240,165,0,0.22) 0%, transparent 70%)",
                   transform: "scale(1.2)",
                   filter: "blur(24px)",
                 }}
@@ -86,8 +86,8 @@ export default function About() {
                 style={{
                   width: 32,
                   height: 32,
-                  borderTop: "3px solid #F97316",
-                  borderLeft: "3px solid #F97316",
+                  borderTop: "3px solid #F0A500",
+                  borderLeft: "3px solid #F0A500",
                   borderTopLeftRadius: "4px",
                   zIndex: 10,
                 }}
@@ -97,8 +97,8 @@ export default function About() {
                 style={{
                   width: 32,
                   height: 32,
-                  borderBottom: "3px solid #F97316",
-                  borderRight: "3px solid #F97316",
+                  borderBottom: "3px solid #F0A500",
+                  borderRight: "3px solid #F0A500",
                   borderBottomRightRadius: "4px",
                   zIndex: 10,
                 }}
@@ -108,7 +108,7 @@ export default function About() {
                 className="overflow-hidden"
                 style={{
                   borderRadius: "16px",
-                  border: "1px solid rgba(249,115,22,0.2)",
+                  border: "1px solid rgba(240,165,0,0.2)",
                 }}
               >
                 <img
@@ -183,7 +183,7 @@ export default function About() {
                   style={{
                     animationDelay: `${i * 120}ms`,
                     paddingLeft: i === 0 ? 0 : "2rem",
-                    borderLeft: i === 0 ? "none" : "1px solid rgba(249,115,22,0.25)",
+                    borderLeft: i === 0 ? "none" : "1px solid rgba(240,165,0,0.25)",
                   }}
                 >
                   <div

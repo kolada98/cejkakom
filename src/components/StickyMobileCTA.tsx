@@ -20,7 +20,7 @@ export default function StickyMobileCTA() {
       style={{
         zIndex: 50,
         height: "60px",
-        backgroundColor: "#F97316",
+        backgroundColor: "#F0A500",
         color: "#0A1D3A",
         fontFamily: "Plus Jakarta Sans, sans-serif",
         fontWeight: 800,

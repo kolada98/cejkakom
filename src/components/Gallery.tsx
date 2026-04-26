@@ -107,7 +107,7 @@ export default function Gallery() {
           width: "500px",
           height: "500px",
           background:
-            "radial-gradient(circle at 100% 0%, rgba(249,115,22,0.06), transparent 55%)",
+            "radial-gradient(circle at 100% 0%, rgba(240,165,0,0.06), transparent 55%)",
         }}
       />
 
@@ -137,13 +137,13 @@ export default function Gallery() {
               className="group relative block w-full mb-4 break-inside-avoid overflow-hidden cursor-zoom-in transition-all duration-300"
               style={{
                 borderRadius: "12px",
-                border: "1px solid rgba(249,115,22,0.08)",
+                border: "1px solid rgba(240,165,0,0.08)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(249,115,22,0.4)";
+                e.currentTarget.style.borderColor = "rgba(240,165,0,0.4)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(249,115,22,0.08)";
+                e.currentTarget.style.borderColor = "rgba(240,165,0,0.08)";
               }}
               aria-label={`Zobrazit: ${item.label}`}
             >

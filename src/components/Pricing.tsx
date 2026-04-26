@@ -45,7 +45,7 @@ function PriceLine({ item, last }: { item: PriceItem; last: boolean }) {
       className="flex items-baseline justify-between"
       style={{
         padding: "0.625rem 0",
-        borderBottom: last ? "none" : "1px solid rgba(249,115,22,0.06)",
+        borderBottom: last ? "none" : "1px solid rgba(240,165,0,0.06)",
       }}
     >
       <span
@@ -93,7 +93,7 @@ export default function Pricing() {
           width: "800px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at bottom, rgba(249,115,22,0.07), transparent 70%)",
+            "radial-gradient(ellipse at bottom, rgba(240,165,0,0.07), transparent 70%)",
         }}
       />
 
@@ -121,7 +121,7 @@ export default function Pricing() {
               className="flex flex-col"
               style={{
                 backgroundColor: "#0A1D3A",
-                border: "1px solid rgba(249,115,22,0.12)",
+                border: "1px solid rgba(240,165,0,0.12)",
                 borderRadius: "12px",
                 padding: "1.75rem",
               }}
@@ -134,7 +134,7 @@ export default function Pricing() {
                   fontSize: "1.25rem",
                   marginBottom: "1.5rem",
                   paddingBottom: "1rem",
-                  borderBottom: "1px solid rgba(249,115,22,0.2)",
+                  borderBottom: "1px solid rgba(240,165,0,0.2)",
                 }}
               >
                 {col.title}
@@ -153,8 +153,8 @@ export default function Pricing() {
             className="flex flex-col justify-center text-center"
             style={{
               background:
-                "linear-gradient(135deg, rgba(249,115,22,0.12) 0%, transparent 100%)",
-              border: "1px solid rgba(249,115,22,0.4)",
+                "linear-gradient(135deg, rgba(240,165,0,0.12) 0%, transparent 100%)",
+              border: "1px solid rgba(240,165,0,0.4)",
               borderRadius: "12px",
               padding: "1.75rem",
             }}
@@ -202,20 +202,20 @@ export default function Pricing() {
               style={{
                 marginTop: "1.5rem",
                 padding: "0.75rem 1.5rem",
-                border: "1.5px solid #F97316",
+                border: "1.5px solid #F0A500",
                 borderRadius: "8px",
-                color: "#F97316",
+                color: "#F0A500",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#F97316";
+                e.currentTarget.style.backgroundColor = "#F0A500";
                 e.currentTarget.style.color = "#0A1D3A";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = "#F97316";
+                e.currentTarget.style.color = "#F0A500";
               }}
             >
               Poslat poptávku
