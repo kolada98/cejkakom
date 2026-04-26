@@ -1,5 +1,6 @@
 import { Cog, Clock, FileCheck, ShieldCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 
 type Item = {
   num: string;
@@ -25,7 +26,7 @@ const items: Item[] = [
     num: "03",
     Icon: FileCheck,
     title: "Dokumentace v pořádku",
-    desc: "Jako certifikovaný RTSC technik vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
+    desc: "Jako certifikovaný revizní technik spalinových cest vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
   },
   {
     num: "04",
@@ -37,6 +38,7 @@ const items: Item[] = [
 
 export default function WhyUs() {
   const ref = useScrollAnimation();
+  const gridRef = useStaggerReveal<HTMLDivElement>(80);
 
   return (
     <section
@@ -56,10 +58,11 @@ export default function WhyUs() {
         </div>
 
         {/* 2x2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ marginTop: "4rem" }}>
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ marginTop: "4rem" }}>
           {items.map(({ num, Icon, title, desc }) => (
             <div
               key={num}
+              data-stagger
               className="group relative overflow-hidden transition-all duration-[400ms]"
               style={{
                 background: "linear-gradient(135deg, #0A1D3A 0%, #132F5A 100%)",
@@ -81,7 +84,7 @@ export default function WhyUs() {
             >
               {/* Ghost number top-right */}
               <span
-                className="ghost-number absolute"
+                className="ghost-number ghost-number-anim absolute"
                 style={{
                   fontSize: "8rem",
                   top: "1rem",

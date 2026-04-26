@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 
 import fasadniKomin from "@/assets/gallery/20m_fasadni_komin.jpg";
 import cisteni1 from "@/assets/gallery/cisteni1.jpg";
@@ -68,6 +69,7 @@ const items: { src: string; label: string }[] = [
 
 export default function Gallery() {
   const ref = useScrollAnimation();
+  const gridRef = useStaggerReveal<HTMLDivElement>(80);
   const [selected, setSelected] = useState<number | null>(null);
 
   const prev = () =>
@@ -122,6 +124,7 @@ export default function Gallery() {
 
         {/* Masonry grid via CSS columns */}
         <div
+          ref={gridRef}
           className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4"
           style={{ marginTop: "4rem" }}
         >
@@ -129,6 +132,7 @@ export default function Gallery() {
             <button
               key={i}
               type="button"
+              {...(i < 12 ? { "data-stagger": "" } : {})}
               onClick={() => setSelected(i)}
               className="group relative block w-full mb-4 break-inside-avoid overflow-hidden cursor-zoom-in transition-all duration-300"
               style={{

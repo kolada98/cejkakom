@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 import rcOsv2 from "@/assets/certificates/rc_osv2.jpg";
@@ -21,6 +22,7 @@ const certificates: Cert[] = [
 
 export default function Certificates() {
   const ref = useScrollAnimation();
+  const gridRef = useStaggerReveal<HTMLDivElement>(80);
   const [selected, setSelected] = useState<number | null>(null);
 
   const prev = () =>
@@ -75,12 +77,14 @@ export default function Certificates() {
 
         {/* 5-column grid */}
         <div
+          ref={gridRef}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
           style={{ marginTop: "4rem" }}
         >
           {certificates.map((cert, i) => (
             <button
               key={i}
+              data-stagger
               onClick={() => setSelected(i)}
               className="group relative block cursor-pointer overflow-hidden transition-all duration-500"
               style={{

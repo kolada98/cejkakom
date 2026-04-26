@@ -1,5 +1,6 @@
 import { PhoneCall } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 
 interface PriceItem { label: string; price: string }
 
@@ -29,7 +30,7 @@ const col3: PriceItem[] = [
   { label: "Hodinová sazba víceprací", price: "950 Kč/h" },
   { label: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
   { label: "Komínové poradenství", price: "ZDARMA" },
-  { label: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 3 000 Kč" },
+  { label: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 4 000 Kč" },
 ];
 
 const columns = [
@@ -76,6 +77,7 @@ function PriceLine({ item, last }: { item: PriceItem; last: boolean }) {
 
 export default function Pricing() {
   const ref = useScrollAnimation();
+  const gridRef = useStaggerReveal<HTMLDivElement>(80);
   const scrollToContact = () =>
     document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" });
 
@@ -108,12 +110,14 @@ export default function Pricing() {
 
         {/* 4-column grid (3 price columns + 1 CTA card) */}
         <div
+          ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start"
           style={{ marginTop: "4rem" }}
         >
           {columns.map((col) => (
             <div
               key={col.title}
+              data-stagger
               className="flex flex-col"
               style={{
                 backgroundColor: "#0A1D3A",
@@ -145,6 +149,7 @@ export default function Pricing() {
 
           {/* CTA card (4th column) */}
           <div
+            data-stagger
             className="flex flex-col justify-center text-center"
             style={{
               background:

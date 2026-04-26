@@ -6,11 +6,11 @@ const headlineWords = [
   { text: "Kominictví —", gold: false },
   { text: "poctivě", gold: true },
   { text: "a podle", gold: false },
-  { text: "předpisů.", gold: false },
+  { text: "předpisů", gold: false },
 ];
 
 const badges = [
-  { Icon: Shield, label: "Certifikovaný RTSC technik" },
+  { Icon: Shield, label: "Revizní technik spalinových cest" },
   { Icon: MapPin, label: "Brno a okolí od 2013" },
   { Icon: FileCheck, label: "Revizní zpráva na místě" },
 ];
@@ -67,26 +67,20 @@ export default function Hero() {
 
           {/* Headline with word-by-word stagger */}
           <h1
-            className="font-black"
+            className="font-black animate-fade-up lg:whitespace-nowrap"
             style={{
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 900,
-              fontSize: "clamp(3rem, 7vw, 6.5rem)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
+              fontSize: "clamp(2rem, 2.5vw, 2.25rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
               color: "#FFFFFF",
+              animationDelay: "0.15s",
             }}
           >
-            <span className="block animate-fade-up" style={{ animationDelay: "0.15s" }}>
-              {headlineWords[0].text}
-            </span>
-            <span className="block animate-fade-up" style={{ animationDelay: "0.30s" }}>
-              <span className="text-gold">{headlineWords[1].text}</span>{" "}
-              {headlineWords[2].text}
-            </span>
-            <span className="block animate-fade-up" style={{ animationDelay: "0.45s" }}>
-              {headlineWords[3].text}
-            </span>
+            {headlineWords[0].text}{" "}
+            <span className="text-gold">{headlineWords[1].text}</span>{" "}
+            {headlineWords[2].text} {headlineWords[3].text}
           </h1>
 
           {/* Subheadline */}
@@ -188,6 +182,22 @@ export default function Hero() {
               height: "40px",
               background:
                 "radial-gradient(ellipse, rgba(255,200,130,0.35) 0%, transparent 70%)",
+              zIndex: 2,
+            }}
+          />
+
+          {/* Radial pulse at chimney top */}
+          <div
+            className="pointer-events-none absolute animate-chimney-pulse"
+            style={{
+              top: "14%",
+              left: "50%",
+              width: "60px",
+              height: "60px",
+              marginLeft: "-30px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(232,177,75,0.3) 0%, rgba(232,177,75,0) 70%)",
               zIndex: 2,
             }}
           />

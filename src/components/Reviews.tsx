@@ -118,24 +118,41 @@ export default function Reviews() {
             >
               Byli jste se službou spokojeni? Budeme rádi za hodnocení.
             </p>
-            <a
-              href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontSize: "0.9375rem",
-                marginTop: "0.5rem",
-                textUnderlineOffset: "4px",
-              }}
-            >
-              Ohodnotit na Firmy.cz
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </a>
+            <div className="flex flex-col items-center gap-2" style={{ marginTop: "0.5rem" }}>
+              <a
+                href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                  textUnderlineOffset: "4px",
+                }}
+              >
+                Ohodnotit na Firmy.cz
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+              {/* TODO: replace with real Google review URL from client */}
+              <a
+                href="#"
+                className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                  textUnderlineOffset: "4px",
+                }}
+              >
+                Ohodnotit na Google
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

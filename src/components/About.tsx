@@ -2,16 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import panCejka from "@/assets/pan_cejka.jpg";
 
-const stats = [
-  { value: "2013", label: "Rok vzniku" },
-  { value: "RTSC", label: "Certifikace" },
-  { value: "40 km", label: "Servisní oblast" },
+type Stat = { value: string; label: string; counter?: { to: number; suffix?: string } };
+
+const stats: Stat[] = [
+  { value: "2013", label: "ROK VZNIKU" },
+  { value: "13+", label: "LET PRAXE", counter: { to: 13, suffix: "+" } },
+  { value: "tisíce", label: "DOMÁCNOSTÍ" },
 ];
 
 export default function About() {
   const ref = useScrollAnimation();
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     const el = statsRef.current;
@@ -28,6 +31,22 @@ export default function About() {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!statsVisible) return;
+    const target = 13;
+    const duration = 1200;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setCounter(Math.round(eased * target));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [statsVisible]);
 
   return (
     <section
@@ -135,24 +154,17 @@ export default function About() {
                 fontSize: "1.0625rem",
                 color: "#B8C5D9",
                 lineHeight: 1.75,
-                marginBottom: "1.25rem",
               }}
             >
-              Kominictví dělám od roku 2013. Za tu dobu jsem prošel stovky domácností
-              a realizoval zakázky od běžného čištění až po výstavbu komínových systémů
-              pro kondenzační kotle a dřevostavby.
-            </p>
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontSize: "1.0625rem",
-                color: "#B8C5D9",
-                lineHeight: 1.75,
-              }}
-            >
-              Jsem certifikovaný revizní technik spalinových cest — vydávám výchozí
-              i pravidelné revizní zprávy v souladu s vyhláškou č. 34/2016 Sb.
+              Kominictví dělám od roku 2013. Za tu dobu jsem prošel tisíce
+              domácností a realizoval zakázky od běžného čištění až po výstavbu
+              komínových systémů pro všechny druhy paliv. Realizujeme komíny pro
+              kamna, krby a kotle na dřevo, pelety a topné oleje, stejně jako
+              komíny pro kondenzační kotle. Kromě nových komínů opravujeme i
+              původní komíny vložkováním tak, aby byly použitelné dle aktuálních
+              norem. Jsem certifikovaný revizní technik spalinových cest —
+              vydávám výchozí revize ke kolaudaci i pravidelné roční zprávy
+              v souladu s vyhláškou č. 34/2016 Sb.
             </p>
 
             {/* Stats row */}
@@ -184,7 +196,9 @@ export default function About() {
                       letterSpacing: "-0.02em",
                     }}
                   >
-                    {stat.value}
+                    {stat.counter
+                      ? `${counter}${stat.counter.suffix ?? ""}`
+                      : stat.value}
                   </div>
                   <div
                     style={{

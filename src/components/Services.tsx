@@ -1,5 +1,6 @@
 import { Layers, Wrench, Home, Flame, CheckCircle, Settings, ShieldCheck } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 import ChimneyBrushIcon from "@/components/icons/ChimneyBrushIcon";
 
 type ServiceItem = {
@@ -27,7 +28,7 @@ const services: ServiceItem[] = [
   {
     Icon: CheckCircle,
     title: "Výchozí revize",
-    desc: "Revize ke kolaudaci s vypracováním dokumentace. Osobní dohled RTSC. Jako certifikovaný RTSC technik vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
+    desc: "Revize ke kolaudaci s vypracováním dokumentace. Osobní dohled RTSC. Jako certifikovaný revizní technik spalinových cest vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
   },
   {
     Icon: Wrench,
@@ -55,6 +56,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
   const { Icon } = service;
   return (
     <div
+      data-stagger
       className="group relative rounded-xl transition-all duration-[400ms] cursor-default flex flex-col"
       style={{
         backgroundColor: "#0F2A52",
@@ -122,6 +124,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 
 export default function Services() {
   const ref = useScrollAnimation();
+  const gridRef = useStaggerReveal<HTMLDivElement>(80);
 
   return (
     <section id="sluzby" className="section-padding relative overflow-hidden" style={{ backgroundColor: "#0A1D3A" }}>
@@ -148,6 +151,7 @@ export default function Services() {
 
         {/* 4-column grid, variable card heights */}
         <div
+          ref={gridRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start"
           style={{ marginTop: "4rem" }}
         >

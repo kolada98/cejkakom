@@ -2,12 +2,13 @@ import { useMemo } from "react";
 
 interface ParticleConfig {
   id: number;
-  left: number;      // horizontal start position (%)
-  size: number;      // 2-6 px
-  duration: number;  // 5-10 s
-  delay: number;     // -duration..0
-  sway: number;      // sway amplitude px
+  left: number;
+  size: number;
+  duration: number;
+  delay: number;
+  sway: number;
   sign: 1 | -1;
+  isSpark: boolean;
 }
 
 function rand(min: number, max: number) {
@@ -15,22 +16,32 @@ function rand(min: number, max: number) {
 }
 
 export default function HeroEmbers() {
-  // Generate 25 particles deterministically per mount
   const particles = useMemo<ParticleConfig[]>(() => {
     const arr: ParticleConfig[] = [];
-    for (let i = 0; i < 25; i++) {
-      const rawSize = Math.random();
-      // Weighted toward smaller particles (most 2-3px, occasional 4-6px)
-      const size = rawSize < 0.7 ? rand(2, 3.5) : rand(3.5, 6);
-      const duration = rand(5, 10);
+    // 19 small embers (2-5px, 4-8s)
+    for (let i = 0; i < 19; i++) {
       arr.push({
         id: i,
         left: rand(0, 100),
-        size,
-        duration,
-        delay: -rand(0, duration),
+        size: rand(2, 5),
+        duration: rand(4, 8),
+        delay: -rand(0, 8),
         sway: rand(15, 35),
         sign: Math.random() > 0.5 ? 1 : -1,
+        isSpark: false,
+      });
+    }
+    // 3 larger sparks (8-12px, 8-12s)
+    for (let i = 0; i < 3; i++) {
+      arr.push({
+        id: 100 + i,
+        left: rand(10, 90),
+        size: rand(8, 12),
+        duration: rand(8, 12),
+        delay: -rand(0, 12),
+        sway: rand(20, 40),
+        sign: Math.random() > 0.5 ? 1 : -1,
+        isSpark: true,
       });
     }
     return arr;
@@ -70,6 +81,11 @@ export default function HeroEmbers() {
             0 0 12px 2px rgba(255,179,71,0.55),
             0 0 24px 4px rgba(232,177,75,0.3);
         }
+        .ember-spark {
+          box-shadow:
+            0 0 18px 4px rgba(255,179,71,0.7),
+            0 0 36px 8px rgba(232,177,75,0.45);
+        }
       `}</style>
 
       {particles.map((p, i) => {
@@ -82,7 +98,7 @@ export default function HeroEmbers() {
         return (
           <span
             key={p.id}
-            className="ember"
+            className={`ember${p.isSpark ? " ember-spark" : ""}`}
             style={{
               left: `${p.left}%`,
               width: `${p.size}px`,
