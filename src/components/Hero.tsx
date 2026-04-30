@@ -152,70 +152,82 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — illustration */}
+        {/* RIGHT — photo */}
         <div className="hidden lg:flex items-center justify-center relative">
-          {/* Warm glow behind chimney */}
-          <div
-            className="pointer-events-none absolute"
-            style={{
-              top: "5%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "500px",
-              height: "500px",
-              background:
-                "radial-gradient(circle, rgba(255,150,50,0.28) 0%, rgba(240,160,0,0.1) 35%, transparent 70%)",
-              filter: "blur(20px)",
-              borderRadius: "50%",
-              zIndex: 1,
-            }}
-          />
+          <style>{`
+            @keyframes smoke-rise {
+              0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
+              15%  { opacity: var(--smoke-opacity, 0.12); }
+              70%  { opacity: calc(var(--smoke-opacity, 0.12) * 0.5); }
+              100% { transform: translate3d(var(--smoke-drift, 8px), -130px, 0) scale(2.5); opacity: 0; }
+            }
+          `}</style>
 
-          {/* Heat shimmer near top of chimney */}
+          {/* Outer wrapper — float animation applied here so photo + smoke move together */}
           <div
-            className="pointer-events-none absolute animate-heat-shimmer"
-            style={{
-              top: "12%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "80px",
-              height: "40px",
-              background:
-                "radial-gradient(ellipse, rgba(255,200,130,0.35) 0%, transparent 70%)",
-              zIndex: 2,
-            }}
-          />
+            className="relative animate-hero-float"
+            style={{ maxWidth: "28rem", width: "100%", zIndex: 3 }}
+          >
+            {/* Smoke puffs — anchored above photo, outside overflow:hidden container */}
+            <div
+              className="pointer-events-none absolute"
+              style={{ top: "-20px", right: "20%", zIndex: 2 }}
+              aria-hidden="true"
+            >
+              {([
+                { id: 0, size: 40, left: 0,   delay: "0s",   drift: "10px",  duration: "5s",   opacity: 0.12 },
+                { id: 1, size: 65, left: 15,  delay: "1.5s", drift: "-12px", duration: "6s",   opacity: 0.10 },
+                { id: 2, size: 50, left: -8,  delay: "3s",   drift: "8px",   duration: "4.5s", opacity: 0.11 },
+              ] as const).map((puff) => (
+                <div
+                  key={puff.id}
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: `${puff.left}px`,
+                    width: `${puff.size}px`,
+                    height: `${puff.size}px`,
+                    borderRadius: "50%",
+                    background: "rgba(200,200,200,0.08)",
+                    ["--smoke-opacity" as string]: puff.opacity,
+                    ["--smoke-drift" as string]: puff.drift,
+                    animation: `smoke-rise ${puff.duration} ease-out ${puff.delay} infinite`,
+                    willChange: "transform, opacity",
+                  }}
+                />
+              ))}
+            </div>
 
-          {/* Radial pulse at chimney top */}
-          <div
-            className="pointer-events-none absolute animate-chimney-pulse"
-            style={{
-              top: "14%",
-              left: "50%",
-              width: "60px",
-              height: "60px",
-              marginLeft: "-30px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(240,160,0,0.3) 0%, rgba(240,160,0,0) 70%)",
-              zIndex: 2,
-            }}
-          />
-
-          <img
-            src={heroPhotoStove}
-            alt="Moderní krbová kamna s nerezovým komínovým průduchem"
-            className="max-w-md w-full object-cover rounded-2xl animate-hero-float relative"
-            style={{
-              aspectRatio: "9 / 16",
-              maxHeight: "70vh",
-              border: "1px solid rgba(240,160,0,0.2)",
-              boxShadow: "0 25px 60px -20px rgba(0,0,0,0.6)",
-              zIndex: 3,
-            }}
-            loading="eager"
-            fetchPriority="high"
-          />
+            {/* Photo + gradient overlay — overflow:hidden clips both to rounded corners */}
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                aspectRatio: "9 / 16",
+                maxHeight: "70vh",
+                border: "1px solid rgba(240,160,0,0.2)",
+                boxShadow: "0 25px 60px -20px rgba(0,0,0,0.6)",
+              }}
+            >
+              <img
+                src={heroPhotoStove}
+                alt="Moderní krbová kamna s nerezovým komínovým průduchem"
+                className="w-full h-full object-cover"
+                style={{ display: "block" }}
+                loading="eager"
+                fetchPriority="high"
+              />
+              {/* Gradient overlay: fades photo into navy on the left edge */}
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to right, rgba(10,29,58,0.85) 0%, rgba(10,29,58,0.4) 30%, rgba(10,29,58,0.0) 60%)",
+                  zIndex: 1,
+                }}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
