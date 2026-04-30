@@ -14,13 +14,13 @@ const steps: Step[] = [
     num: "01",
     Icon: Phone,
     title: "Poptávka",
-    desc: "Zavolejte nebo napište. Řekneme vám, co váš komín potřebuje, a domluvíme termín.",
+    desc: "Zavolejte nebo napište. Řekneme vám, co váš komín potřebuje, sdělíme orientační cenu a domluvíme termín.",
   },
   {
     num: "02",
     Icon: ClipboardCheck,
-    title: "Konzultace",
-    desc: "Přijedeme na místo, posoudíme stav komínu a navrhneme nejvhodnější řešení včetně ceny.",
+    title: "Konzultace a zaměření",
+    desc: "Přijedeme na místo, posoudíme stav komínu, vše zaměříme a navrhneme nejvhodnější řešení včetně finální ceny.",
   },
   {
     num: "03",
@@ -54,7 +54,7 @@ export default function Process() {
           width: "700px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at center, rgba(240,165,0,0.05), transparent 65%)",
+            "radial-gradient(ellipse at center, rgba(240,160,0,0.05), transparent 65%)",
         }}
       />
 
@@ -83,7 +83,7 @@ export default function Process() {
               left: "12.5%",
               right: "12.5%",
               height: "2px",
-              backgroundColor: "rgba(240,165,0,0.3)",
+              backgroundColor: "rgba(240,160,0,0.3)",
               zIndex: 0,
             }}
             aria-hidden="true"
@@ -102,7 +102,7 @@ export default function Process() {
                   fontWeight: 900,
                   fontSize: "3.5rem",
                   lineHeight: 1,
-                  color: "#F0A500",
+                  color: "#F0A000",
                   opacity: 0.9,
                   letterSpacing: "-0.02em",
                   backgroundColor: "#0A1D3A",
@@ -148,9 +148,9 @@ export default function Process() {
             className="group inline-flex items-center justify-center gap-2 transition-all duration-300"
             style={{
               padding: "0.875rem 2rem",
-              border: "1.5px solid #F0A500",
+              border: "1.5px solid #F0A000",
               borderRadius: "8px",
-              color: "#F0A500",
+              color: "#F0A000",
               backgroundColor: "transparent",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
@@ -158,12 +158,12 @@ export default function Process() {
               transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#F0A500";
+              e.currentTarget.style.backgroundColor = "#F0A000";
               e.currentTarget.style.color = "#0A1D3A";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = "transparent";
-              e.currentTarget.style.color = "#F0A500";
+              e.currentTarget.style.color = "#F0A000";
             }}
           >
             Nezávazná poptávka

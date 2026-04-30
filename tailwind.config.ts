@@ -68,10 +68,10 @@ export default {
           darkest: "#050F1E",
         },
         gold: {
-          DEFAULT: "#F0A500",
+          DEFAULT: "#F0A000",
           bright: "#F5B800",
-          soft: "rgba(240,165,0,0.12)",
-          glow: "rgba(240,165,0,0.25)",
+          soft: "rgba(240,160,0,0.12)",
+          glow: "rgba(240,160,0,0.25)",
         },
         "text-secondary": "#B8C5D9",
         "text-tertiary": "#7A8AA3",
@@ -121,6 +121,10 @@ export default {
           "0%, 100%": { opacity: "0.7" },
           "50%": { opacity: "1" },
         },
+        "hero-float": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-6px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -131,6 +135,7 @@ export default {
         "chimney-float": "chimney-float 4s ease-in-out infinite alternate",
         "heat-shimmer": "heat-shimmer 2.5s ease-in-out infinite",
         "subtle-pulse": "subtle-pulse 2s ease-in-out infinite",
+        "hero-float": "hero-float 4s ease-in-out infinite alternate",
       },
     },
   },

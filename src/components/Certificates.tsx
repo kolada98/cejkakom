@@ -60,7 +60,7 @@ export default function Certificates() {
           width: "700px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at center, rgba(240,165,0,0.06), transparent 65%)",
+            "radial-gradient(ellipse at center, rgba(240,160,0,0.06), transparent 65%)",
         }}
       />
 
@@ -89,18 +89,18 @@ export default function Certificates() {
               className="group relative block cursor-pointer overflow-hidden transition-all duration-500"
               style={{
                 backgroundColor: "#0A1D3A",
-                border: "1px solid rgba(240,165,0,0.15)",
+                border: "1px solid rgba(240,160,0,0.15)",
                 borderRadius: "12px",
                 padding: "12px",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(240,165,0,0.5)";
+                e.currentTarget.style.borderColor = "rgba(240,160,0,0.5)";
                 e.currentTarget.style.transform = "translateY(-2px)";
                 e.currentTarget.style.boxShadow =
-                  "0 16px 40px -12px rgba(240,165,0,0.3)";
+                  "0 16px 40px -12px rgba(240,160,0,0.3)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(240,165,0,0.15)";
+                e.currentTarget.style.borderColor = "rgba(240,160,0,0.15)";
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "none";
               }}

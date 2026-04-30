@@ -5,32 +5,30 @@ import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 interface PriceItem { label: string; price: string }
 
 const col1: PriceItem[] = [
-  { label: "Vyčištění komínu + kontrola dle vyhl. 34/2016 Sb.", price: "od 1 050 Kč" },
-  { label: "Jen kontrola (musí být vyčištěno)", price: "700 Kč" },
-  { label: "Čištění na pevná paliva (aktuální cena)", price: "od 1 400 Kč" },
-  { label: "Čištění na plyn (aktuální cena)", price: "od 900 Kč" },
-  { label: "Strojové čištění dehtu (frézování)", price: "850 Kč/m" },
-  { label: "Výchozí revize ke kolaudaci", price: "od 3 000 Kč" },
-  { label: "Výchozí revize s osobním dohledem RTSC", price: "do 15 000 Kč" },
+  { label: "Čištění komínu na pevná paliva",  price: "od 1 400 Kč" },
+  { label: "Čištění komínu na plynná paliva", price: "od 900 Kč" },
+  { label: "Strojové čištění dehtu",          price: "850 Kč/m" },
+  { label: "Výchozí revize ke kolaudaci",     price: "od 3 000 Kč" },
 ];
 
 const col2: PriceItem[] = [
-  { label: "Nový komín nerezový třísložkový (montáž bez mat.)", price: "od 12 500 Kč" },
-  { label: "Nový komín zděný systémový (montáž bez mat.)", price: "od 15 000 Kč" },
-  { label: "Vložkování – tuhá paliva DN150 (mat. + montáž)", price: "od 35 000 Kč" },
-  { label: "Vložkování – kondenzační kotel (mat. + montáž)", price: "od 18 000 Kč" },
-  { label: "Frézování komínu", price: "od 2 000 Kč/m" },
-  { label: "Montáž kouřovodu / koaxiální systém", price: "od 7 000 Kč" },
-  { label: "Montáž nerezové komínové stříšky", price: "od 2 500 Kč" },
-  { label: "Výměna komínových dvířek", price: "3 500 Kč" },
+  { label: "Nový komín nerezový třísložkový",                  price: "od 45 500 Kč" },
+  { label: "Nový komín zděný systémový",                       price: "od 55 000 Kč" },
+  { label: "Vložkování – tuhá paliva",                         price: "od 38 000 Kč" },
+  { label: "Vložkování – kondenzační kotel (mat. + montáž)",   price: "od 18 000 Kč" },
+  { label: "Frézování komínu",                                 price: "od 1 500 Kč/m" },
+  { label: "Nerezový izolovaný nástavec 1m",                   price: "od 12 500 Kč" },
+  { label: "Montáž kouřovodu / koaxiální systém",              price: "od 4 500 Kč" },
+  { label: "Montáž nerezové komínové stříšky",                 price: "od 2 500 Kč" },
+  { label: "Výměna komínových dvířek",                         price: "3 500 Kč" },
 ];
 
 const col3: PriceItem[] = [
-  { label: "Cestovné", price: "15 Kč/km" },
-  { label: "Hodinová sazba víceprací", price: "950 Kč/h" },
-  { label: "Oprava nadstřešní části a pasportizace komínů", price: "na dotaz" },
-  { label: "Komínové poradenství", price: "ZDARMA" },
-  { label: "Expresní výjezd mimo pracovní dobu (do 10 km)", price: "od 4 000 Kč" },
+  { label: "Cestovné",                                                 price: "15 Kč/km" },
+  { label: "Hodinová sazba víceprací",                                 price: "800 Kč/h" },
+  { label: "Oprava nadstřešní části a pasportizace komínů",            price: "na dotaz" },
+  { label: "Komínové poradenství",                                     price: "ZDARMA" },
+  { label: "Expresní výjezd mimo pracovní dobu (do 10 km)",           price: "od 4 000 Kč" },
 ];
 
 const columns = [
@@ -45,7 +43,7 @@ function PriceLine({ item, last }: { item: PriceItem; last: boolean }) {
       className="flex items-baseline justify-between"
       style={{
         padding: "0.625rem 0",
-        borderBottom: last ? "none" : "1px solid rgba(240,165,0,0.06)",
+        borderBottom: last ? "none" : "1px solid rgba(240,160,0,0.06)",
       }}
     >
       <span
@@ -93,7 +91,7 @@ export default function Pricing() {
           width: "800px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at bottom, rgba(240,165,0,0.07), transparent 70%)",
+            "radial-gradient(ellipse at bottom, rgba(240,160,0,0.07), transparent 70%)",
         }}
       />
 
@@ -121,7 +119,7 @@ export default function Pricing() {
               className="flex flex-col"
               style={{
                 backgroundColor: "#0A1D3A",
-                border: "1px solid rgba(240,165,0,0.12)",
+                border: "1px solid rgba(240,160,0,0.12)",
                 borderRadius: "12px",
                 padding: "1.75rem",
               }}
@@ -134,7 +132,7 @@ export default function Pricing() {
                   fontSize: "1.25rem",
                   marginBottom: "1.5rem",
                   paddingBottom: "1rem",
-                  borderBottom: "1px solid rgba(240,165,0,0.2)",
+                  borderBottom: "1px solid rgba(240,160,0,0.2)",
                 }}
               >
                 {col.title}
@@ -153,8 +151,8 @@ export default function Pricing() {
             className="flex flex-col justify-center text-center"
             style={{
               background:
-                "linear-gradient(135deg, rgba(240,165,0,0.12) 0%, transparent 100%)",
-              border: "1px solid rgba(240,165,0,0.4)",
+                "linear-gradient(135deg, rgba(240,160,0,0.12) 0%, transparent 100%)",
+              border: "1px solid rgba(240,160,0,0.4)",
               borderRadius: "12px",
               padding: "1.75rem",
             }}
@@ -202,20 +200,20 @@ export default function Pricing() {
               style={{
                 marginTop: "1.5rem",
                 padding: "0.75rem 1.5rem",
-                border: "1.5px solid #F0A500",
+                border: "1.5px solid #F0A000",
                 borderRadius: "8px",
-                color: "#F0A500",
+                color: "#F0A000",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#F0A500";
+                e.currentTarget.style.backgroundColor = "#F0A000";
                 e.currentTarget.style.color = "#0A1D3A";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = "#F0A500";
+                e.currentTarget.style.color = "#F0A000";
               }}
             >
               Poslat poptávku

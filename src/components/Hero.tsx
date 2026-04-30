@@ -1,5 +1,5 @@
 import { Shield, MapPin, FileCheck } from "lucide-react";
-import heroIllustration from "@/assets/hero-illustration.png";
+import heroPhotoStove from "@/assets/hero-photo-stove.jpg";
 import HeroEmbers from "@/components/HeroEmbers";
 
 const headlineWords = [
@@ -29,7 +29,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(circle at 85% 15%, rgba(240,165,0,0.18) 0%, transparent 60%)",
+            "radial-gradient(circle at 85% 15%, rgba(240,160,0,0.18) 0%, transparent 60%)",
         }}
       />
       {/* Layer 3: radial bottom-left navy depth */}
@@ -131,8 +131,8 @@ export default function Hero() {
                   style={{
                     width: 40,
                     height: 40,
-                    backgroundColor: "rgba(240,165,0,0.1)",
-                    border: "1px solid rgba(240,165,0,0.2)",
+                    backgroundColor: "rgba(240,160,0,0.1)",
+                    border: "1px solid rgba(240,160,0,0.2)",
                   }}
                 >
                   <Icon size={20} className="text-gold" />
@@ -164,7 +164,7 @@ export default function Hero() {
               width: "500px",
               height: "500px",
               background:
-                "radial-gradient(circle, rgba(255,150,50,0.28) 0%, rgba(240,165,0,0.1) 35%, transparent 70%)",
+                "radial-gradient(circle, rgba(255,150,50,0.28) 0%, rgba(240,160,0,0.1) 35%, transparent 70%)",
               filter: "blur(20px)",
               borderRadius: "50%",
               zIndex: 1,
@@ -197,16 +197,22 @@ export default function Hero() {
               marginLeft: "-30px",
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(240,165,0,0.3) 0%, rgba(240,165,0,0) 70%)",
+                "radial-gradient(circle, rgba(240,160,0,0.3) 0%, rgba(240,160,0,0) 70%)",
               zIndex: 2,
             }}
           />
 
           <img
-            src={heroIllustration}
-            alt="Ilustrace nerezového komínu"
-            className="w-full max-w-2xl aspect-square object-contain relative animate-chimney-float"
-            style={{ zIndex: 3 }}
+            src={heroPhotoStove}
+            alt="Moderní krbová kamna s nerezovým komínovým průduchem"
+            className="max-w-md w-full object-cover rounded-2xl animate-hero-float relative"
+            style={{
+              aspectRatio: "9 / 16",
+              maxHeight: "70vh",
+              border: "1px solid rgba(240,160,0,0.2)",
+              boxShadow: "0 25px 60px -20px rgba(0,0,0,0.6)",
+              zIndex: 3,
+            }}
             loading="eager"
             fetchPriority="high"
           />

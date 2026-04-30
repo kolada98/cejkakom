@@ -22,7 +22,7 @@ export default function HeroEmbers() {
     for (let i = 0; i < 19; i++) {
       arr.push({
         id: i,
-        left: rand(0, 100),
+        left: rand(62, 88),
         size: rand(2, 5),
         duration: rand(4, 8),
         delay: -rand(0, 8),
@@ -35,7 +35,7 @@ export default function HeroEmbers() {
     for (let i = 0; i < 3; i++) {
       arr.push({
         id: 100 + i,
-        left: rand(10, 90),
+        left: rand(65, 85),
         size: rand(8, 12),
         duration: rand(8, 12),
         delay: -rand(0, 12),
@@ -76,15 +76,15 @@ export default function HeroEmbers() {
           bottom: 0;
           border-radius: 50%;
           will-change: transform, opacity;
-          background: radial-gradient(circle at 35% 35%, #FFE1A6 0%, #FFB347 45%, #F0A500 100%);
+          background: radial-gradient(circle at 35% 35%, #FFE1A6 0%, #FFB347 45%, #F0A000 100%);
           box-shadow:
             0 0 12px 2px rgba(255,179,71,0.55),
-            0 0 24px 4px rgba(240,165,0,0.3);
+            0 0 24px 4px rgba(240,160,0,0.3);
         }
         .ember-spark {
           box-shadow:
             0 0 18px 4px rgba(255,179,71,0.7),
-            0 0 36px 8px rgba(240,165,0,0.45);
+            0 0 36px 8px rgba(240,160,0,0.45);
         }
       `}</style>
 

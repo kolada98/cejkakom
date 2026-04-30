@@ -13,42 +13,42 @@ const services: ServiceItem[] = [
   {
     Icon: ChimneyBrushIcon,
     title: "Čištění a revize",
-    desc: "Vyčistíme komín na tuhá paliva i plyn při každoroční kontrole dle vyhlášky č. 34/2016 Sb. U zákazníka strávíme 30–60 minut podle stupně znečištění — čistíme komín, kouřovod, spalinové hrdlo i část pod deflektorem. Zhodnotíme stav celé spalinové cesty a případné závady rovnou navrhneme k opravě.",
+    desc: "Vyčistíme komín na tuhá paliva i plyn při každoroční kontrole dle vyhlášky č. 34/2016 Sb. U zákazníka strávíme 30–60 minut dle stupně znečištění — čistíme komín, kouřovod, spalinové hrdlo i část nad i pod deflektorem. Zhodnotíme stav celé spalinové cesty a případné závady rovnou navrhneme k opravě.",
   },
   {
     Icon: Home,
     title: "Výstavba komínů",
-    desc: "Stavíme nerezové komíny od různých výrobců — fasádní i vnitřní, v lesklém nerezu, černém matu nebo antracitu. Ročně realizujeme 60–100 nových komínů. Pro dřevostavby zajišťujeme systémové prostupy hořlavými konstrukcemi a certifikované napojení na parotěsné fólie.",
+    desc: "Stavíme nerezové komíny značek Jeremias, CIKO, Schiedel, DINAK — fasádní i vnitřní, v lesklém nerezu, černém matu nebo antracitu. Ročně realizujeme 60–100 nových komínů. Pro dřevostavby zajišťujeme systémové prostupy hořlavými konstrukcemi a certifikované napojení na parotěsné fólie. Stavíme i zděné komíny značek CIKO a Schiedel.",
   },
   {
     Icon: Layers,
     title: "Vložkování komínů",
-    desc: "Pokud stávající komín přestane bezpečně odvádět spaliny, nejšetrnější řešení je vložkování. Vložkujeme pro tuhá paliva (nerez flexi DN 150–200 mm), kondenzační kotle (plast nebo nerez wrap) i atmosférické plynové kotle. Realizujeme i komplikované zakázky.",
-  },
-  {
-    Icon: CheckCircle,
-    title: "Výchozí revize",
-    desc: "Revize ke kolaudaci s vypracováním dokumentace. Osobní dohled RTSC. Jako certifikovaný revizní technik spalinových cest vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
+    desc: "Pokud stávající komín přestane bezpečně odvádět spaliny, nejšetrnější řešení je jeho vyvložkování. Vložkujeme komíny pro tuhá paliva (nerezovými pevnými trubkami nebo flexi hadicí), kondenzační kotle (plastové trubky nebo nerez flexi wrap) i atmosférické plynové kotle. Realizujeme i komplikované zakázky.",
   },
   {
     Icon: Wrench,
     title: "Frézování",
-    desc: "Frézováním zvětšíme průměr stávajícího průduchu tak, aby bylo možné vložkování. Frézování provádíme vlastní technikou — bez závislosti na subdodavatelích, s rychlejším termínem a přesnější cenou.",
+    desc: "Frézováním zvětšíme průměr stávajícího průduchu tak, aby bylo možné vložkování. Frézování provádíme vlastní technikou (hydraulická fréza Hydra 13) — bez závislosti na subdodavatelích, s rychlejším termínem a přesnější cenou.",
   },
   {
     Icon: Flame,
-    title: "Plynové komínky",
-    desc: "Výstavba plynových komínků a odkouření, kondenzační kotle, kaskády kotlů. Pracujeme s kvalitními systémovými prvky s platnou certifikací pro každý typ spotřebiče.",
+    title: "Plynová odkouření, komínky",
+    desc: "Výstavba plynových komínků a odkouření pro kondenzační kotle a kaskády kotlů. Pracujeme s kvalitními systémovými prvky s platnou certifikací pro každý typ spotřebiče.",
   },
   {
     Icon: Settings,
     title: "Opravy komínů",
-    desc: "Opravy nadstřešních částí, výměna dvířek, montáž kouřovodů. Řešíme i komplikované případy — od estetických úprav po kompletní rekonstrukce nadstřešního dílu.",
+    desc: "Opravy nadstřešních částí, výměna komínových dvířek, montáž kouřovodů, dopojování kamen. Řešíme i komplikované případy — od estetických úprav po kompletní rekonstrukce nadstřešních částí komínů.",
   },
   {
     Icon: ShieldCheck,
     title: "Požární bezpečnost",
-    desc: "Každý komín stavíme s důrazem na požárně bezpečné provedení včetně certifikovaných prostupů hořlavými konstrukcemi. Bezpečnost řešíme nadstandardně — pro váš klid do budoucna.",
+    desc: "Každý komín stavíme s důrazem na požárně bezpečné provedení včetně certifikovaných prostupů hořlavými konstrukcemi. Vždy dle montážního návodu. Bezpečnost řešíme nadstandardně — pro váš klid do budoucna.",
+  },
+  {
+    Icon: CheckCircle,
+    title: "Výchozí revize",
+    desc: "Revize ke kolaudaci s vypracováním dokumentace s kulatým razítkem. Osobní dohled RTSC. Jako certifikovaný revizní technik spalinových cest vystavuji revizní zprávy uznávané pojišťovnami i stavebním úřadem.",
   },
 ];
 
@@ -60,19 +60,19 @@ function ServiceCard({ service }: { service: ServiceItem }) {
       className="group relative rounded-xl transition-all duration-[400ms] cursor-default flex flex-col"
       style={{
         backgroundColor: "#0F2A52",
-        border: "1px solid rgba(240,165,0,0.12)",
+        border: "1px solid rgba(240,160,0,0.12)",
         padding: "2rem",
         transitionTimingFunction: "cubic-bezier(0.2, 0.8, 0.2, 1)",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.backgroundColor = "#132F5A";
-        e.currentTarget.style.borderColor = "rgba(240,165,0,0.4)";
+        e.currentTarget.style.borderColor = "rgba(240,160,0,0.4)";
         e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = "0 20px 40px -15px rgba(240,165,0,0.3)";
+        e.currentTarget.style.boxShadow = "0 20px 40px -15px rgba(240,160,0,0.3)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.backgroundColor = "#0F2A52";
-        e.currentTarget.style.borderColor = "rgba(240,165,0,0.12)";
+        e.currentTarget.style.borderColor = "rgba(240,160,0,0.12)";
         e.currentTarget.style.transform = "translateY(0)";
         e.currentTarget.style.boxShadow = "none";
       }}
@@ -83,8 +83,8 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         style={{
           width: 56,
           height: 56,
-          backgroundColor: "rgba(240,165,0,0.08)",
-          border: "1px solid rgba(240,165,0,0.25)",
+          backgroundColor: "rgba(240,160,0,0.08)",
+          border: "1px solid rgba(240,160,0,0.25)",
           borderRadius: "12px",
           marginBottom: "1.5rem",
         }}
@@ -133,7 +133,7 @@ export default function Services() {
         style={{
           width: "800px",
           height: "400px",
-          background: "radial-gradient(ellipse at bottom, rgba(240,165,0,0.06), transparent 70%)",
+          background: "radial-gradient(ellipse at bottom, rgba(240,160,0,0.06), transparent 70%)",
         }}
       />
 
