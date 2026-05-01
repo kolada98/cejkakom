@@ -154,75 +154,57 @@ export default function Hero() {
 
         {/* RIGHT — photo */}
         <div className="hidden lg:flex items-center justify-center relative">
-          <style>{`
-            @keyframes smoke-rise {
-              0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
-              15%  { opacity: var(--smoke-opacity, 0.12); }
-              70%  { opacity: calc(var(--smoke-opacity, 0.12) * 0.5); }
-              100% { transform: translate3d(var(--smoke-drift, 8px), -130px, 0) scale(2.5); opacity: 0; }
-            }
-          `}</style>
-
-          {/* Outer wrapper — float animation applied here so photo + smoke move together */}
+          {/* Floating wrapper — max-w-lg, float animation applied here */}
           <div
-            className="relative animate-hero-float"
-            style={{ maxWidth: "28rem", width: "100%", zIndex: 3 }}
+            className="relative animate-hero-float max-w-lg w-full"
+            style={{ zIndex: 3 }}
           >
-            {/* Smoke puffs — anchored above photo, outside overflow:hidden container */}
-            <div
-              className="pointer-events-none absolute"
-              style={{ top: "-20px", right: "20%", zIndex: 2 }}
-              aria-hidden="true"
-            >
-              {([
-                { id: 0, size: 40, left: 0,   delay: "0s",   drift: "10px",  duration: "5s",   opacity: 0.12 },
-                { id: 1, size: 65, left: 15,  delay: "1.5s", drift: "-12px", duration: "6s",   opacity: 0.10 },
-                { id: 2, size: 50, left: -8,  delay: "3s",   drift: "8px",   duration: "4.5s", opacity: 0.11 },
-              ] as const).map((puff) => (
-                <div
-                  key={puff.id}
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: `${puff.left}px`,
-                    width: `${puff.size}px`,
-                    height: `${puff.size}px`,
-                    borderRadius: "50%",
-                    background: "rgba(200,200,200,0.08)",
-                    ["--smoke-opacity" as string]: puff.opacity,
-                    ["--smoke-drift" as string]: puff.drift,
-                    animation: `smoke-rise ${puff.duration} ease-out ${puff.delay} infinite`,
-                    willChange: "transform, opacity",
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Photo + gradient overlay — overflow:hidden clips both to rounded corners */}
+            {/* Photo container — overflow:hidden clips img and overlays to rounded corners */}
             <div
               className="relative rounded-2xl overflow-hidden"
               style={{
-                aspectRatio: "9 / 16",
+                aspectRatio: "3 / 4",
                 maxHeight: "70vh",
                 border: "1px solid rgba(240,160,0,0.2)",
-                boxShadow: "0 25px 60px -20px rgba(0,0,0,0.6)",
               }}
             >
               <img
                 src={heroPhotoStove}
                 alt="Moderní krbová kamna s nerezovým komínovým průduchem"
                 className="w-full h-full object-cover"
-                style={{ display: "block" }}
+                style={{ display: "block", objectPosition: "center" }}
                 loading="eager"
                 fetchPriority="high"
+                decoding="async"
               />
-              {/* Gradient overlay: fades photo into navy on the left edge */}
+              {/* Horizontal gradient: strong left-to-right blend into navy */}
               <div
-                className="pointer-events-none absolute inset-0"
+                className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
-                  background:
-                    "linear-gradient(to right, rgba(10,29,58,0.85) 0%, rgba(10,29,58,0.4) 30%, rgba(10,29,58,0.0) 60%)",
-                  zIndex: 1,
+                  background: `linear-gradient(
+                    to right,
+                    rgb(10, 29, 58) 0%,
+                    rgba(10, 29, 58, 0.85) 15%,
+                    rgba(10, 29, 58, 0.5) 35%,
+                    rgba(10, 29, 58, 0.15) 60%,
+                    transparent 100%
+                  )`,
+                  zIndex: 10,
+                }}
+                aria-hidden="true"
+              />
+              {/* Vertical gradient: cinematic top/bottom depth fade */}
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{
+                  background: `linear-gradient(
+                    to bottom,
+                    rgba(10, 29, 58, 0.3) 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    rgba(10, 29, 58, 0.4) 100%
+                  )`,
+                  zIndex: 11,
                 }}
                 aria-hidden="true"
               />
