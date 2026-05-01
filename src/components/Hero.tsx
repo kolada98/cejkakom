@@ -15,6 +15,31 @@ const badges = [
   { Icon: FileCheck, label: "Revizní zpráva na místě" },
 ];
 
+// ─── Smoke puff configs (static, randomised on module load) ────────────────
+const SMOKE_PUFFS = [
+  { id: 0, size: 30, left: 45, delay: "0s",   drift: "8px",   duration: "5s"   },
+  { id: 1, size: 55, left: 60, delay: "1.5s", drift: "-14px", duration: "6.5s" },
+  { id: 2, size: 42, left: 35, delay: "3s",   drift: "18px",  duration: "4.5s" },
+  { id: 3, size: 38, left: 52, delay: "4.5s", drift: "-9px",  duration: "7s"   },
+] as const;
+
+// ─── Pipe spark configs (randomised on module load) ───────────────────────
+function _r(min: number, max: number) { return Math.random() * (max - min) + min; }
+
+const PIPE_SPARKS = Array.from({ length: 9 }, (_, i) => ({
+  id: i,
+  left:     _r(20, 80),
+  bottom:   _r(0, 20),
+  width:    _r(1.2, 2.2),
+  height:   _r(6, 11),
+  duration: _r(2, 4),
+  delay:    -_r(0, 4),
+  driftX:   _r(-22, 22),
+  rotStart: _r(-8, 8),
+  rotMid:   _r(-12, 12),
+  rotEnd:   _r(-20, 20),
+}));
+
 export default function Hero() {
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -24,15 +49,15 @@ export default function Hero() {
       className="relative flex items-center overflow-hidden"
       style={{ minHeight: "100vh", backgroundColor: "#0A1D3A" }}
     >
-      {/* Layer 2: radial top-right gold halo */}
+      {/* Subtle warmth at top-right — very low opacity so it doesn't create a halo */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background:
-            "radial-gradient(circle at 85% 15%, rgba(240,160,0,0.18) 0%, transparent 60%)",
+            "radial-gradient(ellipse at top right, rgba(240,160,0,0.04) 0%, transparent 50%)",
         }}
       />
-      {/* Layer 3: radial bottom-left navy depth */}
+      {/* Radial bottom-left navy depth */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -40,7 +65,7 @@ export default function Hero() {
             "radial-gradient(circle at 10% 90%, rgba(15,42,82,0.6) 0%, transparent 70%)",
         }}
       />
-      {/* Layer 4: subtle noise texture */}
+      {/* Subtle noise texture */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
         style={{
@@ -48,7 +73,7 @@ export default function Hero() {
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /></filter><rect width='240' height='240' filter='url(%23n)' opacity='0.55'/></svg>\")",
         }}
       />
-      {/* Layer 5: rising embers */}
+      {/* Rising ember particles */}
       <HeroEmbers />
 
       <div className="relative z-10 container mx-auto px-4 pt-32 pb-20 grid lg:grid-cols-[60fr_40fr] gap-12 items-center">
@@ -65,7 +90,7 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Headline with word-by-word stagger */}
+          {/* Headline */}
           <h1
             className="font-black animate-fade-up lg:whitespace-nowrap"
             style={{
@@ -152,20 +177,111 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — photo */}
-        <div className="hidden lg:flex items-center justify-center relative">
-          {/* Floating wrapper — max-w-lg, float animation applied here */}
+        {/* RIGHT — photo, pushed to right edge */}
+        <div className="hidden lg:flex items-center justify-end relative">
+          <style>{`
+            @keyframes smoke-rise {
+              0%   { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+              20%  { opacity: 0.4; }
+              80%  { opacity: 0.12; }
+              100% { transform: translate3d(var(--smoke-drift, 0px), -180px, 0) scale(2.5); opacity: 0; }
+            }
+            @keyframes pipe-spark-rise {
+              0%   { transform: translate3d(0, 0, 0) rotate(var(--rot-start, 0deg)) scaleY(0.5); opacity: 0; }
+              10%  { opacity: 1; transform: translate3d(0, -15px, 0) rotate(var(--rot-mid, 0deg)) scaleY(1); }
+              60%  { opacity: 0.85; }
+              100% { transform: translate3d(var(--drift-x, 0px), -220px, 0) rotate(var(--rot-end, 0deg)) scaleY(0.5); opacity: 0; }
+            }
+            .pipe-smoke-puff {
+              position: absolute;
+              border-radius: 50%;
+              filter: blur(8px);
+              will-change: transform, opacity;
+              background: radial-gradient(
+                ellipse at center,
+                rgba(180, 180, 180, 0.25) 0%,
+                rgba(150, 150, 150, 0.15) 40%,
+                rgba(120, 120, 120, 0.05) 70%,
+                transparent 100%
+              );
+            }
+            .pipe-spark-el {
+              position: absolute;
+              border-radius: 50%;
+              will-change: transform, opacity;
+              mix-blend-mode: screen;
+              background: linear-gradient(to top,
+                rgba(255, 100,   0, 0.9)  0%,
+                rgba(255, 180,  50, 1)   40%,
+                rgba(255, 240, 180, 1)   80%,
+                rgba(255, 255, 220, 1)  100%
+              );
+              box-shadow:
+                0 0 4px 1px rgba(255, 180, 50, 0.8),
+                0 0 8px 2px rgba(255, 120,  0, 0.4);
+            }
+          `}</style>
+
+          {/* Floating wrapper — animation moves photo + plume together */}
           <div
             className="relative animate-hero-float max-w-lg w-full"
             style={{ zIndex: 3 }}
           >
-            {/* Photo container — overflow:hidden clips img and overlays to rounded corners */}
+            {/* Smoke + pipe-spark plume — sits above the photo, at pipe position (~45% from left) */}
+            <div
+              className="pointer-events-none absolute"
+              style={{
+                bottom: "100%",
+                left: "calc(45% - 60px)",
+                width: "120px",
+                height: "200px",
+                zIndex: 4,
+              }}
+              aria-hidden="true"
+            >
+              {/* Smoke puffs */}
+              {SMOKE_PUFFS.map((puff) => (
+                <div
+                  key={puff.id}
+                  className="pipe-smoke-puff"
+                  style={{
+                    width:    `${puff.size}px`,
+                    height:   `${puff.size}px`,
+                    left:     `${puff.left}px`,
+                    bottom:   "0",
+                    ["--smoke-drift" as string]: puff.drift,
+                    animation: `smoke-rise ${puff.duration} ease-out ${puff.delay} infinite`,
+                  }}
+                />
+              ))}
+
+              {/* Pipe sparks */}
+              {PIPE_SPARKS.map((s) => (
+                <span
+                  key={s.id}
+                  className="pipe-spark-el"
+                  style={{
+                    width:    `${s.width}px`,
+                    height:   `${s.height}px`,
+                    left:     `${s.left}px`,
+                    bottom:   `${s.bottom}px`,
+                    ["--drift-x"   as string]: `${s.driftX}px`,
+                    ["--rot-start" as string]: `${s.rotStart}deg`,
+                    ["--rot-mid"   as string]: `${s.rotMid}deg`,
+                    ["--rot-end"   as string]: `${s.rotEnd}deg`,
+                    animation: `pipe-spark-rise ${s.duration}s ease-in-out ${s.delay}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Photo + gradient overlays — overflow:hidden clips to rounded corners */}
             <div
               className="relative rounded-2xl overflow-hidden"
               style={{
                 aspectRatio: "3 / 4",
                 maxHeight: "70vh",
-                border: "1px solid rgba(240,160,0,0.2)",
+                boxShadow: "0 30px 80px -30px rgba(0,0,0,0.6)",
               }}
             >
               <img
@@ -177,31 +293,31 @@ export default function Hero() {
                 fetchPriority="high"
                 decoding="async"
               />
-              {/* Horizontal gradient: strong left-to-right blend into navy */}
+              {/* Horizontal gradient: blends left edge into navy */}
               <div
                 className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
                   background: `linear-gradient(
                     to right,
-                    rgb(10, 29, 58) 0%,
-                    rgba(10, 29, 58, 0.85) 15%,
-                    rgba(10, 29, 58, 0.5) 35%,
-                    rgba(10, 29, 58, 0.15) 60%,
-                    transparent 100%
+                    rgb(10, 29, 58)          0%,
+                    rgba(10, 29, 58, 0.92)  10%,
+                    rgba(10, 29, 58, 0.6)   25%,
+                    rgba(10, 29, 58, 0.2)   50%,
+                    transparent             75%
                   )`,
                   zIndex: 10,
                 }}
                 aria-hidden="true"
               />
-              {/* Vertical gradient: cinematic top/bottom depth fade */}
+              {/* Vertical gradient: cinematic top/bottom depth */}
               <div
                 className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
                   background: `linear-gradient(
                     to bottom,
-                    rgba(10, 29, 58, 0.3) 0%,
-                    transparent 30%,
-                    transparent 70%,
+                    rgba(10, 29, 58, 0.3)  0%,
+                    transparent            30%,
+                    transparent            70%,
                     rgba(10, 29, 58, 0.4) 100%
                   )`,
                   zIndex: 11,
