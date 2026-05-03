@@ -3,6 +3,8 @@ import { Phone, Mail, MapPin, Clock, Loader2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 
+const WEB3FORMS_KEY = "cbf251fc-cc40-4236-8073-c1946298388f";
+
 const infoCards = [
   {
     Icon: Phone,
@@ -39,16 +41,38 @@ interface FieldProps {
   required?: boolean;
   textarea?: boolean;
   rows?: number;
+  error?: string;
 }
 
-function Field({ id, label, type = "text", value, onChange, required, textarea, rows = 5 }: FieldProps) {
+function Field({
+  id,
+  label,
+  type = "text",
+  value,
+  onChange,
+  required,
+  textarea,
+  rows = 5,
+  error,
+}: FieldProps) {
   const [focused, setFocused] = useState(false);
+
+  const hasError = Boolean(error);
+  const borderColor = hasError
+    ? "#EF4444"
+    : focused
+    ? "#F0A000"
+    : "rgba(240,160,0,0.15)";
+  const boxShadow = hasError
+    ? "0 0 0 4px rgba(239,68,68,0.12)"
+    : focused
+    ? "0 0 0 4px rgba(240,160,0,0.1)"
+    : "none";
+
   const inputStyle: React.CSSProperties = {
     width: "100%",
     backgroundColor: "#050F1E",
-    border: focused
-      ? "1.5px solid #F0A000"
-      : "1px solid rgba(240,160,0,0.15)",
+    border: `${focused || hasError ? "1.5px" : "1px"} solid ${borderColor}`,
     borderRadius: "8px",
     padding: "0.875rem 1rem",
     color: "#FFFFFF",
@@ -56,8 +80,9 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
     fontSize: "0.9375rem",
     lineHeight: 1.5,
     outline: "none",
-    transition: "border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
-    boxShadow: focused ? "0 0 0 4px rgba(240,160,0,0.1)" : "none",
+    transition:
+      "border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+    boxShadow,
     resize: textarea ? "vertical" : undefined,
   };
 
@@ -76,8 +101,13 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
         }}
       >
         {label}
-        {required && <span className="text-gold" style={{ marginLeft: "0.25rem" }}>*</span>}
+        {required && (
+          <span className="text-gold" style={{ marginLeft: "0.25rem" }}>
+            *
+          </span>
+        )}
       </label>
+
       {textarea ? (
         <textarea
           id={id}
@@ -87,7 +117,8 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={inputStyle}
-          required={required}
+          aria-invalid={hasError}
+          aria-describedby={hasError ? `${id}-error` : undefined}
         />
       ) : (
         <input
@@ -98,44 +129,132 @@ function Field({ id, label, type = "text", value, onChange, required, textarea, 
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={inputStyle}
-          required={required}
+          aria-invalid={hasError}
+          aria-describedby={hasError ? `${id}-error` : undefined}
         />
+      )}
+
+      {hasError && (
+        <p
+          id={`${id}-error`}
+          role="alert"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.8125rem",
+            color: "#EF4444",
+            marginTop: "0.375rem",
+          }}
+        >
+          {error}
+        </p>
       )}
     </div>
   );
 }
 
+interface FormState {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+  consent: boolean;
+}
+
+const EMPTY_FORM: FormState = {
+  name: "",
+  phone: "",
+  email: "",
+  message: "",
+  consent: false,
+};
+
+function validateForm(form: FormState): Record<string, string> {
+  const errors: Record<string, string> = {};
+
+  if (!form.name.trim() || form.name.trim().length < 2) {
+    errors.name = "Zadejte prosím jméno (minimálně 2 znaky)";
+  }
+
+  const digits = form.phone.replace(/\D/g, "");
+  if (!form.phone.trim() || digits.length < 9) {
+    errors.phone = "Zadejte prosím platný telefon (minimálně 9 číslic)";
+  }
+
+  if (form.email.trim()) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.trim())) {
+      errors.email = "Zadejte prosím platný email";
+    }
+  }
+
+  if (!form.consent) {
+    errors.consent = "Souhlas se zpracováním osobních údajů je povinný";
+  }
+
+  return errors;
+}
+
 export default function Contact() {
   const ref = useScrollAnimation();
   const { toast } = useToast();
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
-    consent: false,
-  });
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const set = (key: keyof FormState) => (v: string) =>
+    setForm((prev) => ({ ...prev, [key]: v }));
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast({ title: "Vyplňte prosím povinná pole", variant: "destructive" });
+
+    const errors = validateForm(form);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
-    if (!form.consent) {
+    setFieldErrors({});
+    setIsLoading(true);
+
+    try {
+      const payload: Record<string, string> = {
+        access_key: WEB3FORMS_KEY,
+        subject: "Nová poptávka z webu — ČEJKAKOM",
+        from_name: "ČEJKAKOM web",
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        message: form.message.trim(),
+      };
+      if (form.email.trim()) {
+        payload.email = form.email.trim();
+        payload.replyto = form.email.trim();
+      }
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data: { success: boolean; message?: string } = await res.json();
+
+      if (data.success) {
+        toast({ title: "Poptávka odeslána. Ozveme se vám brzy." });
+        setForm(EMPTY_FORM);
+      } else {
+        throw new Error(data.message ?? "Web3Forms error");
+      }
+    } catch {
       toast({
-        title: "Musíte souhlasit se zpracováním osobních údajů",
+        title:
+          "Nepodařilo se odeslat. Zavolejte prosím na +420 776 310 278.",
         variant: "destructive",
       });
-      return;
-    }
-    setIsLoading(true);
-    setTimeout(() => {
-      toast({ title: "Poptávka odeslána!", description: "Odpovíme vám do 24 hodin." });
-      setForm({ name: "", phone: "", email: "", message: "", consent: false });
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   return (
@@ -177,7 +296,7 @@ export default function Contact() {
                 const cardContent = (
                   <div className="flex items-center gap-4">
                     <div
-                      className="flex-shrink-0 flex items-center justify-center rounded-full transition-colors duration-300"
+                      className="flex-shrink-0 flex items-center justify-center rounded-full"
                       style={{
                         width: "48px",
                         height: "48px",
@@ -220,7 +339,8 @@ export default function Contact() {
                   border: "1px solid rgba(240,160,0,0.15)",
                   borderRadius: "12px",
                   padding: "1.5rem",
-                  transition: "border-color 300ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+                  transition:
+                    "border-color 300ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1)",
                   display: "block",
                 };
 
@@ -281,6 +401,7 @@ export default function Contact() {
           {/* RIGHT — form */}
           <form
             onSubmit={handleSubmit}
+            noValidate
             style={{
               backgroundColor: "#0A1D3A",
               border: "1px solid rgba(240,160,0,0.2)",
@@ -315,7 +436,8 @@ export default function Contact() {
               label="Jméno a příjmení"
               required
               value={form.name}
-              onChange={(v) => setForm({ ...form, name: v })}
+              onChange={set("name")}
+              error={fieldErrors.name}
             />
             <Field
               id="phone"
@@ -323,14 +445,16 @@ export default function Contact() {
               type="tel"
               required
               value={form.phone}
-              onChange={(v) => setForm({ ...form, phone: v })}
+              onChange={set("phone")}
+              error={fieldErrors.phone}
             />
             <Field
               id="email"
               label="Email"
               type="email"
               value={form.email}
-              onChange={(v) => setForm({ ...form, email: v })}
+              onChange={set("email")}
+              error={fieldErrors.email}
             />
             <Field
               id="message"
@@ -338,31 +462,54 @@ export default function Contact() {
               textarea
               rows={5}
               value={form.message}
-              onChange={(v) => setForm({ ...form, message: v })}
+              onChange={set("message")}
             />
 
-            <label
-              className="flex items-start gap-3 cursor-pointer"
-              style={{
-                marginTop: "0.5rem",
-                marginBottom: "1.5rem",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "0.8125rem",
-                color: "#B8C5D9",
-                lineHeight: 1.6,
-              }}
-            >
-              <input
-                type="checkbox"
-                checked={form.consent}
-                onChange={(e) => setForm({ ...form, consent: e.target.checked })}
-                className="accent-gold flex-shrink-0"
-                style={{ marginTop: "0.2rem", width: "16px", height: "16px" }}
-              />
-              <span>
-                Souhlasím se zpracováním osobních údajů pro účely vyřízení poptávky.
-              </span>
-            </label>
+            {/* GDPR consent */}
+            <div style={{ marginTop: "0.5rem", marginBottom: "1.5rem" }}>
+              <label
+                className="flex items-start gap-3 cursor-pointer"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "0.8125rem",
+                  color: "#B8C5D9",
+                  lineHeight: 1.6,
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={(e) =>
+                    setForm({ ...form, consent: e.target.checked })
+                  }
+                  className="accent-gold flex-shrink-0"
+                  style={{ marginTop: "0.2rem", width: "16px", height: "16px" }}
+                  aria-invalid={Boolean(fieldErrors.consent)}
+                  aria-describedby={
+                    fieldErrors.consent ? "consent-error" : undefined
+                  }
+                />
+                <span>
+                  Souhlasím se zpracováním osobních údajů pro účely vyřízení
+                  poptávky.
+                </span>
+              </label>
+              {fieldErrors.consent && (
+                <p
+                  id="consent-error"
+                  role="alert"
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "0.8125rem",
+                    color: "#EF4444",
+                    marginTop: "0.375rem",
+                    paddingLeft: "1.75rem",
+                  }}
+                >
+                  {fieldErrors.consent}
+                </p>
+              )}
+            </div>
 
             <button
               type="submit"
@@ -386,12 +533,14 @@ export default function Contact() {
               onMouseEnter={(e) => {
                 if (!isLoading) {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 14px 32px -10px rgba(240,160,0,0.7)";
+                  e.currentTarget.style.boxShadow =
+                    "0 14px 32px -10px rgba(240,160,0,0.7)";
                 }
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 24px -8px rgba(240,160,0,0.5)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 24px -8px rgba(240,160,0,0.5)";
               }}
             >
               {isLoading ? (

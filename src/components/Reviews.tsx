@@ -1,6 +1,131 @@
 import { Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
+interface Review {
+  stars: number;
+  text: string;
+  author: string;
+  sourceText: string;
+  authorHref?: string;
+}
+
+const reviews: Review[] = [
+  {
+    stars: 5,
+    text: "Profesionálně odvedená práce. Doporučuji.",
+    author: "Jana Šťastná",
+    sourceText: "via Mapy.cz · prosinec 2021",
+  },
+  {
+    stars: 5,
+    text: "Děkuji panu Čejkovi za perfektně odvedenou práci, ráda doporučím dále. Máme komín nově vyfrézovaný, vyvložkovaný a připojená nová kamna.",
+    author: "Lenka Šťastná",
+    sourceText: "via Google · 2022",
+    authorHref: "https://maps.app.goo.gl/QDd746j3LwdMN4w29",
+  },
+];
+
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <div
+      className="relative h-full"
+      style={{
+        backgroundColor: "#0F2A52",
+        borderLeft: "4px solid #F0A000",
+        borderRadius: "12px",
+        padding: "2.5rem",
+      }}
+    >
+      {/* Decorative quote icon */}
+      <Quote
+        size={48}
+        className="absolute pointer-events-none"
+        style={{
+          top: "-1rem",
+          left: "-0.5rem",
+          color: "rgba(240,160,0,0.25)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Stars */}
+      <div
+        className="text-gold"
+        style={{
+          fontSize: "1.25rem",
+          letterSpacing: "0.15em",
+          marginTop: "1rem",
+        }}
+        aria-label={`${review.stars} hvězd`}
+      >
+        {"★".repeat(review.stars)}
+      </div>
+
+      {/* Quote text */}
+      <p
+        className="text-white italic"
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 500,
+          fontSize: "1.125rem",
+          lineHeight: 1.65,
+          marginTop: "1rem",
+        }}
+      >
+        {review.text}
+      </p>
+
+      {/* Gold divider */}
+      <div
+        className="bg-gold"
+        style={{ width: "32px", height: "2px", margin: "1.5rem 0" }}
+      />
+
+      {/* Author */}
+      <div
+        style={{
+          fontFamily: "Plus Jakarta Sans, sans-serif",
+          fontWeight: 700,
+          fontSize: "1rem",
+          color: "#FFFFFF",
+        }}
+      >
+        {review.authorHref ? (
+          <a
+            href={review.authorHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-all duration-200"
+            style={{ color: "#FFFFFF", textDecorationLine: "none" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.textDecorationLine = "underline";
+              e.currentTarget.style.textDecorationColor = "rgba(240,160,0,0.6)";
+              e.currentTarget.style.textUnderlineOffset = "3px";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.textDecorationLine = "none";
+            }}
+          >
+            {review.author}
+          </a>
+        ) : (
+          review.author
+        )}
+      </div>
+      <div
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontSize: "0.8125rem",
+          color: "#7A8AA3",
+          marginTop: "0.25rem",
+        }}
+      >
+        {review.sourceText}
+      </div>
+    </div>
+  );
+}
+
 export default function Reviews() {
   const ref = useScrollAnimation();
 
@@ -28,131 +153,45 @@ export default function Reviews() {
           <span className="section-title-bar center" />
         </div>
 
-        {/* Review card */}
-        <div className="mx-auto relative" style={{ maxWidth: "640px", marginTop: "4rem" }}>
-          <div
-            className="relative"
+        {/* 2-column grid: stacked on mobile, side by side on md+ */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto"
+          style={{ maxWidth: "900px", marginTop: "4rem" }}
+        >
+          {reviews.map((review) => (
+            <ReviewCard key={review.author} review={review} />
+          ))}
+        </div>
+
+        {/* CTA to leave a review */}
+        <div className="text-center" style={{ marginTop: "3rem" }}>
+          <p
             style={{
-              backgroundColor: "#0F2A52",
-              borderLeft: "4px solid #F0A000",
-              borderRadius: "12px",
-              padding: "2.5rem",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.9375rem",
+              color: "#B8C5D9",
             }}
           >
-            {/* Decorative quote icon */}
-            <Quote
-              size={48}
-              className="absolute pointer-events-none"
-              style={{
-                top: "-1rem",
-                left: "-0.5rem",
-                color: "rgba(240,160,0,0.25)",
-              }}
-              aria-hidden="true"
-            />
-
-            {/* 5 gold stars */}
-            <div
-              className="text-gold"
-              style={{
-                fontSize: "1.25rem",
-                letterSpacing: "0.15em",
-                marginTop: "1rem",
-              }}
-              aria-label="5 hvězd"
-            >
-              ★★★★★
-            </div>
-
-            {/* Quote */}
-            <p
-              className="text-white italic"
+            Byli jste se službou spokojeni? Budeme rádi za hodnocení.
+          </p>
+          <div className="flex justify-center" style={{ marginTop: "0.5rem" }}>
+            <a
+              href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
               style={{
                 fontFamily: "Inter, sans-serif",
-                fontWeight: 500,
-                fontSize: "1.25rem",
-                lineHeight: 1.6,
-                marginTop: "1rem",
-              }}
-            >
-              Profesionálně odvedená práce. Doporučuji.
-            </p>
-
-            {/* Gold divider */}
-            <div
-              className="bg-gold"
-              style={{ width: "32px", height: "2px", margin: "1.5rem 0" }}
-            />
-
-            {/* Author */}
-            <div
-              className="text-white"
-              style={{
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                fontWeight: 700,
-                fontSize: "1rem",
-              }}
-            >
-              Jana Šťastná
-            </div>
-            <div
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "0.8125rem",
-                color: "#7A8AA3",
-                marginTop: "0.25rem",
-              }}
-            >
-              via Mapy.cz · prosinec 2021
-            </div>
-          </div>
-
-          {/* Below card */}
-          <div className="text-center" style={{ marginTop: "3rem" }}>
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
+                fontWeight: 600,
                 fontSize: "0.9375rem",
-                color: "#B8C5D9",
+                textUnderlineOffset: "4px",
               }}
             >
-              Byli jste se službou spokojeni? Budeme rádi za hodnocení.
-            </p>
-            <div className="flex flex-col items-center gap-2" style={{ marginTop: "0.5rem" }}>
-              <a
-                href="https://www.firmy.cz/detail/13280804-ing-roman-cejka-kominictvi-bilovice-nad-svitavou.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "0.9375rem",
-                  textUnderlineOffset: "4px",
-                }}
-              >
-                Ohodnotit na Firmy.cz
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </a>
-              {/* TODO: replace with real Google review URL from client */}
-              <a
-                href="#"
-                className="group inline-flex items-center gap-2 text-gold transition-all duration-300 hover:brightness-125 hover:underline"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "0.9375rem",
-                  textUnderlineOffset: "4px",
-                }}
-              >
-                Ohodnotit na Google
-                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </a>
-            </div>
+              Ohodnotit na Firmy.cz
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </a>
           </div>
         </div>
       </div>
