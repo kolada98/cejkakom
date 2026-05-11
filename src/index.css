@@ -91,38 +91,13 @@
     color: #fff;
   }
 
-  /* Prefers-reduced-motion — skip all decorative animations */
+  /* Prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-
-    /* Show any scroll-animated content immediately */
-    [data-animate],
-    .animate-fade-up,
-    [data-stagger] {
-      opacity: 1 !important;
-      transform: none !important;
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-}
-
-@layer utilities {
-  /*
-    Safety class applied by useScrollAnimation / useStaggerReveal when:
-    - IntersectionObserver is unavailable (very old browsers), OR
-    - The 2 500 ms timeout fires before the IO callback.
-    Forces content visible instantly with no animation.
-  */
-  .animation-done {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
   }
 }
 
