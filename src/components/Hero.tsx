@@ -515,6 +515,8 @@ export default function Hero() {
                 */
                 border: "1px solid rgba(255,255,255,0.04)",
                 boxShadow: "0 25px 70px -20px rgba(0,0,0,0.7)",
+                /* Navy placeholder while the JPG streams in — no blank/white flash */
+                backgroundColor: "#0A1D3A",
               }}
             >
               <img
@@ -524,7 +526,7 @@ export default function Hero() {
                 style={{ display: "block", objectPosition: "center" }}
                 loading="eager"
                 fetchPriority="high"
-                decoding="async"
+                decoding="sync"
               />
 
               {/*
