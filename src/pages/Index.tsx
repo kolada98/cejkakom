@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -12,22 +13,41 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 
-const Index = () => (
-  <>
-    <Navbar />
-    <Hero />
-    <Services />
-    <WhyUs />
-    <Process />
-    <About />
-    <Certificates />
-    <Reviews />
-    <Pricing />
-    <Gallery />
-    <Contact />
-    <Footer />
-    <StickyMobileCTA />
-  </>
-);
+const Index = () => {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          const navbarHeight = 88;
+          const top =
+            element.getBoundingClientRect().top +
+            window.scrollY -
+            navbarHeight;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 500);
+    }
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Services />
+      <WhyUs />
+      <Process />
+      <About />
+      <Certificates />
+      <Reviews />
+      <Pricing />
+      <Gallery />
+      <Contact />
+      <Footer />
+      <StickyMobileCTA />
+    </>
+  );
+};
 
 export default Index;
